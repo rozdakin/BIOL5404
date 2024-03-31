@@ -14,7 +14,7 @@ link-external-newwindow: true
 
 ## Instructions
 
--   Create a new .R script to complete this assignment.
+-   Create a new .R script to complete this assignment in your local assignments folder for this course.
 -   You'll submit the .R script on Brightspace.
 -   ***Put your first and last NAME in the [file name]{.underline} of the script.***
 -   Put your name at the top of the script as well.
@@ -100,7 +100,7 @@ subset(murders, region == 'North' & population > 7000000)
 
 ## Question 4
 
-Next, we will use the data from [Roche et al. 2015](https://doi.org/10.1371/journal.pbio.1002295) (study on data archiving from Week 1). You will need to use the dataset from Figshare, plus their meta-data to complete this assignment. Use the link in the paper to go to their data archive on Figshare, and 'download all' files. Move the files to an appropriate working directory for this assignment.
+Next, we will use the data from [Roche et al. 2015](https://doi.org/10.1371/journal.pbio.1002295) (study on data archiving from Week 1). You will need to use the dataset from Figshare, plus their meta-data to complete this assignment. Use the link in the paper to go to their data archive on Figshare, and 'download all' files. Move the files to an appropriate working directory for this assignment (i.e., your assignments folder for this course).
 
 ![](https://storage.googleapis.com/plos-corpus-prod/10.1371/journal.pbio.1002295/1/pbio.1002295.g001.PNG_L?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=wombat-sa%40plos-prod.iam.gserviceaccount.com%2F20240331%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240331T174529Z&X-Goog-Expires=86400&X-Goog-SignedHeaders=host&X-Goog-Signature=758581070f8cf7c2ad3deba0d65f654a7e0f53140279e17e09aa211eb497d6562b5bb1706bac6c9c5b37a752f6de0cf469427ea1197c8c04d13afa62fbe231d8722bef6b411dee00073cedcf8560f17b36a0f4f736d80b0c4f24e707aaaee5ac98f80b538ce834eb110855d5e07eb67664fb3015c2cdbe42ae64727c69ad613e0606ab5199a32a46453e6cc1a48af11f40fb8dd44c71cd78066126da2ba7a69e38efe7967d5cca341cb7c5d548522d49dea943e13f6a09453ecf385d96279856256005ac3161c55ce7a6898acfe36a26c34f4091471ec3f98f5cdc74c922b619e44df9619f037ea5ebe529f02c08d4ba24a37473a31da22e72bc2635f6c20927){width="394"}
 
