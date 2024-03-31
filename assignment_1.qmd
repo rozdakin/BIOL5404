@@ -1,0 +1,190 @@
+---
+title: "BIOL 5404 Assignment 1"
+author: "Roz Dakin"
+date: "January 21, 2024"
+published-title: "Due on"
+format: html
+editor: visual
+toc: true
+toc-location: left
+toc-expand: 2
+toc-title: BIOL 5404 A1
+link-external-newwindow: true
+---
+
+## Instructions
+
+-   Create a new .R script to complete this assignment.
+-   You'll submit the .R script on Brightspace.
+-   ***Put your first and last NAME in the [file name]{.underline} of the script.***
+-   Put your name at the top of the script as well.
+-   Please do not include your student ID, just your name is enough.
+-   **Show your work!**
+-   Make sure your script is organized and legible.
+-   Use [code sections](https://support.posit.co/hc/en-us/articles/200484568-Code-Folding-and-Sections-in-the-RStudio-IDE) (####) & question numbers as outlined below.
+-   Provide all written answers as brief \# comments within your script.
+-   Be sure to load all packages needed at the top of your script, like this (adding any other packages needed):
+
+```{r}
+#| label: packages
+#| message: false
+
+library(tidyverse)
+library(dslabs)
+```
+
+## Question 1
+
+The murders dataset from the dslabs package has data on gun homicides for 50 US states and the District of Columbia, Washington DC.
+
+```{r}
+#| label: murders-dataset
+#| eval: false
+
+help(murders)
+```
+
+1a. Plot the distribution of 'total' (the number of gun homicides in 2010).
+
+1b. Create a new column in the murders dataframe that has the rate of gun homicides per 1,000,000 people in the population. Plot the distribution of this new variable.
+
+1c. Use R to identify the following outliers (i.e., by indexing based on logical conditions, or by using R functions):
+
+-   Which state has the highest **total count** of gun homicides?
+-   Which state has the highest **per capita murder rate**? Why do you think this particular state's per capita murder rate is SO much higher than the others?
+
+## Question 2
+
+Using ggplot, make this graph plotting total vs. population:
+
+```{r}
+#| label: murder-graph
+
+ggplot(murders, mapping = 
+         aes(x = population, y = total, label = abb, color = region)) +
+  geom_label() +
+  theme_bw()
+```
+
+2a. Next, use a separate call to ggplot to recreate this graph but modify it so that BOTH the x and y variables plotted on a log scale.
+
+2b. Why it is helpful to do this? Briefly explain.
+
+2c. Next, using a separate ggplot call again, remake the graph with the following changes:
+
+-   add points (you may need to investigate how to do this!),
+-   reduce the size of the label text,
+-   move the labels to be above and to the right of each datapoint, so that both the points and labels can be seen,
+-   capitalize the x- and y-axis labels, and
+-   capitalize the title on the legend.
+
+Feel free to make any other aesthetic changes as desired!
+
+## Question 3
+
+In the murders dataset, use indexing and logical operators to identify:
+
+3a. Which US states have a larger population than the province of Ontario?
+
+3b. Which US states are considered to be in the South AND have a population of fewer than 10 million people?
+
+3c. How many US states have a population between 7 and 15 million?
+
+3d. The line below attempts to find any northern states with a population greater than 7 million, however, the output is empty. What's wrong with this attempt? Fix it in your script.
+
+```{r}
+#| label: bad-subset
+
+subset(murders, region == 'North' & population > 7000000)
+```
+
+## Question 4
+
+Next, we will use the data from [Roche et al. 2015](https://doi.org/10.1371/journal.pbio.1002295) (study on data archiving from Week 1). You will need to use the dataset from Figshare, plus their meta-data to complete this assignment. Use the link in the paper to go to their data archive on Figshare, and 'download all' files. Move the files to an appropriate working directory for this assignment.
+
+![](https://storage.googleapis.com/plos-corpus-prod/10.1371/journal.pbio.1002295/1/pbio.1002295.g001.PNG_L?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=wombat-sa%40plos-prod.iam.gserviceaccount.com%2F20240331%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240331T174529Z&X-Goog-Expires=86400&X-Goog-SignedHeaders=host&X-Goog-Signature=758581070f8cf7c2ad3deba0d65f654a7e0f53140279e17e09aa211eb497d6562b5bb1706bac6c9c5b37a752f6de0cf469427ea1197c8c04d13afa62fbe231d8722bef6b411dee00073cedcf8560f17b36a0f4f736d80b0c4f24e707aaaee5ac98f80b538ce834eb110855d5e07eb67664fb3015c2cdbe42ae64727c69ad613e0606ab5199a32a46453e6cc1a48af11f40fb8dd44c71cd78066126da2ba7a69e38efe7967d5cca341cb7c5d548522d49dea943e13f6a09453ecf385d96279856256005ac3161c55ce7a6898acfe36a26c34f4091471ec3f98f5cdc74c922b619e44df9619f037ea5ebe529f02c08d4ba24a37473a31da22e72bc2635f6c20927){width="394"}
+
+Bring the csv data file into R by adding a line to your .R script, as follows:
+
+```{r}
+#| label: get-Roche-data
+#| message: false
+
+data <- read_csv('Dryad_data_2012_2013.csv')
+```
+
+4a. First, reduce the dataframe to JUST have the following 10 columns:
+
+-   dataset, journal, year, noFiles, fileExt, readme, analysisPgrm, analysisCode, complScore, reuseScore
+
+4b. How many unique **journals** are in Roche et al.'s dataset? *Note, this is asking about journals, not studies!*
+
+4c. Check to make sure the two SCORE columns have the expected range of values.
+
+4d. What is the mean completeness score?
+
+4e. What is the most common (modal) re-usability score?
+
+4f. How many studies have the lowest possible completeness score, but the highest possible re-usability score?
+
+4g. How many studies have a reusability score of 3, but the second-highest possible completeness score?
+
+4h. What info is provided in the column analysisPgrm?
+
+4i. Are there any NAs (missing values) in analysisPgrm? How many are missing?
+
+4j. The column analysisPrgm stores character info about any/all analysis programs used (ranging from 1-n). Look closely at how analysisPgrm is stored/entered. Briefly, what potential issue do you see?
+
+## Question 5
+
+Let's create a new column that designates each study as having used R or not:
+
+```{r}
+#| label: uses-R
+#| results: false
+
+data$useR <- grepl('R', data$analysisPgrm, ignore.case = F)
+
+table(data$useR) # summarizes how many studies did not, and did, use R
+```
+
+5a. Create ANOTHER new column in the dataframe that designates each study as having used csv for any of their fileExt, or not.
+
+5b. What proportion of studies used csv?
+
+5c. Using EITHER base R or ggplot (or any other package you wish), generate a bar graph that plots the relationship between these two categorical variables above (i.e., whether a study used R (or not) & whether a study used csv (or not)). Bar graphs are best for showing the distribution of one or more categorical variables! To show the relationship between two categorical variables here, you'd use either a grouped or stacked bar graph.
+
+5d. Modify your plot to include the necessary axis labels, legend, and other features so that a reader can interpret what your graph is showing.
+
+5e. Use a chi-squared contingency test to evaluate whether studies using R were any more or less likely to use csv. What is your conclusion?
+
+## Question 6
+
+6a. What does the column readme show?
+
+6b. What does the table below tell us? Add this to your script and comment on what it shows.
+
+```{r}
+#| label: has-readme
+#| results: false
+
+table(data$readme)
+```
+
+6c. Using either base R or ggplot (or any other packages you wish), plot the association between completeness score (y axis) and readme (x). Hint: R needs to be told to treat readme as categorical/factor.
+
+6d. Modify your plot to include the necessary features so that a reader would be able to interpret what it is showing.
+
+6e. Use the function lm() to fit a linear model testing whether whether completeness score is associated with readme. What is your conclusion? Is it surprising?
+
+## Extra/optional challenges
+
+These are optional, only do what you want/are able to here.
+
+i.  How many papers in Roche et al.'s dataset did not specify ANY analysis program?
+ii. What was the maximum number of analysis programs within a single study? (Determine using R not manually!)
+iii. Fit a binomial model to determine whether the probability of csv file being used increases with the the number of data files for a paper. What do you conclude?
+iv. Fit a model OR create a visualization to investigate another association in this dataset. What do you expect, and what does your model/visualization suggest?
+v.  CHALLENGE... Using R, write a script that finds the unique solution to the wintry word puzzle shown in this image below. There is one unique solution here!
+
+![](https://www.dropbox.com/s/eogv2yhp50jfhi6/word_puzzle.png?dl=1){width="709"}
