@@ -187,4 +187,4 @@ iii. Fit a binomial model to determine whether the probability of csv file being
 iv. Fit a model OR create a visualization to investigate another association in this dataset. What do you expect, and what does your model/visualization suggest?
 v.  CHALLENGE... Using R, write a script that finds the unique solution to the wintry word puzzle shown in this image below. There is one unique solution here!
 
-![](https://www.dropbox.com/s/eogv2yhp50jfhi6/word_puzzle.png?dl=1){width="709"}
+![](oi6xF-x5.png)
