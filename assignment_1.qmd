@@ -186,5 +186,3 @@ ii. What was the maximum number of analysis programs within a single study? (Det
 iii. Fit a binomial model to determine whether the probability of csv file being used increases with the the number of data files for a paper. What do you conclude?
 iv. Fit a model OR create a visualization to investigate another association in this dataset. What do you expect, and what does your model/visualization suggest?
 v.  CHALLENGE... Using R, write a script that finds the unique solution to the wintry word puzzle shown in this image below. There is one unique solution here!
-
-![](oi6xF-x5.png)
