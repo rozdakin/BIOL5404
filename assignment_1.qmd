@@ -16,7 +16,7 @@ link-external-newwindow: true
 
 -   Create a new .R script to complete this assignment in your local assignments folder for this course.
 -   You'll submit the .R script on Brightspace.
--   ***Put your first and last NAME in the [file name]{.underline} of the script.***
+-   ***Put your FIRST and LAST NAME in the [file name]{.underline} of the script.***
 -   Put your name at the top of the script as well.
 -   Please do not include your student ID, just your name is enough.
 -   **Show your work!**
@@ -33,7 +33,7 @@ library(tidyverse)
 library(dslabs)
 ```
 
-## Question 1
+## Part 1
 
 The murders dataset from the dslabs package has data on gun homicides for 50 US states and the District of Columbia, Washington DC.
 
@@ -53,7 +53,7 @@ help(murders)
 -   Which state has the highest **total count** of gun homicides?
 -   Which state has the highest **per capita murder rate**? Why do you think this particular state's per capita murder rate is SO much higher than the others?
 
-## Question 2
+## Part 2
 
 Using ggplot, make this graph plotting total vs. population:
 
@@ -80,7 +80,7 @@ ggplot(murders, mapping =
 
 Feel free to make any other aesthetic changes as desired!
 
-## Question 3
+## Part 3
 
 In the murders dataset, use indexing and logical operators to identify:
 
@@ -98,11 +98,11 @@ In the murders dataset, use indexing and logical operators to identify:
 subset(murders, region == 'North' & population > 7000000)
 ```
 
-## Question 4
+## Part 4
 
 Next, we will use the data from [Roche et al. 2015](https://doi.org/10.1371/journal.pbio.1002295) (study on data archiving from Week 1). You will need to use the dataset from Figshare, plus their meta-data to complete this assignment. Use the link in the paper to go to their data archive on Figshare, and 'download all' files. Move the files to an appropriate working directory for this assignment (i.e., your assignments folder for this course).
 
-![](https://storage.googleapis.com/plos-corpus-prod/10.1371/journal.pbio.1002295/1/pbio.1002295.g001.PNG_L?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=wombat-sa%40plos-prod.iam.gserviceaccount.com%2F20240331%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20240331T174529Z&X-Goog-Expires=86400&X-Goog-SignedHeaders=host&X-Goog-Signature=758581070f8cf7c2ad3deba0d65f654a7e0f53140279e17e09aa211eb497d6562b5bb1706bac6c9c5b37a752f6de0cf469427ea1197c8c04d13afa62fbe231d8722bef6b411dee00073cedcf8560f17b36a0f4f736d80b0c4f24e707aaaee5ac98f80b538ce834eb110855d5e07eb67664fb3015c2cdbe42ae64727c69ad613e0606ab5199a32a46453e6cc1a48af11f40fb8dd44c71cd78066126da2ba7a69e38efe7967d5cca341cb7c5d548522d49dea943e13f6a09453ecf385d96279856256005ac3161c55ce7a6898acfe36a26c34f4091471ec3f98f5cdc74c922b619e44df9619f037ea5ebe529f02c08d4ba24a37473a31da22e72bc2635f6c20927){width="394"}
+![](pbio.1002295.g001.png){width="454"}
 
 Bring the csv data file into R by adding a line to your .R script, as follows:
 
@@ -135,7 +135,7 @@ data <- read_csv('Dryad_data_2012_2013.csv')
 
 4j. The column analysisPrgm stores character info about any/all analysis programs used (ranging from 1-n). Look closely at how analysisPgrm is stored/entered. Briefly, what potential issue do you see?
 
-## Question 5
+## Part 5
 
 Let's create a new column that designates each study as having used R or not:
 
@@ -158,7 +158,7 @@ table(data$useR) # summarizes how many studies did not, and did, use R
 
 5e. Use a chi-squared contingency test to evaluate whether studies using R were any more or less likely to use csv. What is your conclusion?
 
-## Question 6
+## Part 6
 
 6a. What does the column readme show?
 
