@@ -7,7 +7,7 @@ editor: visual
 toc: false
 ---
 
--   A1 due January XX, 2025
+-   [A1 due January XX, 2025](assignment_1.html)
 -   A2 due February
 -   A3 due February
 -   A4 due March
