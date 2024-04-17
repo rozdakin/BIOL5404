@@ -1,2 +1,2 @@
-# BIOL5404_A1
-Assignment 1 for BIOL 5404
+# BIOL5404
+Assignments for BIOL 5404
