@@ -7,9 +7,9 @@ editor: visual
 toc: false
 ---
 
--   [A1 due January 21, 2024](assignment_1.html)
--   [A2 due February 4, 2024](assignment_2.html)
--   A3 due February
+-   [Assignment 1 due January 21, 2024](assignment_1.html)
+-   [Assignment 2 due February 4, 2024](assignment_2.html)
+-   [Assignment 3 due February 18, 2024](assignment_3.html)
 -   A4 due March
 -   A5 due March
 -   A6 due April

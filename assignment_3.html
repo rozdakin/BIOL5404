@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Roz Dakin">
+<meta name="dcterms.date" content="2024-02-18">
+
+<title>BIOL 5404 Assignment 3</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="assignment_3_files/libs/clipboard/clipboard.min.js"></script>
+<script src="assignment_3_files/libs/quarto-html/quarto.js"></script>
+<script src="assignment_3_files/libs/quarto-html/popper.min.js"></script>
+<script src="assignment_3_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="assignment_3_files/libs/quarto-html/anchor.min.js"></script>
+<link href="assignment_3_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="assignment_3_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="assignment_3_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="assignment_3_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="assignment_3_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article toc-left">
+<div id="quarto-sidebar-toc-left" class="sidebar toc-left">
+  <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
+    <h2 id="toc-title">BIOL 5404 A3</h2>
+   
+  <ul>
+  <li><a href="#instructions" id="toc-instructions" class="nav-link active" data-scroll-target="#instructions">Instructions</a></li>
+  <li><a href="#part-1" id="toc-part-1" class="nav-link" data-scroll-target="#part-1">Part 1</a></li>
+  <li><a href="#part-2" id="toc-part-2" class="nav-link" data-scroll-target="#part-2">Part 2</a></li>
+  <li><a href="#part-3" id="toc-part-3" class="nav-link" data-scroll-target="#part-3">Part 3</a></li>
+  <li><a href="#part-4" id="toc-part-4" class="nav-link" data-scroll-target="#part-4">Part 4</a></li>
+  <li><a href="#part-5" id="toc-part-5" class="nav-link" data-scroll-target="#part-5">Part 5</a></li>
+  <li><a href="#part-6" id="toc-part-6" class="nav-link" data-scroll-target="#part-6">Part 6</a></li>
+  <li><a href="#extra-optional-challenges" id="toc-extra-optional-challenges" class="nav-link" data-scroll-target="#extra-optional-challenges">Extra optional challenges</a></li>
+  </ul>
+</nav>
+</div>
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">BIOL 5404 Assignment 3</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Roz Dakin </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Due on</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">February 18, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<p><a href="index.html">Back to assignment list</a></p>
+<section id="instructions" class="level2">
+<h2 class="anchored" data-anchor-id="instructions">Instructions</h2>
+<ul>
+<li>Create a new .R script to complete this assignment in your local assignments folder for this course.</li>
+<li>You’ll submit the .R script on Brightspace.</li>
+<li><strong><em>Put your FIRST and LAST NAME in the <u>file name</u> of the script.</em></strong></li>
+<li>Put your name at the top of the script as well.</li>
+<li>Please do not include your student ID, just your name is enough.</li>
+<li><strong>Show your work!</strong></li>
+<li>Make sure your script is organized and legible.</li>
+<li>Use <a href="https://support.posit.co/hc/en-us/articles/200484568-Code-Folding-and-Sections-in-the-RStudio-IDE">code sections</a> (####) &amp; question numbers as outlined below.</li>
+<li>Provide all written answers as brief # comments within your script.</li>
+<li>Be sure to load all packages needed at the top of your script, like this (adding any other packages needed):</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>In this assignment, we will use the <strong>mpg</strong> dataset (which comes with tidyverse) AND also the data contained in the zip file <strong>data_by_continent_country.zip</strong>, which is available on Brightspace.</p>
+</section>
+<section id="part-1" class="level2">
+<h2 class="anchored" data-anchor-id="part-1">Part 1</h2>
+<p>1a. Copy the custom function null_corr() below into your script. For 1a, look at the function and describe in your own words what this function is intended to do. What does null_corr take as input, what does it attempt to do, and what does it return as output?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>null_corr <span class="ot">&lt;-</span> <span class="cf">function</span> (<span class="at">ss =</span> <span class="dv">100</span>) { </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(ss, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(ss, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  ctest <span class="ot">&lt;-</span> <span class="fu">cor.test</span>(x <span class="sc">~</span> y)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">setNames</span>(<span class="fu">c</span>(ctest<span class="sc">$</span>estimate, ctest<span class="sc">$</span>p.value), <span class="fu">c</span>(<span class="st">'estimate'</span>, <span class="st">'p'</span>)))</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>1b. The version of null_corr() above has an error! Find the error and fix it. Then, demonstrate that the function works with a few examples, like this:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">null_corr</span>(<span class="at">ss =</span> <span class="dv">50</span>) <span class="co"># etc</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>1c. Briefly, why does null_corr() gives a different output each time it is run for a given value of ss?</p>
+<p>1d. Now that you’ve got the function working, let’s use it to do a simulation.</p>
+<ul>
+<li>In this simulation, we want to run null_corr() 10,000 times, and store the output each time.</li>
+<li>We will store each output in a single row of a data.frame that we’ll create, called <strong>results</strong>.</li>
+<li>After creating <strong>results</strong>, write a for loop to run null_corr() 10,000 times, and store each iteration’s output in the i<sup>th</sup> row of results. <strong>Use the default ss of 100.</strong></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">r =</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">10000</span>), <span class="at">p =</span> <span class="cn">NA</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(results)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   r  p
+1 NA NA
+2 NA NA
+3 NA NA
+4 NA NA
+5 NA NA
+6 NA NA</code></pre>
+</div>
+</div>
+<p>1e. Now let’s examine the results. What percent of the time did you obtain a p-value &lt; 0.05? Does your answer match what you would expect? Why do different students obtain slightly different values for the percent here?</p>
+<p>1f. Now, repeat the exercise above, but with a LARGER value of ss, let’s say an ss of 1,000.</p>
+<ul>
+<li>Make a new data.frame to store these new results for the larger sample size.</li>
+<li>Run 10,000 iterations again, using the larger ss of 1,000.</li>
+<li>What proportion of time do you expect to get a p-value &lt; 0.05 this time?</li>
+<li>Check to see if your expectation is correct.</li>
+</ul>
+<p>1g. Use a histogram to examine the distribution of correlation coefficients obtained in your first run (when ss = 100). What, if anything, do you expect to change about this distribution when ss gets larger? (i.e., how do you expect this distribution to look for ss = 1000 vs.&nbsp;ss = 100?)</p>
+<p><strong>OPTIONAL:</strong> Use ggplot2 to investigate this by generating a plot with both distributions of the correlation coefficient r overlaid on top of each other, so they can be visually compared. (i.e., a plot that shows the distribution of r when ss = 100, and when ss = 1,000, on the same panel).</p>
+</section>
+<section id="part-2" class="level2">
+<h2 class="anchored" data-anchor-id="part-2">Part 2</h2>
+<p>There are two loops below, under headings <strong>Loop 1</strong> and <strong>Loop 2</strong>. Each of these loops has some errors.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Loop 1 (Hint: this loop has 2 errors)</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># The goal of this first loop is to fill in simresults_1</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># with means sampled from a normal distribution</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>simresults_1 <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">1000</span>) </span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">1000</span>) { </span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  temp <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">100</span>, <span class="dv">10</span>)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  simresults_1[i] <span class="sc">&lt;</span> <span class="sc">-</span> <span class="fu">mean</span>(temp)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>simresults_1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>2a. Find and fix the two errors in <strong>Loop 1</strong>, and comment to identify and explain the changes you made. After making the fix, run <strong>Loop 1</strong>, and inspect the output to show that it’s now working.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Loop 2 (Hint: this loop has 3 errors)</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># The goal of this second loop is to fill in simresults_2</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># with means sampled from a normal distribution</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>simresults_2 <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">1000</span>) </span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i from <span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>) {</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  temp <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">99</span>, <span class="dv">10</span>)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  simresults2 <span class="ot">&lt;-</span> <span class="fu">mean</span>(temp)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>simresults_2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>2b. Find and fix the three errors in <strong>Loop 2</strong>, and comment to identify and explain the changes you made. After making the fix, run <strong>Loop 2</strong>, and inspect the output to show that it’s now working.</p>
+</section>
+<section id="part-3" class="level2">
+<h2 class="anchored" data-anchor-id="part-3">Part 3</h2>
+<p>In this section, we’ll work with the data provided in <strong>data_by_continent_country.zip</strong> on Brightspace. This zip archive contains a set of folders and files that have demographic data from countries around the world. Each data file includes info on a country’s population, average life expectancy, and GDP per capita across 5-year intervals from 1952 to 2007.</p>
+<p><em>Aside: these data come from the gapminder package… they are readily available as a single object if you install the package. I’ve intentionally distributed them across folders here to give us a chance to practice reading in data &amp; iterating a process like this when we have many files to read in nested directories.</em></p>
+<p>Download <strong>data_by_continent_country.zip</strong> from Brightspace and uncompress/unzip it. The data are stored across folders, organized by continent, then country. Take a look at the folder structure using the explorer/finder on your computer. You should be able to see that there is a folder for each continent, with subfolders for each country, each of which has a csv file with data for a given country. Make sure the unzipped folder <strong>data_by_continent_country</strong> is in your working directory.</p>
+<p>3a. First, determine how many csv files there are in total.</p>
+<ul>
+<li>You can use list.files() to do this, by getting the paths to all of the .csv files in data_by_continent_country.</li>
+<li>Use the pattern argument in list.files() to identify csv files, and use the recursive argument to search all sub-directories by setting recursive = T.</li>
+<li>Read the help for list.files() to understand what these arguments are doing.</li>
+<li>Give the output of your call to list.files() a name (e.g., <strong>myvector</strong>), so that it creates a vector of paths to all the different csv files in data_by_continent_country.</li>
+<li>How many csv files are there in total?</li>
+</ul>
+<p>3b. Next, iterate over the vector you created above, reading in <strong>each of the csv files</strong>, and then storing the data from each of these files in the i<sup>th</sup> element of a list that you create for this purpose.</p>
+<p>Start by using the line below to create an empty list with the desired length:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>mylist <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="st">"list"</span>, <span class="at">length =</span> <span class="fu">length</span>(myvector))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>3c. Now write a for loop to read in each csv file and put into <strong>mylist</strong>. You can use read.csv() from base R or read_csv() in tidyverse.</p>
+<p>Inspect the first element of your list. Try looking at a few more, did it work?</p>
+<p>3d. A problem with what we have so far is that the csv files did not actually contain values for country and continent names. We need to incorporate that info so that the data will be useful &amp; tidy!</p>
+<p>Revise and repeat your loop above so that after reading in each csv file, your loop will also ADD a column with the correct <strong>continent name for that country</strong>, and ADD a column for the correct <strong>country name for that country</strong>. As above, store it in the i<sup>th</sup> element of the list. Inspect it to make sure it worked.</p>
+<p>Hint: you can use strsplit() from base R, or str_split() from tidyverse, to break up the elements of your paths based on a separator/pattern, and extract the continent and country info from the output of one of these string splitting functions.</p>
+<p>Aside: when you have a list of data.frames like this, and all of the data.frames in the list have the exact same column names and types, you can use the rbindlist() function from the data.table package to bind them together into a single data.frame. It’s very useful!</p>
+<p><strong>OPTIONAL:</strong> Check for duplicates… there is ONE country that had its data accidentally duplicated. Using R, can you identify which country this is, and remove the duplicate data from the list?</p>
+<p><strong>OPTIONAL:</strong> Inspect the combined data for extreme values. Do the variables have the distributions and ranges you would expect? Identify any extreme values worthy of further investigation (i.e., to verify that outliers are indeed real).</p>
+</section>
+<section id="part-4" class="level2">
+<h2 class="anchored" data-anchor-id="part-4">Part 4</h2>
+<p>Now we are going to work with the <strong>mpg</strong> dataset that has information on vehicles (cars etc), their fuel efficiency, and other properties. Familiarize yourself with the variables in this dataset.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mpg)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">help</span>(mpg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Let’s consider the structure of this tidy dataset. The column <strong>model</strong> represents the name of the car model:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(mpg<span class="sc">$</span>model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+           4runner 4wd                     a4             a4 quattro 
+                     6                      7                      8 
+            a6 quattro                 altima     c1500 suburban 2wd 
+                     3                      6                      5 
+                 camry           camry solara            caravan 2wd 
+                     7                      7                     11 
+                 civic                corolla               corvette 
+                     9                      5                      5 
+     dakota pickup 4wd            durango 4wd         expedition 2wd 
+                     9                      7                      3 
+          explorer 4wd        f150 pickup 4wd           forester awd 
+                     6                      7                      6 
+    grand cherokee 4wd             grand prix                    gti 
+                     8                      5                      5 
+           impreza awd                  jetta        k1500 tahoe 4wd 
+                     8                      9                      4 
+land cruiser wagon 4wd                 malibu                 maxima 
+                     2                      5                      3 
+       mountaineer 4wd                mustang          navigator 2wd 
+                     4                      9                      3 
+            new beetle                 passat         pathfinder 4wd 
+                     6                      7                      4 
+   ram 1500 pickup 4wd            range rover                 sonata 
+                    10                      4                      7 
+               tiburon      toyota tacoma 4wd 
+                     7                      7 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(mpg, model <span class="sc">==</span> <span class="st">'mustang'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 9 × 11
+  manufacturer model   displ  year   cyl trans     drv     cty   hwy fl    class
+  &lt;chr&gt;        &lt;chr&gt;   &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;     &lt;chr&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;
+1 ford         mustang   3.8  1999     6 manual(m… r        18    26 r     subc…
+2 ford         mustang   3.8  1999     6 auto(l4)  r        18    25 r     subc…
+3 ford         mustang   4    2008     6 manual(m… r        17    26 r     subc…
+4 ford         mustang   4    2008     6 auto(l5)  r        16    24 r     subc…
+5 ford         mustang   4.6  1999     8 auto(l4)  r        15    21 r     subc…
+6 ford         mustang   4.6  1999     8 manual(m… r        15    22 r     subc…
+7 ford         mustang   4.6  2008     8 manual(m… r        15    23 r     subc…
+8 ford         mustang   4.6  2008     8 auto(l5)  r        15    22 r     subc…
+9 ford         mustang   5.4  2008     8 manual(m… r        14    20 p     subc…</code></pre>
+</div>
+</div>
+<p>4a. Briefly, how would you describe the structure of the data? How many rows do we have for the 1999 Ford Mustang, for example? How many rows for the 2008 Ford Mustang? Why do we have multiple rows of Ford Mustangs for a given year?</p>
+<p>4b. Do all of the car models have the same number of 1999 rows as we do for 1999 Ford Mustangs?</p>
+<p>Hint: using group_by() and the tally() function gives a nice way to do this, or group_by() and count(), which is equivalent.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># For example: </span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>mpg <span class="sc">%&gt;%</span> </span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(class) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 7 × 2
+# Groups:   class [7]
+  class          n
+  &lt;chr&gt;      &lt;int&gt;
+1 2seater        5
+2 compact       47
+3 midsize       41
+4 minivan       11
+5 pickup        33
+6 subcompact    35
+7 suv           62</code></pre>
+</div>
+</div>
+<p>4c. Use dplyr to calculate the average, and range, for the number of ‘entries’ for a given <strong>model-year</strong>. By model-year, I mean things like ‘1999 Ford Mustang’, ‘2008 Audi A4’, etc. So, use dplyr functions to determine how many entries (rows) in the data there are for each model-year, and then compute the average, and range (min and max) for those counts.</p>
+<p><strong>OPTIONAL:</strong> Examine the <strong>drv</strong> column, which gives info on the vehicle’s drive train (categorized as either 4-wheel drive, front-wheel drive, or rear-wheel drive). Now print the <strong>model</strong> column, and note that some of the models also have similar information about the vehicle’s drive train in the model name as well. Using vectorized commands, extract any information about drive train from the model column (if it exists). Then, verify that that info you extracted from the model column matches the value in the drv column (quality control).</p>
+<p>Hint: str_extract_all() from the stringr package will do this conveniently. Are there any issues/errors?</p>
+</section>
+<section id="part-5" class="level2">
+<h2 class="anchored" data-anchor-id="part-5">Part 5</h2>
+<p>Fuel efficiency values are found in these columns:</p>
+<ul>
+<li><strong>cty</strong> for efficiency during city driving in miles/gallon</li>
+<li><strong>hwy</strong> for efficiency during highway driving in miles/gallon</li>
+</ul>
+<p>5a. Write a small custom function that converts fuel efficiency values in miles/gallon to fuel consumpsion rates in units of litres/100 km.</p>
+<p><strong>Check/demonstrate that your function works in your script.</strong></p>
+<ul>
+<li>To help with this: note that 20 miles/gallon is approximately 11.76 l/100 km, and 40 miles/gallon is approximately 5.88 l/100 km.</li>
+<li>Note that this is trickier than you might initially think, because the conversion from mpg to l/100 km is non-linear (i.e., it’s NOT a simple linear transformation). This is because mpg as a measure of fuel efficiency has distance in the numerator. By contrast, l/100 km is a measure of fuel consumption, and has distance in the denominator.</li>
+</ul>
+<p>5b. Using dplyr and your new function, add (mutate) two new columns into mpg that provide city and highway fuel consumption estimates in litres/100 km.</p>
+<p>5c. Take a look at the <strong>trans</strong> column, which has multiple pieces of information about a vehicle’s transmission type (auto or manual) and the number of speeds (e.g,. m6, m5 etc). Create a new column that JUST identifies a car’s transmission type as either auto OR manual (stripping off the extra characters that provide information about speeds).</p>
+<p>5d. How many cars in the dataset have automatic transmission, and how many have manual transmission?</p>
+<p>Hint: there are many ways you could do this, but a convenient option from the tidyverse is str_extract(). For example:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example of how to use str_extract to look for either of two patterns:</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>mystring <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">'shebang'</span>, <span class="st">'shalalalala'</span>, <span class="st">'he and me'</span>, <span class="st">'hahaha'</span>)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="fu">str_extract</span>(<span class="at">string =</span> mystring, <span class="at">pattern =</span> <span class="st">'he|ha'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "he" "ha" "he" "ha"</code></pre>
+</div>
+</div>
+<p>5e. Take a look at the <strong>class</strong> column, which has info on vehicle size classes (there are 7 unique classes). Using R, which is the most common size class? Which is the least common?</p>
+<p>5f. Create a new column in mpg that categorizes vehicles as either “small” (2seater, compact, and subcompact), “medium” (midsize), or “large” (minivan, pickup, and suv). You can use case_when(), or use nested calls to ifelse() to do this.</p>
+</section>
+<section id="part-6" class="level2">
+<h2 class="anchored" data-anchor-id="part-6">Part 6</h2>
+<p>6a. Create a graph that shows CITY fuel consumption (in litres/100 km) on the y-axis vs.&nbsp;the transmission type (either auto or manual) on x-axis, using either boxplots or violin plots. Make your plot so that it shows manual on the LEFT side of the plot, and auto on the RIGHT side of the plot, along the x-axis. Make any other aesthetic changes you wish.</p>
+<p>HINT: you can do this by making the columns factors using factor() and specifying hte level order, or you can use factor() and do this within the call to ggplot.</p>
+<p>6b. Similarly, create a graph that shows CITY fuel consumption (in litres/100 km) on the y-axis vs.&nbsp;the 3-level size class you created above, with the order along the x-axis showing small, medium, then large, from left to right. Again, make any other aesthetic changes you wish.</p>
+</section>
+<section id="extra-optional-challenges" class="level2">
+<h2 class="anchored" data-anchor-id="extra-optional-challenges">Extra optional challenges</h2>
+<p>This is for extra (excellent) practice, and is not graded.</p>
+<ol type="i">
+<li><p>Are there any vehicles (rows) in mpg wherein that vehicle’s city fuel efficiency in the cty column is BETTER (more efficient) than its highway fuel efficiency in the hwy column? Note that in miles/gallon, a LARGER value = better fuel efficiency.</p></li>
+<li><p>Are there any car MODELS where the best option for CITY fuel efficiency was actually BETTER in 1999 than the best option for that model in 2008? If so, how many? Remember, larger values of miles/gallon indicate better fuel efficiency.</p>
+<p>Note, to answer this you will have to do some data-wrangling and reshaping. It can be helpful to think through the steps and write them down in plain language first. I used group_by(), summarize(), and then pivot_wider() as my first steps.</p></li>
+<li><p>Examine the different of car manufacturers in the dataset here:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(mpg<span class="sc">$</span>manufacturer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+      audi  chevrolet      dodge       ford      honda    hyundai       jeep 
+        18         19         37         25          9         14          8 
+land rover    lincoln    mercury     nissan    pontiac     subaru     toyota 
+         4          3          4         13          5         14         34 
+volkswagen 
+        27 </code></pre>
+</div>
+</div>
+<p>Using dplyr functions, which manufacturer has has the best average HIGHWAY fuel efficiency in 1999? Which manufacturer has the best average HIGHWAY fuel efficiency in 2008?</p></li>
+<li><p>Which manufacturer has has the best average CITY fuel efficiency in 1999? Which manufacturer has the best average CITY fuel efficiency in 2008?</p></li>
+<li><p>Which of the manufacturers in this dataset showed the best IMPROVEMENT in average <strong>highway</strong> fuel efficiency over that decade?</p></li>
+<li><p>Which of the manufacturers in this dataset showed the best IMPROVEMENT in average <strong>city</strong> fuel efficiency over that decade?</p></li>
+</ol>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+      }
+    }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
