@@ -88,7 +88,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#part-4" id="toc-part-4" class="nav-link" data-scroll-target="#part-4">Part 4</a></li>
   <li><a href="#part-5" id="toc-part-5" class="nav-link" data-scroll-target="#part-5">Part 5</a></li>
   <li><a href="#part-6" id="toc-part-6" class="nav-link" data-scroll-target="#part-6">Part 6</a></li>
-  <li><a href="#extraoptional-challenges" id="toc-extraoptional-challenges" class="nav-link" data-scroll-target="#extraoptional-challenges">Extra/optional challenges</a></li>
+  <li><a href="#extra-optional-challenges" id="toc-extra-optional-challenges" class="nav-link" data-scroll-target="#extra-optional-challenges">Extra optional challenges</a></li>
   </ul>
 </nav>
 </div>
@@ -178,10 +178,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>add points (you may need to investigate how to do this!),</li>
 <li>reduce the size of the label text,</li>
 <li>move the labels to be above and to the right of each datapoint, so that both the points and labels can be seen,</li>
-<li>capitalize the x- and y-axis labels, and</li>
+<li>capitalize the x-axis and y-axis labels, and</li>
 <li>capitalize the title on the legend.</li>
 </ul>
-<p>Feel free to make any other aesthetic changes as desired!</p>
+<p>Feel free to make any other aesthetic changes, as desired.</p>
 </section>
 <section id="part-3" class="level2">
 <h2 class="anchored" data-anchor-id="part-3">Part 3</h2>
@@ -200,7 +200,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="part-4" class="level2">
 <h2 class="anchored" data-anchor-id="part-4">Part 4</h2>
-<p>Next, we will use the data from <a href="https://doi.org/10.1371/journal.pbio.1002295">Roche et al.&nbsp;2015</a> (study on data archiving from Week 1). You will need to use the dataset from Figshare, plus their meta-data to complete this assignment. Use the link in the paper to go to their data archive on Figshare, and ‘download all’ files. Move the files to an appropriate working directory for this assignment (i.e., your assignments folder for this course).</p>
+<p>Next, we will use the data from <a href="https://doi.org/10.1371/journal.pbio.1002295">Roche et al.&nbsp;2015</a> (study on data archiving from Week 1).</p>
+<p>You will need to use the dataset from Figshare, plus their meta-data to complete this assignment. Go to their paper, and find the link within the paper to their data archive on Figshare. From the Figshare respository, ‘download all’ files. Move the files to an appropriate working directory for this assignment (i.e., your assignments folder for this course).</p>
 <p><img src="pbio.1002295.g001.png" class="img-fluid" width="454"></p>
 <p>Bring the csv data file into R by adding a line to your .R script, as follows:</p>
 <div class="cell">
@@ -213,12 +214,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>4b. How many unique <strong>journals</strong> are in Roche et al.’s dataset? <em>Note, this is asking about journals, not studies!</em></p>
 <p>4c. Check to make sure the two SCORE columns have the expected range of values.</p>
 <p>4d. What is the mean completeness score?</p>
-<p>4e. What is the most common (modal) re-usability score?</p>
-<p>4f. How many studies have the lowest possible completeness score, but the highest possible re-usability score?</p>
+<p>4e. What is the most common (modal) reusability score?</p>
+<p>4f. How many studies have the lowest possible completeness score, but the highest possible reusability score?</p>
 <p>4g. How many studies have a reusability score of 3, but the second-highest possible completeness score?</p>
 <p>4h. What info is provided in the column analysisPgrm?</p>
 <p>4i. Are there any NAs (missing values) in analysisPgrm? How many are missing?</p>
-<p>4j. The column analysisPrgm stores character info about any/all analysis programs used (ranging from 1-n). Look closely at how analysisPgrm is stored/entered. Briefly, what potential issue do you see?</p>
+<p>4j. Look closely at how values in analysisPgrm are stored/entered. Briefly, what potential issue do you see that would need to be handled if you wanted to analyze the information in this column?</p>
 </section>
 <section id="part-5" class="level2">
 <h2 class="anchored" data-anchor-id="part-5">Part 5</h2>
@@ -230,8 +231,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>5a. Create ANOTHER new column in the dataframe that designates each study as having used csv for any of their fileExt, or not.</p>
 <p>5b. What proportion of studies used csv?</p>
-<p>5c. Using EITHER base R or ggplot (or any other package you wish), generate a bar graph that plots the relationship between these two categorical variables above (i.e., whether a study used R (or not) &amp; whether a study used csv (or not)). Bar graphs are best for showing the distribution of one or more categorical variables! To show the relationship between two categorical variables here, you’d use either a grouped or stacked bar graph.</p>
-<p>5d. Modify your plot to include the necessary axis labels, legend, and other features so that a reader can interpret what your graph is showing.</p>
+<p>5c. Using EITHER base R or ggplot (or any other package you wish), generate a bar graph that plots the relationship between these two categorical variables above (i.e., whether a study used R (or not) &amp; whether a study used csv (or not)). Bar graphs are best for showing the distribution of one or more categorical variables. To show the relationship between <strong>two</strong> categorical variables here, you should use either a grouped bar graph, or a stacked bar graph.</p>
+<p>5d. Modify your plot to include the necessary axis labels, legend, and other features, so that a reader can interpret what your graph is showing.</p>
 <p>5e. Use a chi-squared contingency test to evaluate whether studies using R were any more or less likely to use csv. What is your conclusion?</p>
 </section>
 <section id="part-6" class="level2">
@@ -242,18 +243,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(data<span class="sc">$</span>readme)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>6c. Using either base R or ggplot (or any other packages you wish), plot the association between completeness score (y axis) and readme (x). Hint: R needs to be told to treat readme as categorical/factor.</p>
-<p>6d. Modify your plot to include the necessary features so that a reader would be able to interpret what it is showing.</p>
-<p>6e. Use the function lm() to fit a linear model testing whether whether completeness score is associated with readme. What is your conclusion? Is it surprising?</p>
+<p>6d. Modify your plot to include the necessary features so that a reader can interpret what it is showing.</p>
+<p>6e. Use the function lm() to fit a linear model testing whether a study’s completeness score is associated with readme. What is your conclusion? Is it surprising?</p>
 </section>
-<section id="extraoptional-challenges" class="level2">
-<h2 class="anchored" data-anchor-id="extraoptional-challenges">Extra/optional challenges</h2>
+<section id="extra-optional-challenges" class="level2">
+<h2 class="anchored" data-anchor-id="extra-optional-challenges">Extra optional challenges</h2>
 <p>These are optional, only do what you want/are able to here.</p>
 <ol type="i">
 <li>How many papers in Roche et al.’s dataset did not specify ANY analysis program?</li>
-<li>What was the maximum number of analysis programs within a single study? (Determine using R not manually!)</li>
+<li>What was the maximum number of analysis programs within a single study? (Determine using R, not manually.)</li>
 <li>Fit a binomial model to determine whether the probability of csv file being used increases with the the number of data files for a paper. What do you conclude?</li>
-<li>Fit a model OR create a visualization to investigate another association in this dataset. What do you expect, and what does your model/visualization suggest?</li>
-<li>CHALLENGE… Using R, write a script that finds the unique solution to the wintry word puzzle shown in this image below. There is one unique solution here!</li>
+<li>Fit a model OR create a visualization to investigate another association in this dataset (is Y associated with X?). What do you expect to find? What does your model/visualization suggest?</li>
+<li>CHALLENGE… Using R, write a script that finds the unique solution to the wintry word puzzle shown in this image below. There is only one unique solution here!</li>
 </ol>
 <p><img src="oi6xF-x5.png" class="img-fluid"></p>
 </section>
