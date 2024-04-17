@@ -47,7 +47,9 @@ x <- 1:10
 sd(x)
 ```
 
-1a. Write your OWN function that takes a vector of numeric data, and returns the sample standard deviation (you'll need to know the formula for SD to do this). Use the formula for the ***Sample*** ***SD*** here:
+1a. Write your OWN function that takes a vector of numeric data, and returns the sample standard deviation (you'll need to know the formula for SD to do this).
+
+Use the formula for the ***Sample*** ***SD*** here:
 
 [![](standard-deviation_formula.png){width="527"}](https://www.k2analytics.co.in/wp-content/uploads/2020/05/standard-deviation.png)
 
@@ -72,138 +74,141 @@ is.numeric(c('a', 'b', 'c'))
 
 ## Part 2
 
-Using ggplot, make this graph plotting total vs. population:
+2a. Building on the function you created above, write a new function (with a new name) that takes a vector of values as input, and calculates and returns 3 descriptive statistics:
+
+-   the sample mean,
+-   the sample SD,
+-   and the standard error of the mean.
+
+It should return a vector of those three values.
+
+2b. To maximize the usefulness of this new function, modify it so that the 3 values in the vector that gets returned are each named. Here is a hint/reminder for how to create a vector of numeric values where each element has a name:
 
 ```{r}
-#| label: murder-graph
+#| label: naming-example
 
-ggplot(murders, mapping = 
-         aes(x = population, y = total, label = abb, color = region)) +
-  geom_label() +
-  theme_bw()
+c('mean' = 1, 'sd' = 2, 'sem' = 3)
 ```
-
-2a. Next, use a separate call to ggplot to recreate this graph but modify it so that BOTH the x and y variables plotted on a log scale.
-
-2b. Why it is helpful to do this? Briefly explain.
-
-2c. Next, using a separate ggplot call again, remake the graph with the following changes:
-
--   add points (you may need to investigate how to do this!),
--   reduce the size of the label text,
--   move the labels to be above and to the right of each datapoint, so that both the points and labels can be seen,
--   capitalize the x- and y-axis labels, and
--   capitalize the title on the legend.
-
-Feel free to make any other aesthetic changes, as desired.
 
 ## Part 3
 
-In the murders dataset, use indexing and logical operators to identify:
+3a. Write a for loop that prints the values from 50:80
 
-3a. Which US states have a larger population than the province of Ontario?
-
-3b. Which US states are considered to be in the South AND have a population of fewer than 10 million people?
-
-3c. How many US states have a population between 7 and 15 million?
-
-3d. The line below attempts to find any northern states with a population greater than 7 million, however, the output is empty. What's wrong with this attempt? Fix it in your script.
+3b. The iris dataset has measurements of flower morphology for 3 iris species:
 
 ```{r}
-#| label: bad-subset
+#| label: iris-data
 
-subset(murders, region == 'North' & population > 7000000)
+str(iris)
+```
+
+The first 4 columns are numeric measurements of length and width of flower structures. Write a for loop that:
+
+-   Generates a histogram for each of those 4 columns in turn.
+-   Each histogram should have a title on top of the histogram with the name of the column (Petal.Width, etc).
+    -   Hint: you can do this with hist() using the main argument in base R
+    -   Other hint: column names for a data.frame are accessible via names()
+-   And lastly, your loop should wait for a keypress before moving on to the next column and generating the next histogram.
+    -   Hint: one way to pause to wait for a keypress in the console is to use the readline() function:
+
+```{r}
+#| label: wait-keypress
+#| eval: false
+
+readline(prompt = 'Press return/enter to continue')
 ```
 
 ## Part 4
 
-Next, we will use the data from [Roche et al. 2015](https://doi.org/10.1371/journal.pbio.1002295) (study on data archiving from Week 1).
+4a. Use apply() to get the median value for each of the first 4 columns of the **iris** dataset.
 
-You will need to use the dataset from Figshare, plus their meta-data to complete this assignment. Go to their paper, and find the link within the paper to their data archive on Figshare. From the Figshare respository, 'download all' files. Move the files to an appropriate working directory for this assignment (i.e., your assignments folder for this course).
+4b. Create an 8 x 8 matrix (give it a name) with the values from 1:64, where the values are filled in row-wise (i.e., the first row should be 1:8, second should be 9:16, third should be 17:24, etc)
 
-![](pbio.1002295.g001.png){width="454"}
+4c. Use apply() to get the sample **sd** of each **column** in your matrix.
 
-Bring the csv data file into R by adding a line to your .R script, as follows:
-
-```{r}
-#| label: get-Roche-data
-#| message: false
-
-data <- read_csv('Dryad_data_2012_2013.csv')
-```
-
-4a. First, reduce the dataframe to JUST have the following 10 columns:
-
--   dataset, journal, year, noFiles, fileExt, readme, analysisPgrm, analysisCode, complScore, reuseScore
-
-4b. How many unique **journals** are in Roche et al.'s dataset? *Note, this is asking about journals, not studies!*
-
-4c. Check to make sure the two SCORE columns have the expected range of values.
-
-4d. What is the mean completeness score?
-
-4e. What is the most common (modal) reusability score?
-
-4f. How many studies have the lowest possible completeness score, but the highest possible reusability score?
-
-4g. How many studies have a reusability score of 3, but the second-highest possible completeness score?
-
-4h. What info is provided in the column analysisPgrm?
-
-4i. Are there any NAs (missing values) in analysisPgrm? How many are missing?
-
-4j. Look closely at how values in analysisPgrm are stored/entered. Briefly, what potential issue do you see that would need to be handled if you wanted to analyze the information in this column?
+4d. Use apply() to get the sample **sd** of each **row** in your matrix. Are you surprised by the values?
 
 ## Part 5
 
-Let's create a new column that designates each study as having used R or not:
+For this question, we'll use the diamonds dataset. It is a large dataset with data on the characteristics from \~54,000 diamonds, including each diamond's weight in carats; it's "cut", color, and clarity classifications; it's price; and it's dimensions (mm) in 3 axes (and a few others variables).
 
 ```{r}
-#| label: uses-R
-#| results: false
+#| label: diamonds-example
 
-data$useR <- grepl('R', data$analysisPgrm, ignore.case = F)
-
-table(data$useR) # summarizes how many studies did not, and did, use R
+diamonds
 ```
 
-5a. Create ANOTHER new column in the dataframe that designates each study as having used csv for any of their fileExt, or not.
-
-5b. What proportion of studies used csv?
-
-5c. Using EITHER base R or ggplot (or any other package you wish), generate a bar graph that plots the relationship between these two categorical variables above (i.e., whether a study used R (or not) & whether a study used csv (or not)). Bar graphs are best for showing the distribution of one or more categorical variables. To show the relationship between **two** categorical variables here, you should use either a grouped bar graph, or a stacked bar graph.
-
-5d. Modify your plot to include the necessary axis labels, legend, and other features, so that a reader can interpret what your graph is showing.
-
-5e. Use a chi-squared contingency test to evaluate whether studies using R were any more or less likely to use csv. What is your conclusion?
-
-## Part 6
-
-6a. What does the column readme show?
-
-6b. What does the table below tell us? Add this to your script and comment on what it shows.
+Remember you can use this to see the meta-data:
 
 ```{r}
-#| label: has-readme
-#| results: false
+#| label: diamonds-meta
+#| eval: false
 
-table(data$readme)
+help(diamonds)
 ```
 
-6c. Using either base R or ggplot (or any other packages you wish), plot the association between completeness score (y axis) and readme (x). Hint: R needs to be told to treat readme as categorical/factor.
+5a. What are the possible values of **cut**? Take a look at them, and examine the distribution of cut (i.e., the number of diamonds in the dataset in each cut category).
 
-6d. Modify your plot to include the necessary features so that a reader can interpret what it is showing.
+5b. Suppose we want to model the relationship between **price** and **weight (carat)** for each cut separately (in a separate model). As a first step, create a scatterplot for price vs. carat weight for JUST the subset of **Premium** diamonds from the dataset. You can use ggplot2 if you wish, or just use plot() in base R.
 
-6e. Use the function lm() to fit a linear model testing whether a study's completeness score is associated with readme. What is your conclusion? Is it surprising?
+5c. Now, regenerate the scatterplot, but this time plot natural log-transformed price vs. natural log-transformed carat weight, for just the **Premium** diamonds. How does the relationship change when examining the log-log transformation?
 
-## Extra/optional challenges
+5d. Create an object mod that is a fitted regression model for **log-price** vs. **log-carat weight** for just the **Premium** diamonds. Examine the summary() for your model. What % of variation in the log-price of premium diamonds is explained by log-weight? (This is the multiple R-squared.)
 
-These are optional, only do what you want/are able to here.
+5e. Show that you can extract the value of this R-squared from the fitted model.
 
-i.  How many papers in Roche et al.'s dataset did not specify ANY analysis program?
-ii. What was the maximum number of analysis programs within a single study? (Determine using R, not manually.)
-iii. Fit a binomial model to determine whether the probability of csv file being used increases with the the number of data files for a paper. What do you conclude?
-iv. Fit a model OR create a visualization to investigate another association in this dataset (is Y associated with X?). What do you expect to find? What does your model/visualization suggest?
-v.  CHALLENGE... Using R, write a script that finds the unique solution to the wintry word puzzle shown in this image below. There is only one unique solution here!
+Hint: summary(mod) is itself a **list** object that contains the value you are looking for. You can use str() on the output of summary(mod) to index (i.e., pull out) the R-squared value.
 
-![](oi6xF-x5.png)
+**OPTIONAL:** Write a custom function that takes a fitted model object, and returns the R-squared value from its summary.
+
+## Extra optional challenges
+
+This is for extra (excellent) practice, and is not graded.
+
+i.  Use a for loop to fit a separate model of log-price vs. log-weight for EACH of the levels of cut in the diamonds dataset (Ideal, Premium, Good etc), and store the fitted model in a list.
+
+    To get you started, the example below creates an empty list called fitted_mods with a length that matches the number of unique levels of cut (5). Write your for loop so that it iterates over each level of cut, fitting the log-log regression model (as you did above), and then storing the fitted model in the appropriate slot of fitted_mods. When your loop is done, fitted_mods should contain one fitted model for each unique cut type.
+
+    ```{r}
+    #| label: example-fitted_modes
+
+    mycuts <- unique(diamonds$cut)
+
+    fitted_mods <- vector("list", length = length(mycuts))
+    ```
+
+ii. Using sapply() and your function for extracting R-squared values, get the five R-squared values from your fitted_mods list.
+
+iii. Looking at the meta-data for diamonds, we see that the column **depth** is a measure of diamond shape that is calculated from a diamond's linear x, y, and z dimensions. The help file gives two separate formulas for depth, as follows:
+
+     z / mean(x, y)
+
+     2 \* z / (x + y)
+
+     ...and somewhat confusingly, after the formulas, it also gives the range of depth values in the dataset, reported as (43-79). We can confirm this with:
+
+     ```{r}
+     #| label: check-depth-range
+
+     summary(diamonds$depth)
+     ```
+
+iv. Create a new column in diamonds, **depthF2**, that calculates depth following the **second formula** above.
+
+v.  Create a new column in diamonds, **depthF1**, that calculates depth following the **first formula** above.
+
+vi. Plot a scatterplot of **depthF1** vs. **depthF2**. Add a red line that shows a 1:1 relationship. Note that there are many ways to do this, and one is abline(). Does the result look as you would expect?
+
+vii. Looking at the range of your newly calculated values, it's clear that the depth column in diamonds is scaled by some factor. Can you figure out what that factor is, using the data?
+
+viii. Re-scale your newly-calculated columns **depthF2** and **depthF1** so that they are expected to match **depth**. Then plot depth vs. one of your new columns. Add the red 1:1 line again.
+
+ix. It's clear from the plot that the dataset has some discrepancies. Either we have errors in the x, y, or z measurements, OR we have errors in the depth values that were calculated by the authors of the diamonds dataset (or both). Investigating this, which do you think is more likely?
+
+x.  Let's create a marker to identify the problematic rows. Generate a new column in diamonds called **meas_ok** that has a value of T IF the measurements are OK, and a value of F if there is a large discrepancy that we would want to investigate futher.
+
+    As the definition of a "large enough" discrepancy for this example, let's say if your calculated **depthF1** is within +/- 5 of the value in **depth** column of the dataset, we'll consider that row to be OK.
+
+    IF **depthF1** and **depth** have a discrepancy that is larger than +/- 5, or if **depthF1** is missing or NA, consider it to be a problematic row.
+
+xi. How many of the diamonds are problematic? What percent of the original data is this? Create a filtered data.frame with just the problematic rows, so they can be inspected.

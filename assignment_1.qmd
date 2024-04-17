@@ -181,7 +181,7 @@ table(data$readme)
 
 6e. Use the function lm() to fit a linear model testing whether a study's completeness score is associated with readme. What is your conclusion? Is it surprising?
 
-## Extra/optional challenges
+## Extra optional challenges
 
 These are optional, only do what you want/are able to here.
 
