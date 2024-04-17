@@ -1,14 +1,14 @@
 ---
-title: "BIOL 5404 Assignment 1"
+title: "BIOL 5404 Assignment 2"
 author: "Roz Dakin"
-date: "January 21, 2024"
+date: "February 2, 2024"
 published-title: "Due on"
 format: html
 editor: visual
 toc: true
 toc-location: left
 toc-expand: 2
-toc-title: BIOL 5404 A1
+toc-title: BIOL 5404 A2
 link-external-newwindow: true
 ---
 
@@ -32,28 +32,43 @@ link-external-newwindow: true
 #| message: false
 
 library(tidyverse)
-library(dslabs)
 ```
+
+We will use the diamonds dataset that comes with the tidyverse package. We will also use the iris dataset that comes with base R.
 
 ## Part 1
 
-The murders dataset from the dslabs package has data on gun homicides for 50 US states and the District of Columbia, Washington DC.
+In R, the sd() function takes a vector of numeric data and returns the sample standard deviation.
 
 ```{r}
-#| label: murders-dataset
-#| eval: false
+#| label: sd-demo
 
-help(murders)
+x <- 1:10
+sd(x)
 ```
 
-1a. Plot the distribution of 'total' (the number of gun homicides in 2010).
+1a. Write your OWN function that takes a vector of numeric data, and returns the sample standard deviation (you'll need to know the formula for SD to do this). Use the formula for the ***Sample*** ***SD*** here:
 
-1b. Create a new column in the murders dataframe that has the rate of gun homicides per 1,000,000 people in the population. Plot the distribution of this new variable.
+[![](standard-deviation_formula.png){width="527"}](https://www.k2analytics.co.in/wp-content/uploads/2020/05/standard-deviation.png)
 
-1c. Use R to identify the following outliers (i.e., by indexing based on logical conditions, or by using R functions):
+Note: do not use sd() in your function! The purpose of this exercise is to generate a function yourself that will do this.
 
--   Which state has the highest **total count** of gun homicides?
--   Which state has the highest **per capita murder rate**? Why do you think this particular state's per capita murder rate is SO much higher than the others?
+1b. Verify that your function gives the same output as sd() for a few examples. What happens if you pass your function a vector of character data? What happens if you pass your function a vector that is a factor?
+
+1c. Now, modify your function so that IF it gets passed a vector that is not numeric, THEN it prints a useful error message. Start by copy-pasting your function above, then modify it to add this new capacity. After creating your new-and-improved function, show that it works with a few examples.
+
+Hint: you can use a conditional statement to do this, along with the function is.numeric(), which is shown below.
+
+```{r}
+#| label: is-numeric-demo
+
+is.numeric(1:10)
+is.numeric(c('a', 'b', 'c'))
+```
+
+1d. What happens if you pass your function a numeric vector that has one NA value in it?
+
+**OPTIONAL:** Modify your function further (building a new version) so that if it gets passed a numeric vector with at least one NA entry, it still reports the sample SD for the non-NA values. How many non-NA datapoints (values) does your function need, at a minimum, to be able to report the SD? Caution: ensure that your function calculates the sample sd of non-NA values using the correct n of non-NA values.
 
 ## Part 2
 
@@ -77,7 +92,7 @@ ggplot(murders, mapping =
 -   add points (you may need to investigate how to do this!),
 -   reduce the size of the label text,
 -   move the labels to be above and to the right of each datapoint, so that both the points and labels can be seen,
--   capitalize the x-axis and y-axis labels, and
+-   capitalize the x- and y-axis labels, and
 -   capitalize the title on the legend.
 
 Feel free to make any other aesthetic changes, as desired.
