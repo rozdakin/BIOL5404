@@ -80,7 +80,7 @@ ggplot(murders, mapping =
 -   capitalize the x- and y-axis labels, and
 -   capitalize the title on the legend.
 
-Feel free to make any other aesthetic changes as desired!
+Feel free to make any other aesthetic changes, as desired.
 
 ## Part 3
 
@@ -102,7 +102,9 @@ subset(murders, region == 'North' & population > 7000000)
 
 ## Part 4
 
-Next, we will use the data from [Roche et al. 2015](https://doi.org/10.1371/journal.pbio.1002295) (study on data archiving from Week 1). You will need to use the dataset from Figshare, plus their meta-data to complete this assignment. Use the link in the paper to go to their data archive on Figshare, and 'download all' files. Move the files to an appropriate working directory for this assignment (i.e., your assignments folder for this course).
+Next, we will use the data from [Roche et al. 2015](https://doi.org/10.1371/journal.pbio.1002295) (study on data archiving from Week 1).
+
+You will need to use the dataset from Figshare, plus their meta-data to complete this assignment. Go to their paper, and find the link within the paper to their data archive on Figshare. From the Figshare respository, 'download all' files. Move the files to an appropriate working directory for this assignment (i.e., your assignments folder for this course).
 
 ![](pbio.1002295.g001.png){width="454"}
 
@@ -125,9 +127,9 @@ data <- read_csv('Dryad_data_2012_2013.csv')
 
 4d. What is the mean completeness score?
 
-4e. What is the most common (modal) re-usability score?
+4e. What is the most common (modal) reusability score?
 
-4f. How many studies have the lowest possible completeness score, but the highest possible re-usability score?
+4f. How many studies have the lowest possible completeness score, but the highest possible reusability score?
 
 4g. How many studies have a reusability score of 3, but the second-highest possible completeness score?
 
@@ -135,7 +137,7 @@ data <- read_csv('Dryad_data_2012_2013.csv')
 
 4i. Are there any NAs (missing values) in analysisPgrm? How many are missing?
 
-4j. The column analysisPrgm stores character info about any/all analysis programs used (ranging from 1-n). Look closely at how analysisPgrm is stored/entered. Briefly, what potential issue do you see?
+4j. Look closely at how values in analysisPgrm are stored/entered. Briefly, what potential issue do you see that would need to be handled if you wanted to analyze the information in this column?
 
 ## Part 5
 
@@ -154,9 +156,9 @@ table(data$useR) # summarizes how many studies did not, and did, use R
 
 5b. What proportion of studies used csv?
 
-5c. Using EITHER base R or ggplot (or any other package you wish), generate a bar graph that plots the relationship between these two categorical variables above (i.e., whether a study used R (or not) & whether a study used csv (or not)). Bar graphs are best for showing the distribution of one or more categorical variables! To show the relationship between two categorical variables here, you'd use either a grouped or stacked bar graph.
+5c. Using EITHER base R or ggplot (or any other package you wish), generate a bar graph that plots the relationship between these two categorical variables above (i.e., whether a study used R (or not) & whether a study used csv (or not)). Bar graphs are best for showing the distribution of one or more categorical variables. To show the relationship between **two** categorical variables here, you should use either a grouped bar graph, or a stacked bar graph.
 
-5d. Modify your plot to include the necessary axis labels, legend, and other features so that a reader can interpret what your graph is showing.
+5d. Modify your plot to include the necessary axis labels, legend, and other features, so that a reader can interpret what your graph is showing.
 
 5e. Use a chi-squared contingency test to evaluate whether studies using R were any more or less likely to use csv. What is your conclusion?
 
@@ -175,18 +177,18 @@ table(data$readme)
 
 6c. Using either base R or ggplot (or any other packages you wish), plot the association between completeness score (y axis) and readme (x). Hint: R needs to be told to treat readme as categorical/factor.
 
-6d. Modify your plot to include the necessary features so that a reader would be able to interpret what it is showing.
+6d. Modify your plot to include the necessary features so that a reader can interpret what it is showing.
 
-6e. Use the function lm() to fit a linear model testing whether whether completeness score is associated with readme. What is your conclusion? Is it surprising?
+6e. Use the function lm() to fit a linear model testing whether a study's completeness score is associated with readme. What is your conclusion? Is it surprising?
 
 ## Extra/optional challenges
 
 These are optional, only do what you want/are able to here.
 
 i.  How many papers in Roche et al.'s dataset did not specify ANY analysis program?
-ii. What was the maximum number of analysis programs within a single study? (Determine using R not manually!)
+ii. What was the maximum number of analysis programs within a single study? (Determine using R, not manually.)
 iii. Fit a binomial model to determine whether the probability of csv file being used increases with the the number of data files for a paper. What do you conclude?
-iv. Fit a model OR create a visualization to investigate another association in this dataset. What do you expect, and what does your model/visualization suggest?
-v.  CHALLENGE... Using R, write a script that finds the unique solution to the wintry word puzzle shown in this image below. There is one unique solution here!
+iv. Fit a model OR create a visualization to investigate another association in this dataset (is Y associated with X?). What do you expect to find? What does your model/visualization suggest?
+v.  CHALLENGE... Using R, write a script that finds the unique solution to the wintry word puzzle shown in this image below. There is only one unique solution here!
 
 ![](oi6xF-x5.png)
