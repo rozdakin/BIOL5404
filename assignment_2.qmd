@@ -51,7 +51,7 @@ sd(x)
 
 Use the formula for the ***Sample*** ***SD*** here:
 
-[![](standard-deviation_formula.png){width="527"}](https://www.k2analytics.co.in/wp-content/uploads/2020/05/standard-deviation.png)
+[![](standard-deviation_formula.png){width="589"}](https://www.k2analytics.co.in/wp-content/uploads/2020/05/standard-deviation.png)
 
 Note: do not use sd() in your function! The purpose of this exercise is to generate a function yourself that will do this.
 
@@ -138,7 +138,9 @@ For this question, we'll use the diamonds dataset. It is a large dataset with da
 diamonds
 ```
 
-Remember you can use this to see the meta-data:
+[![Diamond in kimberlite matrix from South Africa (source: Wikimedia Commons).](Diamond_-_South_Africa_-_Finsch_Mine_2.jpg){fig-align="left" width="678"}](https://commons.wikimedia.org/wiki/File:Diamond_-_South_Africa_-_Finsch_Mine_2.jpg)
+
+Remember, you can use this to see the meta-data:
 
 ```{r}
 #| label: diamonds-meta

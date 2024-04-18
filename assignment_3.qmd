@@ -180,6 +180,8 @@ Aside: when you have a list of data.frames like this, and all of the data.frames
 
 Now we are going to work with the **mpg** dataset that has information on vehicles (cars etc), their fuel efficiency, and other properties. Familiarize yourself with the variables in this dataset.
 
+[![](65c6a24c2e920.webp)](https://www.thestar.com/news/gta/he-has-one-of-canadas-largest-hot-wheels-collections-heres-what-drives-him-to-go/article_db3e9bec-cab1-11ee-b12f-fb3f9cb02b52.html)
+
 ```{r}
 #| label: get-mpg
 #| eval: false
