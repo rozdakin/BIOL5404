@@ -1,0 +1,57 @@
+---
+title: "BIOL 5404 Assignment 6"
+author: "Roz Dakin"
+date: "March 31, 2024"
+published-title: "Due on"
+format: html
+editor: visual
+toc: false
+link-external-newwindow: true
+---
+
+[Back to assignment list](index.html)
+
+## Instructions: your own EDA
+
+-   Create a new .R script to complete this assignment in your local assignments folder for this course.
+-   You'll submit the .R script AND the necessary data files on Brightspace.
+-   ***Put your FIRST and LAST NAME in the [file name]{.underline} of the script.***
+-   Put your name at the top of the script as well.
+-   Please do not include your student ID, just your name is enough.
+-   Make sure your script is organized and legible – use principles learned throughout this course.
+-   Be sure to load all packages needed at the top of your script.
+
+For this Assignment, you’ll submit your own draft EDA in a tidy and well-annotated R script. The EDA that you present here will form basis of your final report. The goal of A6 is to get started on your EDA project and get feedback on your work, before you format it into a spiffy-looking report at the end of the term. After all, EDA is iterative!
+
+As such, there are no questions for this assignment.
+
+Before you begin, read the PDF **"Instructions for the Independent Report"** on Brightspace. The instructions PDF outlines the goals/criteria of your EDA and suggests some tips on choosing a dataset/question to work with.
+
+Your EDA should include:
+
+-   importing -- make sure you use relative path(s)!
+-   hygiene and tidying
+-   transformation, as needed
+-   wrangling steps, as needed
+-   several visualizations
+
+In your script for A6, include comments throughout that explain key points to the user, including what your research question(s) is/are, where your dataset comes from, and what specific actions you are performing in the script and why.
+
+As with our other assignments, A6 will be evaluated out of 10:
+
+-   5 points for completeness (is the code doing what you intend?)
+-   5 points for clarity (can the user follow along/understand what's being done?)
+-   ...and the graders will provide some commentary/feedback. The idea is that this feedback should be useful to you when finalizing your markdown report in April.
+
+## Examples of final reports
+
+<https://drive.google.com/drive/folders/1wzDkJAqyJUivATaQjAUnWieyxtrq5OkN?usp=sharing#>
+
+The link above takes you to a folder with previous markdown projects that past were willing to share, for your benefit! They nicely show the diversity and depth of exploratory data analyses. You should be able to download all files for a given project. To get a quick look at one, you could download JUST the html file. Note: you must download (previewing the htmls from within Google Drive doesn't let you view the final formatting).
+
+For A6, you will not yet be creating a "pretty" markdown version. The goal here is to draft your EDA as a regular-old R script, applying tools and concepts that we've been working on all term.
+
+For A6, you should submit the following files on Brightspace:
+
+-   the .R script of your EDA
+-   any data files needed to make your .R script go!
