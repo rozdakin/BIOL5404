@@ -10,6 +10,6 @@ toc: false
 -   [Assignment 1 due January 21, 2024](assignment_1.html)
 -   [Assignment 2 due February 4, 2024](assignment_2.html)
 -   [Assignment 3 due February 18, 2024](assignment_3.html)
--   A4 due March
+-   [Assignment 4 due March 3, 2024](assignment_4.html)
 -   A5 due March
 -   [Assignment 6 due March 31, 2024](assignment_6.html)
