@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Roz Dakin">
+<meta name="dcterms.date" content="2024-03-17">
+
+<title>BIOL 5404 Assignment 5</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="assignment_5_files/libs/clipboard/clipboard.min.js"></script>
+<script src="assignment_5_files/libs/quarto-html/quarto.js"></script>
+<script src="assignment_5_files/libs/quarto-html/popper.min.js"></script>
+<script src="assignment_5_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="assignment_5_files/libs/quarto-html/anchor.min.js"></script>
+<link href="assignment_5_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="assignment_5_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="assignment_5_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="assignment_5_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="assignment_5_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article toc-left">
+<div id="quarto-sidebar-toc-left" class="sidebar toc-left">
+  <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
+    <h2 id="toc-title">BIOL 5404 A5</h2>
+   
+  <ul>
+  <li><a href="#instructions" id="toc-instructions" class="nav-link active" data-scroll-target="#instructions">Instructions</a></li>
+  <li><a href="#part-1" id="toc-part-1" class="nav-link" data-scroll-target="#part-1">Part 1</a></li>
+  <li><a href="#part-2" id="toc-part-2" class="nav-link" data-scroll-target="#part-2">Part 2</a></li>
+  <li><a href="#part-3" id="toc-part-3" class="nav-link" data-scroll-target="#part-3">Part 3</a></li>
+  <li><a href="#part-4" id="toc-part-4" class="nav-link" data-scroll-target="#part-4">Part 4</a></li>
+  <li><a href="#part-5" id="toc-part-5" class="nav-link" data-scroll-target="#part-5">Part 5</a></li>
+  <li><a href="#part-6" id="toc-part-6" class="nav-link" data-scroll-target="#part-6">Part 6</a></li>
+  <li><a href="#extra-optional-challenges" id="toc-extra-optional-challenges" class="nav-link" data-scroll-target="#extra-optional-challenges">Extra optional challenges</a></li>
+  </ul>
+</nav>
+</div>
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">BIOL 5404 Assignment 5</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Roz Dakin </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Due on</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">March 17, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<p><a href="index.html">Back to assignment list</a></p>
+<section id="instructions" class="level2">
+<h2 class="anchored" data-anchor-id="instructions">Instructions</h2>
+<ul>
+<li>Create a new .R script to complete this assignment in your local assignments folder for this course.</li>
+<li>You’ll submit the .R script on Brightspace.</li>
+<li><strong><em>Put your FIRST and LAST NAME in the <u>file name</u> of the script.</em></strong></li>
+<li>Put your name at the top of the script as well.</li>
+<li>Please do not include your student ID, just your name is enough.</li>
+<li><strong>Show your work!</strong></li>
+<li>Make sure your script is organized and legible.</li>
+<li>Use <a href="https://support.posit.co/hc/en-us/articles/200484568-Code-Folding-and-Sections-in-the-RStudio-IDE">code sections</a> (####) &amp; question numbers as outlined below.</li>
+<li>Provide all written answers as brief # comments within your script.</li>
+<li>Be sure to load all packages needed at the top of your script, like this (adding any other packages needed):</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmerTest)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>You will need to install these packages, if you don’t already have them.</p>
+<p>In this assignment, we will use two datasets:</p>
+<ul>
+<li><p>Data on scientific authorship in ecology/zoology, collected by Salerno et al.&nbsp;This study addresses gender composition of authorship teams. How often are authorship teams mixed vs.&nbsp;same gender? Our goal will be to do some hygiene investigations on this dataset.</p></li>
+<li><p>Data on thousands of bird specimens collected by the University of Michigan Museum of Zoology. We will use this dataset to ask whether body size in wild bird species has been shrinking over the past century. It has been hypothesized that climate change and anthropogenic stressors are driving the evolution of smaller body sizes. Our goal will be to do some EDA and visualization on this question.</p></li>
+</ul>
+</section>
+<section id="part-1" class="level2">
+<h2 class="anchored" data-anchor-id="part-1">Part 1</h2>
+<p>Let’s start with Salerno et al’s study of authorship teams in ecology/zoology. Start by reading in the data from csv file (available on BS). This dataset was published alongside their paper on gender in authorship teams in the journal PLOS One in 2019. As we will see, the dataset has a lot of issues. Let’s investigate.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>adat <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">'journal.pone.0218598.s001.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Take a look at the data. Each ROW in the dataset represents a single PAPER that the authors included in their sample.</p>
+<p>1a. How many <strong>papers</strong> are in their sample?</p>
+<p>1b. How many <strong>unique journals</strong> are represented in this sample?</p>
+<p>1c. What is the range of publication year for the papers in this dataset?</p>
+<p>1d. Is <code>Journal</code> or <code>Year</code> info missing for any rows in this dataset?</p>
+<p>1e. Use ggplot() to quickly visualize the following (without worrying about aesthetic details):</p>
+<ul>
+<li><p>A bargraph of the number of papers from each journal title,</p></li>
+<li><p>A bargraph of the <code>Subfield</code> column in the data,</p></li>
+<li><p>The distribution of publication <code>Year</code> as a numerical variable, and</p></li>
+<li><p>The distribution of publication <code>Year</code> converted to a factor (categorical, with a bar graph).</p></li>
+</ul>
+<p>1f. Explain what is unusual about the appearance of your 3<sup>rd</sup> plot above. Is the dataset actually missing papers from a particular year, or is this an artifact?</p>
+<p>1g. Now let’s look at some hygiene. Remember each row represents a paper. Let’s start by focusing on these three columns:</p>
+<ul>
+<li><p><code>Month</code>: gives the month a paper was published</p></li>
+<li><p><code>Title</code>: gives the paper’s title</p></li>
+<li><p><code>No.authors</code>: gives the number of people in the paper’s authorship team</p></li>
+</ul>
+<p>Think about what you expect for each of these 3 columns. Write it down. Then, for each column, check your expectations and look for potential problems. What are the typical values? What do you expect? Are there obvious errors or cases that violate your expectations? Are the values in the column usable, as-is?</p>
+<p><strong>Note: I am NOT asking you to clean these 3 columns for question 1g.</strong> I’m just asking you to examine what would need to be fixed up, and write a little summary of what would need to be done for each of those columns.</p>
+<p>1h. How many papers in this dataset are sole-authored papers? What percent of the datsaset is this? Does that surprise you?</p>
+</section>
+<section id="part-2" class="level2">
+<h2 class="anchored" data-anchor-id="part-2">Part 2</h2>
+<p>The goal of Salerno et al.’s study was to ask whether the gender of the last author was associated with the gender the first author in science authorship teams. For each of the papers in their sample, Salerno et al.&nbsp;categorized the gender of these two author positions in the columns <code>Author1F</code> (1 = female, 0 = male) and <code>LastF</code> (1 = female, 0 = male). Our next step in this section is to do some checks to verify that the values of these two columns, <code>Author1F</code> and <code>LastF</code>, are as expected.</p>
+<p>2a. Make two separate ggplot() bar graphs to look at the distribution for columns <code>Author1F</code> and <code>LastF</code>, respectively.</p>
+<p>2b. How many papers/rows in this dataset are missing values for <code>Author1F</code>?</p>
+<p>2c. How many papers/rows are missing values for <code>LastF</code>?</p>
+<p>2d. How many papers are missing values for BOTH <code>Author1F</code> and <code>LastF</code>?</p>
+<p>2e. How many papers are missing values for EITHER <code>Author1F</code> or <code>LastF</code>?</p>
+<p>Note: a good reason for this info to be missing would be if author gender could not be determined. Salerno et al’s method involved assuming gender based on an author’s name, or searching that person online and then making a guess/assumption about their gender.</p>
+<p>2f. In the column <code>PropF</code>, Salerno et al.&nbsp;calculated the PROPORTION of the paper’s total authorship team that was female. So for example, if a paper had 10 authors and 7 of them were female, <code>PropF</code> would have a value 0.7. Are the values of <code>PropF</code> in the range expected?</p>
+<p>2g. Make a ggplot() histogram of the distrubtion of <code>PropF</code>. What are typical values?</p>
+<p>2h. How many rows are missing <code>PropF</code>?</p>
+<p>2i. Does it make sense WHICH rows have NA for <code>PropF</code>?</p>
+<p>2j. In their study, Salerno et al.&nbsp;analyze the data in their <code>PropF</code> column (response variable) in relation to last author gender (<code>LastF</code>) as the predictor. They want to ask whether teams that are anchored by a male Principal Investigator (last author) tend to have less female representation. Towards this end, they examined the relationship between <code>PropF</code> and <code>LastF</code>. Given what you know about this dataset, can you identify a MAJOR issue here? (It relates to the logic of what they are trying to assess, and what they measured in <code>PropF</code> and in this particular sample.) Show any investigations/examples to bolster your point.</p>
+<p><strong>OPTIONAL:</strong> Set up some further checks to determine HOW OFTEN the values of <code>PropF</code> are impossible given the info in the <code>No.authors</code> column.</p>
+<p>Hint: we expect the value for <code>PropF</code> * <code>No.authors</code> to be a whole number or very close to it within some tolerance (e.g., we might say, within 0.1 of a whole number). Set up a pipe to check this. Beware of floating point issues with this! HOW MANY rows in the dataset have at least one mistake in either <code>No.authors</code> or <code>PropF</code>?</p>
+</section>
+<section id="part-3" class="level2">
+<h2 class="anchored" data-anchor-id="part-3">Part 3</h2>
+<p>Next, we’re going to investigate whether birds have been shrinking over the past ~100 years. As the climate warms, many endothermic animals are expected to evolve smaller body sizes due to changs in thermoregulatory requirements (in biogeography, this is known as Bergmann’s Rule). To explore this question in North American birds, we will use a very large dataset of all specimens that have even been cataloged by the University of Michigan Museum of Zoology over the past ~100 or so years.</p>
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="Drawer%20of%20birds%20in%20FM%20collections,%20(c)%20Field%20Museum,%20Ben%20Marks%20(1).jpg" class="img-fluid figure-img" width="577"></p>
+<figcaption class="figure-caption">Birds in the collection at the Field Museum (Ben Marks).</figcaption>
+</figure>
+</div>
+<p>First, we read in the data:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>birddat <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">'UMMZ_web.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This csv file is relatively large (&gt;200 MB) and will take a few moments to load. Note that the tidyverse read_csv() here is MUCH faster and smarter than trying use read.csv()! We will ignore the parsing issues as they don’t affect our investigations here. We have 174 columns (!) and over 211,000 rows.</p>
+<p>Each row is a <strong>specimen</strong> (i.e., an individual bird in the museum’s collection.) There are many species represented here, and a very large number of columns that have info on various features of these specimens. The body mass measurements are stored in the column <code>massing</code> which stands for mass in grams.</p>
+<p>Let’s do some initial filtering. Below, we filter the dataset to only include specimens from North America that were collected on or after the year 1925. Then, we reduce the data to just the columns we expect to use:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>birddat <span class="ot">&lt;-</span> birddat <span class="sc">%&gt;%</span> </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(continent <span class="sc">==</span> <span class="st">'North America'</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">&gt;=</span> <span class="dv">1925</span> <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(year)) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(scientificname, genus, specificepithet, eventdate, year, month, day, sex, lifestage, massing, continent, dynamicproperties, decimallatitude)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(birddat) <span class="co"># reduced to 92,990 rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>3a. How many different genera are represented here? (Note that genera is the plural of genus)</p>
+<p>3b. We want to focus on 7 genera that are of particular interest for our study:</p>
+<ul>
+<li>Passer, Zonotrichia, Vermivora, Tyrannus, Hirundo, Sialia, Empidonax</li>
+</ul>
+<p>Filter the data to just those genera, and store the newly filtered data (i.e., use assignment &lt;- so that birddat in your environment is repaced with the newly filtered version).</p>
+<p>3c. How many <strong>specimens</strong> are represented from those 7 genera?</p>
+<p>3d. How many of these specimens in the filtered data have a value given in the <code>massing</code> column? Recall that <code>massing</code> gives body mass in grams which we are going to use as our measure of body size.</p>
+<p>Filter your filtered data to only include the specimens in those 7 genera that have a mass value available (i.e., they do NOT have NA for <code>massing)</code>.</p>
+<p>3e. Using ggplot(), take an initial look at the distribution of <code>massing</code> values for this filtered sample. What do you notice? Does it look as expected?</p>
+<p>3f. Before we can get to our question about changing in body size, we need to do some hygiene. As a first step, print out the unique values of the column <code>lifestage</code>. What do you notice?</p>
+<p>3g. What % of rows in the filtered data have an NA value in <code>lifestage</code>?</p>
+<p>3h. We want to focus our analysis on adult birds. Take the necessary steps to filter out rows from the data that have <code>lifestage</code> values related to nest, nestling, fledgling, immature, juvenile, chick, etc.</p>
+<ul>
+<li><p>Assume specimens with NA <code>lifestage</code> are adults and keep them in the data. We know that these collections focus almost entirely on adults.</p></li>
+<li><p>We have one row with <code>lifestage == 'fr'</code>. Let’s assume that is an adult, and keep it in.</p></li>
+<li><p>Keep rows where lifestage has a value indicating that the specimen is indeed an adult, of course.</p></li>
+</ul>
+<p>3i. After doing the steps above, how many rows/specimens are you left with?</p>
+</section>
+<section id="part-4" class="level2">
+<h2 class="anchored" data-anchor-id="part-4">Part 4</h2>
+<p>Next, from this filtered dataset, we want to reduce the data further so that we ONLY study species that have a decent sample size of individuals.</p>
+<p>4a. Start by determining which <code>scientificname</code> IDs have at least n &gt;= 50 adult specimens w/ body mass in the reduced dataset that you ended with above. Create a vector with those 8 <code>scientificname</code> values. (We’ll arbitrarily use a cut-off of n &gt;= 50 here to represent a decent sample size; but we could easily choose something else here).</p>
+<p>4b. BUT WAIT! Examining the 8 <code>scientificname</code> values included here, do you notice anything? Do you see any values that should really be collapsed into the same species category? Which ones?</p>
+<p>4c. Given what we just realized, let’s back up and take another approach instead…</p>
+<ul>
+<li><p>With your data that was generated at the end of Part 3, make a NEW column called <code>species</code> that combines info from the <code>genus</code> and <code>specificepithet</code> columns. This will be our species ID. Because <code>specificepithet</code> does not include any subspecies info, we’ll avoid the issue we ran into above.</p></li>
+<li><p>Determine which <code>species</code> IDs have at least n &gt;= 50 adult specimens with body mass. Hint: there should be 9 of them.</p></li>
+<li><p>Now, filter your data to just include those species… be sure to use the output of this step (give it a name) for your further work in the sections below).</p></li>
+</ul>
+<p>4d. How many rows/specimens are you left with?</p>
+</section>
+<section id="part-5" class="level2">
+<h2 class="anchored" data-anchor-id="part-5">Part 5</h2>
+<p>Ok, now let’s examine the distribution of body mass values.</p>
+<p>5a. First, make a ggplot() to inspect the distribution of <code>massing</code> in your remaining data.</p>
+<p>5b. For this question, I want you to find and remove likely errors/typos in <code>massing</code> that represent <strong>impossibly</strong> <strong>large</strong> body mass values for a given species. Note that the upper threshold will differ for different species here! As a helpful strategy, start by generating a ggplot() of <code>massing</code> and using <code>facet_wrap(~species, scales = 'free')</code> to inspect the distribution of <code>massing</code>, plotted by species, all on one page with species-specific scales for <code>massing</code> values. This is an easy/efficient way now to check for obvious errors in all species at once.</p>
+<p>After visual inspection, filter out the extreme values that you deem to be errors (i.e., use assignment <code>&lt;-</code>and remove those rows from your data for further analysis). Note that in many cases it would be best to keep the rows in and overwrite the impossible values with NA. For the purpose of this assignment, you can just remove the rows with obvious errors since we’re narrowing the data down to rows with known body mass anyway.</p>
+<p>5c. Now let’s do some clean-up on these 4 columns:</p>
+<ul>
+<li>decimallatitude, year, month, day</li>
+</ul>
+<p>For each of these 4 columns, check for typical values and impossible values. Clean up any issues you find.</p>
+<p>5d. For sex, you’ll find that it’s encoded in various (not clean) ways. Create a new column, <code>sex_new</code> with a consistent encoding that classifies each specimen sex as either F, M, or NA. Assign any specimens with indeterminate sex as NA in the <code>sex_new</code> column.</p>
+<p>5e. How many male, female, and NA specimens are there in your remaining dataset of known-mass adults in the focal species?</p>
+<p>5f. Which <strong>year</strong> appears to have been a “big year” for collecting at this museum? (As in, a lot of specimens were collected that year.)</p>
+</section>
+<section id="part-6" class="level2">
+<h2 class="anchored" data-anchor-id="part-6">Part 6</h2>
+<p>Now that we have clean data we are ready to really explore our question about body mass changes over time.</p>
+<p>6a. Let’s start by creating a scatterplot to visualize the relationship between <code>massing</code> (y-axis) and <code>year</code> (x-axis) for our filtered sample.</p>
+<ul>
+<li><p>Colour the datapoints by species</p></li>
+<li><p>Add geom_smooth() with <code>method = 'lm'</code></p></li>
+<li><p>Name this plot <code>species_scatter</code></p></li>
+</ul>
+<p>What do you observe?</p>
+<p>6b. Before we run the analysis, let’s consider that there are other factors that can influence variation in a bird’s body size. One important factor may be seasonality (individuals of a given bird species will be largest/heaviest in spring before breeding, and the smallest/lightest at the end of the breeding phase). A second factor that may be important is latitude (in broadly distributed species, individuals living at higher latitudes tend to be larger/heavier).</p>
+<p>Make a scatterplot for <code>massing</code> vs.&nbsp;each of these two variables (i.e., one plot with <code>massign</code> vs.&nbsp;<code>month</code>, and one plot with <code>massing</code> vs.&nbsp;<code>latitude</code>). Again, colour by species, and include geom_smooth() as above.</p>
+<p>After examining these two additional plots, what do you conclude?</p>
+<p>6c. For this next step, you will need to have the <code>lme4</code> and <code>lmerTest</code> packages installed. Use the code below to fit two linear regression models to analyze the change in body mass vs.&nbsp;year. The first model, <code>mod1</code>, accounts for species differences via the random effect. The second model, <code>mod2</code>, is a simpler model that does NOT account for species diffs. <code>mod2</code> is not an appropriate model because it ignores an important source of non-independence and a major source of body mass variation. But, we will look at it here to prove a point:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(massing <span class="sc">~</span> year <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>species), <span class="at">data =</span> YOUR_DATA)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod1)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(massing <span class="sc">~</span> year, <span class="at">data =</span> YOUR_DATA)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>6d. As a contrast to the <code>species_scatter</code> visualization you created above, create a scatterplot of <code>massing</code> vs.&nbsp;<code>year</code> that does NOT colour/group by species (i.e., all datapoints same colour and has only one geom_smooth line). Name this plot <code>pooled_scatter</code>.</p>
+<p>6e. What are your conclusions from mod1 and mod2, respectively, about potential changes in bird body mass over the years? Why do the two models yield different conclusions? Hint: comparing the graphs species_scatter and smooth_scatter may help you explain this.</p>
+<p>6f. Would you say that the year effect is a <strong>large</strong> effect? In other words, is the estimated change in bird body mass over the years a big change, or is it a subtle one? (Look at species_scatter again.)</p>
+</section>
+<section id="extra-optional-challenges" class="level2">
+<h2 class="anchored" data-anchor-id="extra-optional-challenges">Extra optional challenges</h2>
+<p>This is for extra (excellent) practice, and is not graded.</p>
+<section id="extra-challenges-for-the-bird-study" class="level4">
+<h4 class="anchored" data-anchor-id="extra-challenges-for-the-bird-study">Extra challenges for the bird study</h4>
+<ol type="i">
+<li><p>The <code>species_scatter</code> plot that you made above shows a separate fit for each species. This is not exactly what <code>mod1</code> is doing, because in <code>mod1</code>, the simple random effects structure assumes that there is a single shared slope for all the species. An important next step would be to recreate <code>species_scatter</code> but to make it a more faithful representation of the analysis in <code>mod1</code> that models a random intercept for each species. Let’s recreate that plot, and keep the datapoints coloured by species. But leave out the geom_smooth(). Instead, draw:</p>
+<ul>
+<li><p>A geom_segment() showing a single population-average fit line from your fitted <code>mod1</code> in black</p></li>
+<li><p>A separate geom_segment() for each species (as estimated from the random intercepts from mod1), that follows the same species colour scheme as used for the datapoints.</p></li>
+<li><p>Note also that the <code>broom</code>, <code>ggeffects</code>, and <code>ggpredict</code> packages are worth investigating for this kind of thing. And perhaps <code>modelr</code>?</p></li>
+</ul></li>
+<li><p>A further point to consider is that <code>mod1</code> assumes that all species would have the same rate of body mass change over time, which is biologically odd. That is, <code>mod1</code> assumes that the mean body mass for a 40 g species will have shrunk by the same absolute amount per year, on average, as the mean body mass for a 10 g species. I hope you can see why that is a strange thing to assume! It’s may be more plausible that the amount of shrinkage would be proportional to a species’ average size (shrinking by X% of a species’ size). You could go a step further by incorporating a <strong>random slope</strong> into the model (allowing each species to have a different <strong>slope AND intercept</strong> for the relationship between body mass and time). We could also consider expressing the mass values as proportionate or to a species’ average. Oddly enough, with this particular dataset, the random-intercept only model is actually a better fit to the data than the random slope+intercept model. Perhaps that is because the year-to-year changes are so small. More data would also be helpful to estimate the more complex random slopes model.</p></li>
+<li><p>One more thing to try: let’s re-fit mod1 and mod2 above, but now include additional covariates (predictors) for <code>month</code> and <code>decimallatitude</code> in each model that we considered above. How does the addition of these two other predictors affect the conclusions you draw from these models?</p></li>
+</ol>
+</section>
+<section id="extra-challenges-for-the-authorship-study" class="level4">
+<h4 class="anchored" data-anchor-id="extra-challenges-for-the-authorship-study">Extra challenges for the authorship study</h4>
+<ol type="i">
+<li><p>With the Salerno et al.&nbsp;dataset, make a new, cleaned up <code>Month</code> column. Assume that 22(3) represents March 22 etc. It may help that R also has built-in month names:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>month.abb</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "Jan" "Feb" "Mar" "Apr" "May" "Jun" "Jul" "Aug" "Sep" "Oct" "Nov" "Dec"</code></pre>
+</div>
+</div></li>
+<li><p>Now that you’ve cleaned up the month info, make a bar graph of the months represented in the data. What do you observe? Why do you think this is the case?</p></li>
+<li><p>Now make a column from the combined <code>year</code> and <code>month</code> columns (using the cleaned month info you created above) that is a date-type using <code>lubridate</code> functions (note: <code>lubridate</code> is part of <code>tidyverse</code>). Hint: you can use ymd() in lubridate, and assume that the d part is 1.</p></li>
+<li><p>Get the count of papers in the sample over time for each year-month, from January 2002 to December 2016. Plot a line graph showing this info.</p></li>
+<li><p>Earlier, we identified problems with some duplicated titles. The title column also has a few odd characters (non alpha-numeric characters) that may be represented differently in different rows. There is also case to consider (uppercase or lowercase) that may vary across rows. Considering these possibilities, can you count the number of erroneous duplicates of papers (by title) in the data? Hint: it may help to use str_replace_all() to change non-alphanumeric characters to “_”. Search how to do this.</p></li>
+<li><p>Note: one other check we could do is check to see if the counts in <code>No.author</code> correctly correspond to the info in the author name column using string splitting. It would require some string wrangling because the author names are variously divided by ‘and’, commas, etc.</p></li>
+</ol>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+      }
+    }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

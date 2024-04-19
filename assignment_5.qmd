@@ -1,0 +1,302 @@
+---
+title: "BIOL 5404 Assignment 5"
+author: "Roz Dakin"
+date: "March 17, 2024"
+published-title: "Due on"
+format: html
+editor: visual
+toc: true
+toc-location: left
+toc-expand: 2
+toc-title: BIOL 5404 A5
+link-external-newwindow: true
+---
+
+[Back to assignment list](index.html)
+
+## Instructions
+
+-   Create a new .R script to complete this assignment in your local assignments folder for this course.
+-   You'll submit the .R script on Brightspace.
+-   ***Put your FIRST and LAST NAME in the [file name]{.underline} of the script.***
+-   Put your name at the top of the script as well.
+-   Please do not include your student ID, just your name is enough.
+-   **Show your work!**
+-   Make sure your script is organized and legible.
+-   Use [code sections](https://support.posit.co/hc/en-us/articles/200484568-Code-Folding-and-Sections-in-the-RStudio-IDE) (####) & question numbers as outlined below.
+-   Provide all written answers as brief \# comments within your script.
+-   Be sure to load all packages needed at the top of your script, like this (adding any other packages needed):
+
+```{r}
+#| label: packages
+#| message: false
+
+library(tidyverse)
+library(lme4)
+library(lmerTest)
+```
+
+You will need to install these packages, if you don't already have them.
+
+In this assignment, we will use two datasets:
+
+-   Data on scientific authorship in ecology/zoology, collected by Salerno et al. This study addresses gender composition of authorship teams. How often are authorship teams mixed vs. same gender? Our goal will be to do some hygiene investigations on this dataset.
+
+-   Data on thousands of bird specimens collected by the University of Michigan Museum of Zoology. We will use this dataset to ask whether body size in wild bird species has been shrinking over the past century. It has been hypothesized that climate change and anthropogenic stressors are driving the evolution of smaller body sizes. Our goal will be to do some EDA and visualization on this question.
+
+## Part 1
+
+Let's start with Salerno et al's study of authorship teams in ecology/zoology. Start by reading in the data from csv file (available on BS). This dataset was published alongside their paper on gender in authorship teams in the journal PLOS One in 2019. As we will see, the dataset has a lot of issues. Let's investigate.
+
+```{r}
+#| label: read-salerno
+#| eval: false
+
+adat <- read_csv('journal.pone.0218598.s001.csv')
+```
+
+Take a look at the data. Each ROW in the dataset represents a single PAPER that the authors included in their sample.
+
+1a. How many **papers** are in their sample?
+
+1b. How many **unique journals** are represented in this sample?
+
+1c. What is the range of publication year for the papers in this dataset?
+
+1d. Is `Journal` or `Year` info missing for any rows in this dataset?
+
+1e. Use ggplot() to quickly visualize the following (without worrying about aesthetic details):
+
+-   A bargraph of the number of papers from each journal title,
+
+-   A bargraph of the `Subfield` column in the data,
+
+-   The distribution of publication `Year` as a numerical variable, and
+
+-   The distribution of publication `Year` converted to a factor (categorical, with a bar graph).
+
+1f. Explain what is unusual about the appearance of your 3^rd^ plot above. Is the dataset actually missing papers from a particular year, or is this an artifact?
+
+1g. Now let's look at some hygiene. Remember each row represents a paper. Let's start by focusing on these three columns:
+
+-   `Month`: gives the month a paper was published
+
+-   `Title`: gives the paper's title
+
+-   `No.authors`: gives the number of people in the paper's authorship team
+
+Think about what you expect for each of these 3 columns. Write it down. Then, for each column, check your expectations and look for potential problems. What are the typical values? What do you expect? Are there obvious errors or cases that violate your expectations? Are the values in the column usable, as-is?
+
+**Note: I am NOT asking you to clean these 3 columns for question 1g.** I'm just asking you to examine what would need to be fixed up, and write a little summary of what would need to be done for each of those columns.
+
+1h. How many papers in this dataset are sole-authored papers? What percent of the datsaset is this? Does that surprise you?
+
+## Part 2
+
+The goal of Salerno et al.'s study was to ask whether the gender of the last author was associated with the gender the first author in science authorship teams. For each of the papers in their sample, Salerno et al. categorized the gender of these two author positions in the columns `Author1F` (1 = female, 0 = male) and `LastF` (1 = female, 0 = male). Our next step in this section is to do some checks to verify that the values of these two columns, `Author1F` and `LastF`, are as expected.
+
+2a. Make two separate ggplot() bar graphs to look at the distribution for columns `Author1F` and `LastF`, respectively.
+
+2b. How many papers/rows in this dataset are missing values for `Author1F`?
+
+2c. How many papers/rows are missing values for `LastF`?
+
+2d. How many papers are missing values for BOTH `Author1F` and `LastF`?
+
+2e. How many papers are missing values for EITHER `Author1F` or `LastF`?
+
+Note: a good reason for this info to be missing would be if author gender could not be determined. Salerno et al's method involved assuming gender based on an author's name, or searching that person online and then making a guess/assumption about their gender.
+
+2f. In the column `PropF`, Salerno et al. calculated the PROPORTION of the paper's total authorship team that was female. So for example, if a paper had 10 authors and 7 of them were female, `PropF` would have a value 0.7. Are the values of `PropF` in the range expected?
+
+2g. Make a ggplot() histogram of the distrubtion of `PropF`. What are typical values?
+
+2h. How many rows are missing `PropF`?
+
+2i. Does it make sense WHICH rows have NA for `PropF`?
+
+2j. In their study, Salerno et al. analyze the data in their `PropF` column (response variable) in relation to last author gender (`LastF`) as the predictor. They want to ask whether teams that are anchored by a male Principal Investigator (last author) tend to have less female representation. Towards this end, they examined the relationship between `PropF` and `LastF`. Given what you know about this dataset, can you identify a MAJOR issue here? (It relates to the logic of what they are trying to assess, and what they measured in `PropF` and in this particular sample.) Show any investigations/examples to bolster your point.
+
+**OPTIONAL:** Set up some further checks to determine HOW OFTEN the values of `PropF` are impossible given the info in the `No.authors` column.
+
+Hint: we expect the value for `PropF` \* `No.authors` to be a whole number or very close to it within some tolerance (e.g., we might say, within 0.1 of a whole number). Set up a pipe to check this. Beware of floating point issues with this! HOW MANY rows in the dataset have at least one mistake in either `No.authors` or `PropF`?
+
+## Part 3
+
+Next, we're going to investigate whether birds have been shrinking over the past \~100 years. As the climate warms, many endothermic animals are expected to evolve smaller body sizes due to changs in thermoregulatory requirements (in biogeography, this is known as Bergmann's Rule). To explore this question in North American birds, we will use a very large dataset of all specimens that have even been cataloged by the University of Michigan Museum of Zoology over the past \~100 or so years.
+
+![Birds in the collection at the Field Museum (Ben Marks).](Drawer of birds in FM collections, (c) Field Museum, Ben Marks (1).jpg){fig-align="left" width="577"}
+
+First, we read in the data:
+
+```{r}
+#| label: read-birds
+#| eval: false
+
+birddat <- read_csv('UMMZ_web.csv')
+```
+
+This csv file is relatively large (\>200 MB) and will take a few moments to load. Note that the tidyverse read_csv() here is MUCH faster and smarter than trying use read.csv()! We will ignore the parsing issues as they don't affect our investigations here. We have 174 columns (!) and over 211,000 rows.
+
+Each row is a **specimen** (i.e., an individual bird in the museum's collection.) There are many species represented here, and a very large number of columns that have info on various features of these specimens. The body mass measurements are stored in the column `massing` which stands for mass in grams.
+
+Let's do some initial filtering. Below, we filter the dataset to only include specimens from North America that were collected on or after the year 1925. Then, we reduce the data to just the columns we expect to use:
+
+```{r}
+#| label: filter-birds
+#| eval: false
+
+birddat <- birddat %>% 
+  filter(continent == 'North America') %>% 
+  filter(year >= 1925 & !is.na(year)) %>% 
+  select(scientificname, genus, specificepithet, eventdate, year, month, day, sex, lifestage, massing, continent, dynamicproperties, decimallatitude)
+
+nrow(birddat) # reduced to 92,990 rows
+```
+
+3a. How many different genera are represented here? (Note that genera is the plural of genus)
+
+3b. We want to focus on 7 genera that are of particular interest for our study:
+
+-   Passer, Zonotrichia, Vermivora, Tyrannus, Hirundo, Sialia, Empidonax
+
+Filter the data to just those genera, and store the newly filtered data (i.e., use assignment \<- so that birddat in your environment is repaced with the newly filtered version).
+
+3c. How many **specimens** are represented from those 7 genera?
+
+3d. How many of these specimens in the filtered data have a value given in the `massing` column? Recall that `massing` gives body mass in grams which we are going to use as our measure of body size.
+
+Filter your filtered data to only include the specimens in those 7 genera that have a mass value available (i.e., they do NOT have NA for `massing)`.
+
+3e. Using ggplot(), take an initial look at the distribution of `massing` values for this filtered sample. What do you notice? Does it look as expected?
+
+3f. Before we can get to our question about changing in body size, we need to do some hygiene. As a first step, print out the unique values of the column `lifestage`. What do you notice?
+
+3g. What % of rows in the filtered data have an NA value in `lifestage`?
+
+3h. We want to focus our analysis on adult birds. Take the necessary steps to filter out rows from the data that have `lifestage` values related to nest, nestling, fledgling, immature, juvenile, chick, etc.
+
+-   Assume specimens with NA `lifestage` are adults and keep them in the data. We know that these collections focus almost entirely on adults.
+
+-   We have one row with `lifestage == 'fr'`. Let's assume that is an adult, and keep it in.
+
+-   Keep rows where lifestage has a value indicating that the specimen is indeed an adult, of course.
+
+3i. After doing the steps above, how many rows/specimens are you left with?
+
+## Part 4
+
+Next, from this filtered dataset, we want to reduce the data further so that we ONLY study species that have a decent sample size of individuals.
+
+4a. Start by determining which `scientificname` IDs have at least n \>= 50 adult specimens w/ body mass in the reduced dataset that you ended with above. Create a vector with those 8 `scientificname` values. (We'll arbitrarily use a cut-off of n \>= 50 here to represent a decent sample size; but we could easily choose something else here).
+
+4b. BUT WAIT! Examining the 8 `scientificname` values included here, do you notice anything? Do you see any values that should really be collapsed into the same species category? Which ones?
+
+4c. Given what we just realized, let's back up and take another approach instead...
+
+-   With your data that was generated at the end of Part 3, make a NEW column called `species` that combines info from the `genus` and `specificepithet` columns. This will be our species ID. Because `specificepithet` does not include any subspecies info, we'll avoid the issue we ran into above.
+
+-   Determine which `species` IDs have at least n \>= 50 adult specimens with body mass. Hint: there should be 9 of them.
+
+-   Now, filter your data to just include those species... be sure to use the output of this step (give it a name) for your further work in the sections below).
+
+4d. How many rows/specimens are you left with?
+
+## Part 5
+
+Ok, now let's examine the distribution of body mass values.
+
+5a. First, make a ggplot() to inspect the distribution of `massing` in your remaining data.
+
+5b. For this question, I want you to find and remove likely errors/typos in `massing` that represent **impossibly** **large** body mass values for a given species. Note that the upper threshold will differ for different species here! As a helpful strategy, start by generating a ggplot() of `massing` and using `facet_wrap(~species, scales = 'free')` to inspect the distribution of `massing`, plotted by species, all on one page with species-specific scales for `massing` values. This is an easy/efficient way now to check for obvious errors in all species at once.
+
+After visual inspection, filter out the extreme values that you deem to be errors (i.e., use assignment `<-`and remove those rows from your data for further analysis). Note that in many cases it would be best to keep the rows in and overwrite the impossible values with NA. For the purpose of this assignment, you can just remove the rows with obvious errors since we're narrowing the data down to rows with known body mass anyway.
+
+5c. Now let's do some clean-up on these 4 columns:
+
+-   decimallatitude, year, month, day
+
+For each of these 4 columns, check for typical values and impossible values. Clean up any issues you find.
+
+5d. For sex, you'll find that it's encoded in various (not clean) ways. Create a new column, `sex_new` with a consistent encoding that classifies each specimen sex as either F, M, or NA. Assign any specimens with indeterminate sex as NA in the `sex_new` column.
+
+5e. How many male, female, and NA specimens are there in your remaining dataset of known-mass adults in the focal species?
+
+5f. Which **year** appears to have been a "big year" for collecting at this museum? (As in, a lot of specimens were collected that year.)
+
+## Part 6
+
+Now that we have clean data we are ready to really explore our question about body mass changes over time.
+
+6a. Let's start by creating a scatterplot to visualize the relationship between `massing` (y-axis) and `year` (x-axis) for our filtered sample.
+
+-   Colour the datapoints by species
+
+-   Add geom_smooth() with `method = 'lm'`
+
+-   Name this plot `species_scatter`
+
+What do you observe?
+
+6b. Before we run the analysis, let's consider that there are other factors that can influence variation in a bird's body size. One important factor may be seasonality (individuals of a given bird species will be largest/heaviest in spring before breeding, and the smallest/lightest at the end of the breeding phase). A second factor that may be important is latitude (in broadly distributed species, individuals living at higher latitudes tend to be larger/heavier).
+
+Make a scatterplot for `massing` vs. each of these two variables (i.e., one plot with `massign` vs. `month`, and one plot with `massing` vs. `latitude`). Again, colour by species, and include geom_smooth() as above.
+
+After examining these two additional plots, what do you conclude?
+
+6c. For this next step, you will need to have the `lme4` and `lmerTest` packages installed. Use the code below to fit two linear regression models to analyze the change in body mass vs. year. The first model, `mod1`, accounts for species differences via the random effect. The second model, `mod2`, is a simpler model that does NOT account for species diffs. `mod2` is not an appropriate model because it ignores an important source of non-independence and a major source of body mass variation. But, we will look at it here to prove a point:
+
+```{r}
+#| label: fit-bird-models
+#| eval: false
+
+mod1 <- lmer(massing ~ year + (1|species), data = YOUR_DATA)
+summary(mod1)
+
+mod2 <- lm(massing ~ year, data = YOUR_DATA)
+summary(mod2)
+```
+
+6d. As a contrast to the `species_scatter` visualization you created above, create a scatterplot of `massing` vs. `year` that does NOT colour/group by species (i.e., all datapoints same colour and has only one geom_smooth line). Name this plot `pooled_scatter`.
+
+6e. What are your conclusions from mod1 and mod2, respectively, about potential changes in bird body mass over the years? Why do the two models yield different conclusions? Hint: comparing the graphs species_scatter and smooth_scatter may help you explain this.
+
+6f. Would you say that the year effect is a **large** effect? In other words, is the estimated change in bird body mass over the years a big change, or is it a subtle one? (Look at species_scatter again.)
+
+## Extra optional challenges
+
+This is for extra (excellent) practice, and is not graded.
+
+#### Extra challenges for the bird study
+
+i.  The `species_scatter` plot that you made above shows a separate fit for each species. This is not exactly what `mod1` is doing, because in `mod1`, the simple random effects structure assumes that there is a single shared slope for all the species. An important next step would be to recreate `species_scatter` but to make it a more faithful representation of the analysis in `mod1` that models a random intercept for each species. Let's recreate that plot, and keep the datapoints coloured by species. But leave out the geom_smooth(). Instead, draw:
+
+    -   A geom_segment() showing a single population-average fit line from your fitted `mod1` in black
+
+    -   A separate geom_segment() for each species (as estimated from the random intercepts from mod1), that follows the same species colour scheme as used for the datapoints.
+
+    -   Note also that the `broom`, `ggeffects`, and `ggpredict` packages are worth investigating for this kind of thing. And perhaps `modelr`?
+
+ii. A further point to consider is that `mod1` assumes that all species would have the same rate of body mass change over time, which is biologically odd. That is, `mod1` assumes that the mean body mass for a 40 g species will have shrunk by the same absolute amount per year, on average, as the mean body mass for a 10 g species. I hope you can see why that is a strange thing to assume! It's may be more plausible that the amount of shrinkage would be proportional to a species' average size (shrinking by X% of a species' size). You could go a step further by incorporating a **random slope** into the model (allowing each species to have a different **slope AND intercept** for the relationship between body mass and time). We could also consider expressing the mass values as proportionate or to a species' average. Oddly enough, with this particular dataset, the random-intercept only model is actually a better fit to the data than the random slope+intercept model. Perhaps that is because the year-to-year changes are so small. More data would also be helpful to estimate the more complex random slopes model.
+
+iii. One more thing to try: let's re-fit mod1 and mod2 above, but now include additional covariates (predictors) for `month` and `decimallatitude` in each model that we considered above. How does the addition of these two other predictors affect the conclusions you draw from these models?
+
+#### Extra challenges for the authorship study
+
+i.  With the Salerno et al. dataset, make a new, cleaned up `Month` column. Assume that 22(3) represents March 22 etc. It may help that R also has built-in month names:
+
+    ```{r}
+    #| label: month-abb
+
+    month.abb
+    ```
+
+ii. Now that you've cleaned up the month info, make a bar graph of the months represented in the data. What do you observe? Why do you think this is the case?
+
+iii. Now make a column from the combined `year` and `month` columns (using the cleaned month info you created above) that is a date-type using `lubridate` functions (note: `lubridate` is part of `tidyverse`). Hint: you can use ymd() in lubridate, and assume that the d part is 1.
+
+iv. Get the count of papers in the sample over time for each year-month, from January 2002 to December 2016. Plot a line graph showing this info.
+
+v.  Earlier, we identified problems with some duplicated titles. The title column also has a few odd characters (non alpha-numeric characters) that may be represented differently in different rows. There is also case to consider (uppercase or lowercase) that may vary across rows. Considering these possibilities, can you count the number of erroneous duplicates of papers (by title) in the data? Hint: it may help to use str_replace_all() to change non-alphanumeric characters to "\_". Search how to do this.
+
+vi. Note: one other check we could do is check to see if the counts in `No.author` correctly correspond to the info in the author name column using string splitting. It would require some string wrangling because the author names are variously divided by 'and', commas, etc.
