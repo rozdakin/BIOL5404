@@ -47,7 +47,7 @@ As with our other assignments, A6 will be evaluated out of 10:
 
 #### EDA on pop from the year 2000
 
-This is an example exploratory analysis of billboard-charting songs from the year 2000. It uses the billboard dataset that comes with the tidyr package within tidyverse. You can see the [nicely formatted version here](https://rozdakin.github.io/BIOL5404/billboard_hits_EDA.html) (made with markdown, and still work-in-progress!). Before making the formatted version, I started with a regular .R script, [which you can get here](https://github.com/rozdakin/billboard). This should give you an idea of the general process.
+This is an example exploratory analysis of billboard-charting songs from the year 2000. It uses the billboard dataset that comes with the tidyr package within tidyverse. You can see the [nicely formatted version here](https://rozdakin.github.io/BIOL5404/billboard_hits_EDA.html){target="_blank"} (made with markdown, and still work-in-progress!). Before making the formatted version, I started with a regular .R script, [which you can get here](https://github.com/rozdakin/billboard). This should give you an idea of the general process.
 
 #### Previous reports in this class
 

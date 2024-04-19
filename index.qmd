@@ -11,5 +11,5 @@ toc: false
 -   [Assignment 2 due February 4, 2024](assignment_2.html)
 -   [Assignment 3 due February 18, 2024](assignment_3.html)
 -   [Assignment 4 due March 3, 2024](assignment_4.html)
--   Assignment 5 due March 17, 2024 on Brightspace
+-   [Assignment 5 due March 17, 2024](assignment_5.html)
 -   [Assignment 6 due March 31, 2024](assignment_6.html)
