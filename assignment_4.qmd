@@ -12,7 +12,7 @@ toc-title: BIOL 5404 A4
 link-external-newwindow: true
 ---
 
-[Back to assignment list](index.html)
+[Back to assignment list](index.html#assignments)
 
 ## Instructions
 
@@ -162,7 +162,7 @@ Now, we will use the dataset you created above to practice some visualization.
 
 4e. What do you notice is missing for Istanbul's loess smooth? Can you determine why this feature is missing?
 
-4f. Now, reproduce the graph with geom_smooth() using "loess" and with **[ALL years]{style="color: red"}** included. What do you notice about the geom_smooth() now that the most recent years are **also** included? Does it still make sense to apply the loess smoother as part of this particular visualization?
+4f. Now, reproduce the graph with geom_smooth() using "loess" and with [**ALL years**]{style="color: red"} included. What do you notice about the geom_smooth() now that the most recent years are **also** included? Does it still make sense to apply the loess smoother as part of this particular visualization?
 
 4g. Let's make a different graph. Suppose we want to examine the correlation between city size estimates for two close years, 2300 BC and 2400 BC. We want to make a scatterplot with:
 

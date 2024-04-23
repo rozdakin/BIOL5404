@@ -12,7 +12,7 @@ toc-title: BIOL 5404 A1
 link-external-newwindow: true
 ---
 
-[Back to assignment list](index.html)
+[Back to assignment list](index.html#assignments)
 
 ## Instructions
 

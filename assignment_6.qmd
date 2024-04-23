@@ -9,7 +9,7 @@ toc: false
 link-external-newwindow: true
 ---
 
-[Back to assignment list](index.html)
+[Back to assignment list](index.html#assignments)
 
 ## Instructions: your own EDA
 

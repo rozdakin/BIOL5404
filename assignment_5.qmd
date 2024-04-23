@@ -12,7 +12,7 @@ toc-title: BIOL 5404 A5
 link-external-newwindow: true
 ---
 
-[Back to assignment list](index.html)
+[Back to assignment list](index.html#assignments)
 
 ## Instructions
 
@@ -125,7 +125,7 @@ Hint: we expect the value for `PropF` \* `No.authors` to be a whole number or ve
 
 Next, we're going to investigate whether birds have been shrinking over the past \~100 years. As the climate warms, many endothermic animals are expected to evolve smaller body sizes due to changs in thermoregulatory requirements (in biogeography, this is known as Bergmann's Rule). To explore this question in North American birds, we will use a very large dataset of all specimens that have even been cataloged by the University of Michigan Museum of Zoology over the past \~100 or so years.
 
-![Birds in the collection at the Field Museum (Ben Marks).](Drawer of birds in FM collections, (c) Field Museum, Ben Marks (1).jpg){fig-align="left" width="577"}
+![Birds in the collection at the Field Museum (Ben Marks).](Drawer%20of%20birds%20in%20FM%20collections,%20(c)%20Field%20Museum,%20Ben%20Marks%20(1).jpg){fig-align="left" width="577"}
 
 First, we read in the data:
 
