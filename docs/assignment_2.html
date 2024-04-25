@@ -272,7 +272,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>5c. Now, regenerate the scatterplot, but this time plot natural log-transformed price vs.&nbsp;natural log-transformed carat weight, for just the <strong>Premium</strong> diamonds. How does the relationship change when examining the log-log transformation?</p>
 <p>5d. Create an object mod that is a fitted regression model for <strong>log-price</strong> vs.&nbsp;<strong>log-carat weight</strong> for just the <strong>Premium</strong> diamonds. Examine the summary() for your model. What % of variation in the log-price of premium diamonds is explained by log-weight? (This is the multiple R-squared.)</p>
 <p>5e. Show that you can extract the value of this R-squared from the fitted model.</p>
-<p>Hint: summary(mod) is itself a <strong>list</strong> object that contains the value you are looking for. You can use str() on the output of summary(mod) to index (i.e., pull out) the R-squared value.</p>
+<p>Hint: summary(mod) is itself a <strong>list</strong> object that contains the value you are looking for. You can use str() on the output of summary(mod) to determine the names of elements within summary(mod). Then use the appropriate name to index (i.e., pull out) the R-squared value.</p>
 <p><strong>OPTIONAL:</strong> Write a custom function that takes a fitted model object, and returns the R-squared value from its summary.</p>
 </section>
 <section id="extra-optional-challenges" class="level2">

@@ -159,7 +159,7 @@ help(diamonds)
 
 5e. Show that you can extract the value of this R-squared from the fitted model.
 
-Hint: summary(mod) is itself a **list** object that contains the value you are looking for. You can use str() on the output of summary(mod) to index (i.e., pull out) the R-squared value.
+Hint: summary(mod) is itself a **list** object that contains the value you are looking for. You can use str() on the output of summary(mod) to determine the names of elements within summary(mod). Then use the appropriate name to index (i.e., pull out) the R-squared value.
 
 **OPTIONAL:** Write a custom function that takes a fitted model object, and returns the R-squared value from its summary.
 
