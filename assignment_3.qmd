@@ -93,6 +93,8 @@ head(results)
 
 There are two loops below, under headings **Loop 1** and **Loop 2**. Each of these loops has some errors.
 
+2a. Find and fix the two errors in **Loop 1**, and comment to identify and explain the changes you made. After making the fix, run **Loop 1**, and inspect the output to show that it's now working.
+
 ```{r}
 #| label: loop_1
 #| eval: false
@@ -111,7 +113,7 @@ for (i in 1/1000) {
 simresults_1
 ```
 
-2a. Find and fix the two errors in **Loop 1**, and comment to identify and explain the changes you made. After making the fix, run **Loop 1**, and inspect the output to show that it's now working.
+2b. Find and fix the three errors in **Loop 2**, and comment to identify and explain the changes you made. After making the fix, run **Loop 2**, and inspect the output to show that it's now working.
 
 ```{r}
 #| label: loop_2
@@ -130,8 +132,6 @@ for (i from 1:1000) {
 
 simresults_2
 ```
-
-2b. Find and fix the three errors in **Loop 2**, and comment to identify and explain the changes you made. After making the fix, run **Loop 2**, and inspect the output to show that it's now working.
 
 ## Part 3
 
