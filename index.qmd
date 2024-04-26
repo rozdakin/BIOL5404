@@ -18,14 +18,14 @@ link-external-newwindow: true
 | In person, synchronous course   |                   |
 +---------------------------------+-------------------+
 
-### Learning Goals
+### Goals for this Course
 
 1)  Develop proficiency in the R programming language.
-2)  Learn the core principles of reproducible computational projects.
-3)  Practice using R to explore, wrangle, graph, and model realistic (complex) research data.
-4)  Learn how to troubleshoot.
-5)  Practice learning a new data technique and/or package in R.
-6)  Learn what is required to generate a scientific item ready for publishing.
+2)  Practice using R to explore, wrangle, graph, and model realistic (complex) research data.
+3)  Solve errors in R code (troubleshooting).
+4)  Demonstrate the core principles of reproducible computational projects.
+5)  Apply (learn to use) a new data technique and/or package in R.
+6)  Create an independent data analysis and report that is ready for publishing.
 
 ------------------------------------------------------------------------
 
