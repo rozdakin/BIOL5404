@@ -42,19 +42,19 @@ In this assignment, we will use a few different datasets:
 
 -   We will use a dataset on population sizes of ancient cities throughout history, from 3700 BC to 2000 AD, by Modelski. We will need to do some cleaning/quality control, some wrangling, and then we'll practice visualizing aspects of this dataset.
 
--   In the optional challenge at the end, we will use the gapminder dataset from the gapminder package to integrate continent names with Modelski's city data (you will need to install the gapminder package to do this optional section, if you don't have it already).
+-   In the optional challenge at the end, we will use the gapminder dataset from the `gapminder` package to integrate continent names with Modelski's city data (you will need to install the gapminder package to do this optional section, if you don't have it already).
 
 ## Part 1
 
 Let's start by plotting the data from Roche et al.'s study of data archiving. First, read in the data from the csv file **Dryad_data_2012_2013.csv**
 
-1a. Use ggplot to re-create (as closely as you can!) their scatterplot from **Figure 3** below showing the relationship between reusability score (y-axis) and completeness score (x-axis). Your graph should copy the features of Figure 3 as much as possible. Note, their graph uses position = position_jitter(), and you should too, but you won't be able to replicate the exact positioning of the randomly jittered points.
+1a. Use ggplot to re-create (as closely as you can!) their scatterplot from **Figure 3** below showing the relationship between reusability score (y-axis) and completeness score (x-axis). Your graph should copy the features of Figure 3 as much as possible. Note, their graph uses `position = position_jitter()`, and you should too, but you won't be able to replicate the exact positioning of the randomly jittered points.
 
 ![](Figure_3_option_1.jpeg){fig-align="left" width="370"}
 
 1b. Now, use ggplot to re-draw their **Figure 3** as a *different* type of graph where there is only one dot/point per score combination, and where the AREA size of each dot represents the number of papers with that combination of scores. See the example below to see what I mean. In your plot, include a legend so readers can interpret the area sizes.
 
-Hint: geom_count() is a shortcut to do this. You can also do this if you group_by complScore AND reuseScore, then make a new dataframe that counts up the occurrence of each unique score combination, then use that new df for your graph.
+Hint: `geom_count()` is a shortcut to do this. You can also do this if you `group_by()` complScore AND reuseScore, then make a new dataframe that counts up the occurrence of each unique score combination, then use that new df for your graph.
 
 ![](Figure_3_option_2.jpeg){fig-align="left" width="545"}
 
@@ -64,9 +64,9 @@ Hint: as above, a good way to do this is group_by complScore and reuseScore, the
 
 ![](Figure_3_option_3.jpeg){fig-align="left" width="560"}
 
-1d. Finally, use grid.arrange() from the **gridExtra** package to make a layout that shows ALL three of your candidate plots on a single "page". Which do you prefer?
+1d. Finally, use `grid.arrange()` from the `gridExtra` package to make a layout that shows ALL three of your candidate plots on a single "page". Which do you prefer?
 
-**OPTIONAL:** Use grey to fill in the cells of your heatmap with 0 papers represented. Remove the extra "padding" around the coloured cells so that the border of the plot just includes the coloured areas. See my example to see what I mean.
+**OPTIONAL:** Use grey to fill in the cells of your heatmap that have 0 papers represented. Remove the extra "padding" around the coloured cells so that the border of the plot just includes the coloured areas. See my example above to see what I mean.
 
 ## Part 2
 
@@ -80,41 +80,41 @@ A general workflow is to first WRITE DOWN all of the reality checks you can poss
 
 2a. Inspect the two Modelski dataframes in R, and briefly describe what the two datasets contain. Is each dataset in long or wide format? Is each dataset tidy? If not, what would you need to do to make it tidy?
 
-\*\* Note that you will want to use tidyverse's **read_csv()** function, because there are some odd characters that read.csv() stumbles on.
+\*\* Note that you will want to use tidyverse's `read_csv()` function, because there are some odd characters that `read.csv()` stumbles on.
 
-2b. Write down a list of at least 5 things you would check in the ANCIENT dataset focusing on these columns:
+2b. Write down a list of things you would check in the **ANCIENT** dataset focusing on these items:
 
--   City,
--   Country,
--   Latitude,
--   Longitude,
--   and the population columns (each of which has a column name that gives the year).
+i.  `City`,
+ii. `Latitude` (note: we'll solve issues in this column in 2c),
+iii. `Longitude`,
+iv. the population sizes (i.e., values in columns 7:47), and
+v.  the year info (stored in those column names).
 
-Then, investigate the 5 items on your list.
+Then, **investigate** (look at) the items on your list.
 
-2c. There are two errors in the latitude column of the ANCIENT dataset. Fix the two errors in latitude before proceeding to the next section. You could either find the two errors and fix each one using indexing,
+2c. There are two errors in the `latitude` column of the **ANCIENT** dataset. Fix the two errors in `latitude` before proceeding to Part 3. You could either find the two errors and fix each one using indexing, as shown here:
 
 ```{r}
 #| label: example-fix
 #| eval: false
 
-data$latitude[index] <- "fixed.value"
+data$latitude[index] <- "the.corrected.value"
 ```
 
-...OR investigate how to use str_replace_all() to do this.
+...OR you could investigate how to use `str_replace_all()` to do this.
 
-Convert latitude to as.numeric() after the two errors are fixed.
+After fixing the two errors, convert the `latitude` column to `as.numeric()`.
 
-**OPTIONAL:** In addition to the latitude errors in the ANCIENT dataset, I DID find at least one typo in the Modern dataset. Can you find it? There is also one aspect of the Modern dataset that poses a potential issue, but upon investigation, it is not actually a mistake. Can you find that one, too?
+**OPTIONAL:** In addition to the latitude errors in the **ANCIENT** dataset, I DID find at least one typo in the **Modern** dataset. Can you find it? AND there is also an aspect of the **Modern** dataset that poses a potential issue, but upon investigation, it is not actually a mistake. Can you find that one, too?
 
 ## Part 3
 
 Our next goal is to generate a single long-format dataset that combines BOTH the Ancient and the Modern city population sizes. We want our long dataset to have these 6 columns:
 
--   city,
--   country,
--   latitude,
--   longitude,
+-   City,
+-   Country,
+-   Latitude,
+-   Longitude,
 -   year,
 -   and population.
 
@@ -122,23 +122,23 @@ To get there, we'll have to do some reshaping/tidying first.
 
 3a. Using pipes & tidyverse functions, do the following steps to reshape/tidy the **Ancient** data:
 
-i.  Pivot the Ancient data to long format with new columns that contain year and population.
+i.  Pivot the Ancient data to long format with new columns that contain `year` and `population`.
 
-ii. Then, take the year information (such as BC_3700 or AD_1000) and create a numerical column with just the numerical year.
+ii. Then, take the year information (such as BC_3700 or AD_1000) and create a numerical column with just the `numerical_year`.
 
-iii. Make that numerical year a negative number if the year is BC, but leave it as-is (positive) if the year is AD. You should end up with years that range from -3700 to 1000.
+iii. Make `numerical_year` a negative number if the year is BC, but leave it as-is (positive) if the year is AD. You should end up with years that range from -3700 to 1000.
 
      Hint: it may help to make a column with character info as to whether a given year is BC vs. AD.
 
-iv. Use select() to pare down your data.frame to just 6 desired columns: city, country, latitude, longitude, numerical year, and population
+iv. Use `select()` to pare down your dataframe to just 6 desired columns: `City`, `Country`, `Latitude`, `Longitude`, `numerical_year`, and `population`
 
-v.  Assign this new long data.frame a name, so that it's available for further work.
+v.  Assign this new long dataframe a name, so that it's available for further work.
 
-3b. Using pipes & tidyverse functions, tidy up the **Modern** data so that it has the EXACT same 6 column names (variables) as the dataset your just prepared above. Working with the Modern data, you will want to create a new numerical year column with the correct values (all year 2000), name the population column appropriately, and then use select() to pare down to just the 6 desired columns.
+3b. Using pipes & tidyverse functions, tidy up the **Modern** data so that it has the EXACT same 6 column names (variables) as the dataset your just prepared above. Working with the Modern data, you will want to create a new `numerical_year` column with the correct values (all year 2000), name the population column appropriately, and then use `select()` to pare down to just the 6 desired columns, in the same order.
 
-Note that these two datasets are non-overlapping in terms of the city-years (the latest estimates in the Ancient data are from 1000 AD, whereas the Modern data is all 2000 AD). This means we can combine them using rbind() AS LONG AS the two datasets have the exact same column names, same column data types, and same column order.
+Note that these two datasets are non-overlapping in terms of the city-years (the latest estimates in the **Ancient** data are from 1000 AD, whereas the **Modern** data is all 2000 AD). This means we can combine them using `rbind()` AS LONG AS the two datasets have the exact same column names, same column data types, and same column order.
 
-3c. Create a new data.frame (and give it a name) that uses rbind() to combine the two dataframes you created above. **Then, filter out any rows with NA for the population estimate.** How many rows with population values does your combined dataset have?
+3c. Create a new dataframe (and give it a name) that uses `rbind()` to combine the two dataframes you created above. **Then, filter out any rows with NA for the population estimate.** How many rows with population values does your combined dataset have?
 
 ## Part 4
 
@@ -146,23 +146,23 @@ Now, we will use the dataset you created above to practice some visualization.
 
 4a. First, let's make a line graph showing how city size changed over time for 4 cities of interest. Your graph should show city population size (in millions) on the y-axis vs. numerical year on the x-axis for these 4 cities: **Luoyang, Istanbul, Alexandria, and Rome**.
 
--   Show the datapoints using geom_point().
+-   Show the datapoints using `geom_point()`.
 
--   Use geom_line() to make a separate line connecting datapoints from the same city.
+-   Use `geom_line()` to make a separate line connecting datapoints from the same city.
 
 -   Colour the data/lines from the 4 cities differently. Include a legend for the city names.
 
 -   Adjust the aesthetics/features/labels of your graph so that an audience would be able to understand it.
 
-4b. Re-make the graph above, but filter to show ONLY years BEFORE 1000 AD [**(i.e., \< 1000)**]{style="color: red"}. Remove the geom_line() from these graphs. Add on geom_smooth() with method = "loess" (make sure there is a separate geom_smooth line for each city).
+4b. Re-make the graph above, but filter to show ONLY years BEFORE 1000 AD [**(i.e., \< 1000)**]{style="color: red"}. Remove the `geom_line()` from these graphs. Add on `geom_smooth()` with method = "loess" (make sure there is a separate geom_smooth line for each city).
 
-4c. Re-make the graph above, but now use method = "lm" in geom_smooth().
+4c. Re-make the graph above, but now use method = "lm" in `geom_smooth()`.
 
-4d. What is geom_smooth() doing? Which method, "loess" or "lm", is more appropriate for this particular graph?
+4d. What is `geom_smooth()` doing? Which method, "loess" or "lm", is more appropriate for this particular graph?
 
 4e. What do you notice is missing for Istanbul's loess smooth? Can you determine why this feature is missing?
 
-4f. Now, reproduce the graph with geom_smooth() using "loess" and with [**ALL years**]{style="color: red"} included. What do you notice about the geom_smooth() now that the most recent years are **also** included? Does it still make sense to apply the loess smoother as part of this particular visualization?
+4f. Now, reproduce the graph with `geom_smooth()` using "loess" and with [**ALL years**]{style="color: red"} included. What do you notice about the `geom_smooth()` now that the most recent years are **also** included? Does it still make sense to apply the loess smoother as part of this particular visualization?
 
 4g. Let's make a different graph. Suppose we want to examine the correlation between city size estimates for two close years, 2300 BC and 2400 BC. We want to make a scatterplot with:
 
@@ -179,7 +179,7 @@ iii. You may wish to rename the new columns to have a more appropriate name.
 
 iv. How many cities have a pop. estimate for BOTH 2400 BC and 2300 BC? Figure this out, and comment on it as your sample size; be sure to only count cities with non-NA values for both years.
 
-v.  Now, make your scatterplot of the log10 population in 2400 BC vs. the log10 population in 2300 BC. You may wish to use scale_x_log10() and scale_y_log10() to easily create a log-log plot while showing the axis tick numbers on the original scale (# of people).
+v.  Now, make your scatterplot of the log10 population in 2400 BC vs. the log10 population in 2300 BC. You may wish to use `scale_x_log10()` and `scale_y_log10()` to easily create a log-log plot while showing the axis tick numbers on the original scale (# of people).
 
 vi. Colour the datapoints by country and include a legend.
 
@@ -195,7 +195,7 @@ ix. Add a solid red line showing the linear model (lm) of the relationship betwe
 
 For this question, we want to examine some summary stats by historical era.
 
-5a. Take the combined dataset that you created back in Part 1, and use mutate to add a new column to it, **era**, that gives the approximate historical era as follows:
+5a. Take the combined dataset that you created back in Part 1, and use mutate to add a new column to it, `era`, that gives the approximate historical era as follows:
 
 -   Bronze age is 3700 BC up to and including 1300 BC
 -   Iron age is 1299 BC up to and including 600 BC
@@ -203,13 +203,13 @@ For this question, we want to examine some summary stats by historical era.
 -   Middle ages is 501 AD up to and including 1500 AD
 -   Modern age is 1501 AD until now
 
-Note: you can use case_when() within mutate() to do this in an elegant way that is less complicated for the user to read, or use nested calls to ifelse() within mutate().
+Note: you can use `case_when()` within `mutate()` to do this in an elegant way that is less complicated for the user to read, OR use nested calls to `ifelse()` within `mutate()`.
 
-5b. Now that you have created the era column, let's get the overall average of log-tranformed city size for each year and era, using group_by() and summarize(). More specifically:
+5b. Now that you have created the `era` column, let's get the overall average of log-tranformed city size for each year and era, using `group_by()` and `summarize()`. More specifically:
 
-i.  use mutate to add a column with log-transformed city sizes,
+i.  use `mutate()` to add a column with log-transformed city sizes,
 
-ii. then group by year and era,
+ii. then `group_by()` year and era,
 
 iii. then take the mean of the log-transformed city sizes for each year-era,
 
@@ -219,7 +219,7 @@ iv. and assign this new dataset the name **city_avg**.
 
 i.  Show the individual datapoints AND a thin black line connecting the points.
 
-ii. Color the dataapoints by era and include a legend.
+ii. Color the datapoints by era and include a legend.
 
 iii. Be sure that the coloured points are layered on TOP of the thin black line (Hint: the order in which the ggplot + layers are built up will determine this).
 
@@ -227,13 +227,13 @@ iv. Clean up any features/labels of the plot so an audience can understand it.
 
 v.  Which pre-modern eras showed the biggest jumps in average city size around the world?
 
-**OPTIONAL:** Add semi-transparent rectangles in the background of the plot, one rectangle spanning the year range for each era, with the rectangles colour-coded to match the color scheme of the datapoints. The idea is to make it easier for the viewer to see the era transitions. Make the rectangles span the entire vertical/y-range of the plot. Hint: oen way to do this is with geom_rect(). It's helpful to first create a separate little dataframe with columns for era, start year, and end year. Then, add a geom_rect() layer that calls that dataframe.
+**OPTIONAL:** Add semi-transparent rectangles in the background of the plot, one rectangle spanning the year range for each era, with the rectangles colour-coded to match the color scheme of the datapoints. The idea is to make it easier for the viewer to see the era transitions. Make the rectangles span the entire vertical/y-range of the plot. Hint: one way to do this is with `geom_rect()`. It's helpful to first create a separate little dataframe with columns for `era`, `start_year`, and `end_year`. Then, add a `geom_rect()` layer that calls that dataframe.
 
 ## Extra optional challenges
 
 This is for extra (excellent) practice, and is not graded.
 
-The gapminder dataset has info about the continent for different countries around the world:
+The `gapminder` dataset has info about the continent for different countries around the world:
 
 ```{r}
 #| label: view-gapminder
@@ -241,9 +241,9 @@ The gapminder dataset has info about the continent for different countries aroun
 gapminder
 ```
 
-Let's use the continent info from gapminder, merging it into our other data on cities/pop sizes/eras that we created above. Our goal here will be to determine and plot the number (count) of major ancient cities for each continent-era. This will let us see where in the world the major ancient cities were, through the ages.
+Let's use the continent info from `gapminder`, merging it into our other data on cities/pop sizes/eras that we created above. Our goal here will be to determine and plot the number (count) of major ancient cities for each continent-era. This will let us see where in the world the major ancient cities were, through the ages.
 
-i.  First, we will set up a dataframe with just the unique country and continent names from gapminder, as follows:
+i.  First, we will set up a dataframe with just the unique country and continent names from `gapminder`, as follows:
 
     ```{r}
     #| label: get-ccs
@@ -255,14 +255,14 @@ i.  First, we will set up a dataframe with just the unique country and continent
 
 ii. Using the city dataset where you have added an **era** column, filter to just **pre-modern** eras.
 
-iii. Merge the continent names from cc into your city dataset with left_join(), based on country names. Note: country names are provided both in the city dataset and cc, but they have different capitalization, so you will need to figure out how do the joining.
+iii. Merge the continent names from cc into your city dataset with `left_join()`, based on country names. Note: country names are provided both in the city dataset and cc, but they have different capitalization, so you will need to figure out how do the joining.
 
-iv. Filter to remove any rows where continent is NA.
+iv. Filter to remove any rows where continent is `NA`.
 
-v.  Filter to include just one row per city-era that has the largest (max) population for that city and era. Hint: one way to do this is with group_by() and summarize().
+v.  Filter to include just one row per city-era that has the largest (max) population for that city and era. Hint: one way to do this is with `group_by()` and `summarize()`.
 
 vi. Then, determine how many ancient cities there were in each continent-era (i.e., count them). Hint: the output here should be a tibble with 15 rows...
 
-vii. Finally, use ggplot to make a grouped or stacked bar graph with geom_bar() showing these counts by continent and era. Put era on the x-axis. Reorder the x-axis era categories so that it's chronological (Bronze, Iron, Classical, Middle). Use fill for continent.
+vii. Finally, use ggplot to make a grouped or stacked bar graph with `geom_bar()` showing these counts by continent and era. Put era on the x-axis. Reorder the x-axis era categories so that it's chronological (Bronze, Iron, Classical, Middle). Use fill for continent.
 
-viii. Experiment with position = 'stack', position = 'dodge', and position = 'fill' for this. Which of these methods do you think is best for this particular graph? What do you conclude from this graph?
+viii. Experiment with `position = 'stack'`, `position = 'dodge'`, and `position = 'fill'` for this. Which of these methods do you think is best for this particular graph? What do you conclude from this graph?

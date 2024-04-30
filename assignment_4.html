@@ -148,20 +148,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li><p>We will work on graphing data from Roche et al.&nbsp;on completeness and reusability scores for publicly archived data (we’ll remake their Figure 3).</p></li>
 <li><p>We will use a dataset on population sizes of ancient cities throughout history, from 3700 BC to 2000 AD, by Modelski. We will need to do some cleaning/quality control, some wrangling, and then we’ll practice visualizing aspects of this dataset.</p></li>
-<li><p>In the optional challenge at the end, we will use the gapminder dataset from the gapminder package to integrate continent names with Modelski’s city data (you will need to install the gapminder package to do this optional section, if you don’t have it already).</p></li>
+<li><p>In the optional challenge at the end, we will use the gapminder dataset from the <code>gapminder</code> package to integrate continent names with Modelski’s city data (you will need to install the gapminder package to do this optional section, if you don’t have it already).</p></li>
 </ul>
 </section>
 <section id="part-1" class="level2">
 <h2 class="anchored" data-anchor-id="part-1">Part 1</h2>
 <p>Let’s start by plotting the data from Roche et al.’s study of data archiving. First, read in the data from the csv file <strong>Dryad_data_2012_2013.csv</strong></p>
-<p>1a. Use ggplot to re-create (as closely as you can!) their scatterplot from <strong>Figure 3</strong> below showing the relationship between reusability score (y-axis) and completeness score (x-axis). Your graph should copy the features of Figure 3 as much as possible. Note, their graph uses position = position_jitter(), and you should too, but you won’t be able to replicate the exact positioning of the randomly jittered points.</p>
+<p>1a. Use ggplot to re-create (as closely as you can!) their scatterplot from <strong>Figure 3</strong> below showing the relationship between reusability score (y-axis) and completeness score (x-axis). Your graph should copy the features of Figure 3 as much as possible. Note, their graph uses <code>position = position_jitter()</code>, and you should too, but you won’t be able to replicate the exact positioning of the randomly jittered points.</p>
 <div class="quarto-figure quarto-figure-left">
 <figure class="figure">
 <p><img src="Figure_3_option_1.jpeg" class="img-fluid figure-img" width="370"></p>
 </figure>
 </div>
 <p>1b. Now, use ggplot to re-draw their <strong>Figure 3</strong> as a <em>different</em> type of graph where there is only one dot/point per score combination, and where the AREA size of each dot represents the number of papers with that combination of scores. See the example below to see what I mean. In your plot, include a legend so readers can interpret the area sizes.</p>
-<p>Hint: geom_count() is a shortcut to do this. You can also do this if you group_by complScore AND reuseScore, then make a new dataframe that counts up the occurrence of each unique score combination, then use that new df for your graph.</p>
+<p>Hint: <code>geom_count()</code> is a shortcut to do this. You can also do this if you <code>group_by()</code> complScore AND reuseScore, then make a new dataframe that counts up the occurrence of each unique score combination, then use that new df for your graph.</p>
 <div class="quarto-figure quarto-figure-left">
 <figure class="figure">
 <p><img src="Figure_3_option_2.jpeg" class="img-fluid figure-img" width="545"></p>
@@ -174,8 +174,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="Figure_3_option_3.jpeg" class="img-fluid figure-img" width="560"></p>
 </figure>
 </div>
-<p>1d. Finally, use grid.arrange() from the <strong>gridExtra</strong> package to make a layout that shows ALL three of your candidate plots on a single “page”. Which do you prefer?</p>
-<p><strong>OPTIONAL:</strong> Use grey to fill in the cells of your heatmap with 0 papers represented. Remove the extra “padding” around the coloured cells so that the border of the plot just includes the coloured areas. See my example to see what I mean.</p>
+<p>1d. Finally, use <code>grid.arrange()</code> from the <code>gridExtra</code> package to make a layout that shows ALL three of your candidate plots on a single “page”. Which do you prefer?</p>
+<p><strong>OPTIONAL:</strong> Use grey to fill in the cells of your heatmap that have 0 papers represented. Remove the extra “padding” around the coloured cells so that the border of the plot just includes the coloured areas. See my example above to see what I mean.</p>
 </section>
 <section id="part-2" class="level2">
 <h2 class="anchored" data-anchor-id="part-2">Part 2</h2>
@@ -189,64 +189,64 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Background: one of the first steps when cleaning up a new dataset (data hygiene) is to sit down and think through the logic of what you expect in the data. For example, what are potential IMPOSSIBLE values for each column (or group of columns)? How many duplicates of a given value, or combination of values across two or more columns, do you expect? What kind of issues could occur as a result of typos in a dataset, and how would you sleuth out those issues?</p>
 <p>A general workflow is to first WRITE DOWN all of the reality checks you can possible think of, and then, CHECK them one by one.</p>
 <p>2a. Inspect the two Modelski dataframes in R, and briefly describe what the two datasets contain. Is each dataset in long or wide format? Is each dataset tidy? If not, what would you need to do to make it tidy?</p>
-<p>** Note that you will want to use tidyverse’s <strong>read_csv()</strong> function, because there are some odd characters that read.csv() stumbles on.</p>
-<p>2b. Write down a list of at least 5 things you would check in the ANCIENT dataset focusing on these columns:</p>
-<ul>
-<li>City,</li>
-<li>Country,</li>
-<li>Latitude,</li>
-<li>Longitude,</li>
-<li>and the population columns (each of which has a column name that gives the year).</li>
-</ul>
-<p>Then, investigate the 5 items on your list.</p>
-<p>2c. There are two errors in the latitude column of the ANCIENT dataset. Fix the two errors in latitude before proceeding to the next section. You could either find the two errors and fix each one using indexing,</p>
+<p>** Note that you will want to use tidyverse’s <code>read_csv()</code> function, because there are some odd characters that <code>read.csv()</code> stumbles on.</p>
+<p>2b. Write down a list of things you would check in the <strong>ANCIENT</strong> dataset focusing on these items:</p>
+<ol type="i">
+<li><code>City</code>,</li>
+<li><code>Latitude</code> (note: we’ll solve issues in this column in 2c),</li>
+<li><code>Longitude</code>,</li>
+<li>the population sizes (i.e., values in columns 7:47), and</li>
+<li>the year info (stored in those column names).</li>
+</ol>
+<p>Then, <strong>investigate</strong> (look at) the items on your list.</p>
+<p>2c. There are two errors in the <code>latitude</code> column of the <strong>ANCIENT</strong> dataset. Fix the two errors in <code>latitude</code> before proceeding to Part 3. You could either find the two errors and fix each one using indexing, as shown here:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>latitude[index] <span class="ot">&lt;-</span> <span class="st">"fixed.value"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>latitude[index] <span class="ot">&lt;-</span> <span class="st">"the.corrected.value"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>…OR investigate how to use str_replace_all() to do this.</p>
-<p>Convert latitude to as.numeric() after the two errors are fixed.</p>
-<p><strong>OPTIONAL:</strong> In addition to the latitude errors in the ANCIENT dataset, I DID find at least one typo in the Modern dataset. Can you find it? There is also one aspect of the Modern dataset that poses a potential issue, but upon investigation, it is not actually a mistake. Can you find that one, too?</p>
+<p>…OR you could investigate how to use <code>str_replace_all()</code> to do this.</p>
+<p>After fixing the two errors, convert the <code>latitude</code> column to <code>as.numeric()</code>.</p>
+<p><strong>OPTIONAL:</strong> In addition to the latitude errors in the <strong>ANCIENT</strong> dataset, I DID find at least one typo in the <strong>Modern</strong> dataset. Can you find it? AND there is also an aspect of the <strong>Modern</strong> dataset that poses a potential issue, but upon investigation, it is not actually a mistake. Can you find that one, too?</p>
 </section>
 <section id="part-3" class="level2">
 <h2 class="anchored" data-anchor-id="part-3">Part 3</h2>
 <p>Our next goal is to generate a single long-format dataset that combines BOTH the Ancient and the Modern city population sizes. We want our long dataset to have these 6 columns:</p>
 <ul>
-<li>city,</li>
-<li>country,</li>
-<li>latitude,</li>
-<li>longitude,</li>
+<li>City,</li>
+<li>Country,</li>
+<li>Latitude,</li>
+<li>Longitude,</li>
 <li>year,</li>
 <li>and population.</li>
 </ul>
 <p>To get there, we’ll have to do some reshaping/tidying first.</p>
 <p>3a. Using pipes &amp; tidyverse functions, do the following steps to reshape/tidy the <strong>Ancient</strong> data:</p>
 <ol type="i">
-<li><p>Pivot the Ancient data to long format with new columns that contain year and population.</p></li>
-<li><p>Then, take the year information (such as BC_3700 or AD_1000) and create a numerical column with just the numerical year.</p></li>
-<li><p>Make that numerical year a negative number if the year is BC, but leave it as-is (positive) if the year is AD. You should end up with years that range from -3700 to 1000.</p>
+<li><p>Pivot the Ancient data to long format with new columns that contain <code>year</code> and <code>population</code>.</p></li>
+<li><p>Then, take the year information (such as BC_3700 or AD_1000) and create a numerical column with just the <code>numerical_year</code>.</p></li>
+<li><p>Make <code>numerical_year</code> a negative number if the year is BC, but leave it as-is (positive) if the year is AD. You should end up with years that range from -3700 to 1000.</p>
 <p>Hint: it may help to make a column with character info as to whether a given year is BC vs.&nbsp;AD.</p></li>
-<li><p>Use select() to pare down your data.frame to just 6 desired columns: city, country, latitude, longitude, numerical year, and population</p></li>
-<li><p>Assign this new long data.frame a name, so that it’s available for further work.</p></li>
+<li><p>Use <code>select()</code> to pare down your dataframe to just 6 desired columns: <code>City</code>, <code>Country</code>, <code>Latitude</code>, <code>Longitude</code>, <code>numerical_year</code>, and <code>population</code></p></li>
+<li><p>Assign this new long dataframe a name, so that it’s available for further work.</p></li>
 </ol>
-<p>3b. Using pipes &amp; tidyverse functions, tidy up the <strong>Modern</strong> data so that it has the EXACT same 6 column names (variables) as the dataset your just prepared above. Working with the Modern data, you will want to create a new numerical year column with the correct values (all year 2000), name the population column appropriately, and then use select() to pare down to just the 6 desired columns.</p>
-<p>Note that these two datasets are non-overlapping in terms of the city-years (the latest estimates in the Ancient data are from 1000 AD, whereas the Modern data is all 2000 AD). This means we can combine them using rbind() AS LONG AS the two datasets have the exact same column names, same column data types, and same column order.</p>
-<p>3c. Create a new data.frame (and give it a name) that uses rbind() to combine the two dataframes you created above. <strong>Then, filter out any rows with NA for the population estimate.</strong> How many rows with population values does your combined dataset have?</p>
+<p>3b. Using pipes &amp; tidyverse functions, tidy up the <strong>Modern</strong> data so that it has the EXACT same 6 column names (variables) as the dataset your just prepared above. Working with the Modern data, you will want to create a new <code>numerical_year</code> column with the correct values (all year 2000), name the population column appropriately, and then use <code>select()</code> to pare down to just the 6 desired columns, in the same order.</p>
+<p>Note that these two datasets are non-overlapping in terms of the city-years (the latest estimates in the <strong>Ancient</strong> data are from 1000 AD, whereas the <strong>Modern</strong> data is all 2000 AD). This means we can combine them using <code>rbind()</code> AS LONG AS the two datasets have the exact same column names, same column data types, and same column order.</p>
+<p>3c. Create a new dataframe (and give it a name) that uses <code>rbind()</code> to combine the two dataframes you created above. <strong>Then, filter out any rows with NA for the population estimate.</strong> How many rows with population values does your combined dataset have?</p>
 </section>
 <section id="part-4" class="level2">
 <h2 class="anchored" data-anchor-id="part-4">Part 4</h2>
 <p>Now, we will use the dataset you created above to practice some visualization.</p>
 <p>4a. First, let’s make a line graph showing how city size changed over time for 4 cities of interest. Your graph should show city population size (in millions) on the y-axis vs.&nbsp;numerical year on the x-axis for these 4 cities: <strong>Luoyang, Istanbul, Alexandria, and Rome</strong>.</p>
 <ul>
-<li><p>Show the datapoints using geom_point().</p></li>
-<li><p>Use geom_line() to make a separate line connecting datapoints from the same city.</p></li>
+<li><p>Show the datapoints using <code>geom_point()</code>.</p></li>
+<li><p>Use <code>geom_line()</code> to make a separate line connecting datapoints from the same city.</p></li>
 <li><p>Colour the data/lines from the 4 cities differently. Include a legend for the city names.</p></li>
 <li><p>Adjust the aesthetics/features/labels of your graph so that an audience would be able to understand it.</p></li>
 </ul>
-<p>4b. Re-make the graph above, but filter to show ONLY years BEFORE 1000 AD <span style="color: red"><strong>(i.e., &lt; 1000)</strong></span>. Remove the geom_line() from these graphs. Add on geom_smooth() with method = “loess” (make sure there is a separate geom_smooth line for each city).</p>
-<p>4c. Re-make the graph above, but now use method = “lm” in geom_smooth().</p>
-<p>4d. What is geom_smooth() doing? Which method, “loess” or “lm”, is more appropriate for this particular graph?</p>
+<p>4b. Re-make the graph above, but filter to show ONLY years BEFORE 1000 AD <span style="color: red"><strong>(i.e., &lt; 1000)</strong></span>. Remove the <code>geom_line()</code> from these graphs. Add on <code>geom_smooth()</code> with method = “loess” (make sure there is a separate geom_smooth line for each city).</p>
+<p>4c. Re-make the graph above, but now use method = “lm” in <code>geom_smooth()</code>.</p>
+<p>4d. What is <code>geom_smooth()</code> doing? Which method, “loess” or “lm”, is more appropriate for this particular graph?</p>
 <p>4e. What do you notice is missing for Istanbul’s loess smooth? Can you determine why this feature is missing?</p>
-<p>4f. Now, reproduce the graph with geom_smooth() using “loess” and with <span style="color: red"><strong>ALL years</strong></span> included. What do you notice about the geom_smooth() now that the most recent years are <strong>also</strong> included? Does it still make sense to apply the loess smoother as part of this particular visualization?</p>
+<p>4f. Now, reproduce the graph with <code>geom_smooth()</code> using “loess” and with <span style="color: red"><strong>ALL years</strong></span> included. What do you notice about the <code>geom_smooth()</code> now that the most recent years are <strong>also</strong> included? Does it still make sense to apply the loess smoother as part of this particular visualization?</p>
 <p>4g. Let’s make a different graph. Suppose we want to examine the correlation between city size estimates for two close years, 2300 BC and 2400 BC. We want to make a scatterplot with:</p>
 <ul>
 <li><strong>log10</strong> pop estimate in <strong>2400 BC</strong> on the y-axis, and</li>
@@ -258,7 +258,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>Next, reshape the data so that those two years are represented in wide format.</p></li>
 <li><p>You may wish to rename the new columns to have a more appropriate name.</p></li>
 <li><p>How many cities have a pop. estimate for BOTH 2400 BC and 2300 BC? Figure this out, and comment on it as your sample size; be sure to only count cities with non-NA values for both years.</p></li>
-<li><p>Now, make your scatterplot of the log10 population in 2400 BC vs.&nbsp;the log10 population in 2300 BC. You may wish to use scale_x_log10() and scale_y_log10() to easily create a log-log plot while showing the axis tick numbers on the original scale (# of people).</p></li>
+<li><p>Now, make your scatterplot of the log10 population in 2400 BC vs.&nbsp;the log10 population in 2300 BC. You may wish to use <code>scale_x_log10()</code> and <code>scale_y_log10()</code> to easily create a log-log plot while showing the axis tick numbers on the original scale (# of people).</p></li>
 <li><p>Colour the datapoints by country and include a legend.</p></li>
 <li><p>Include an <em>appropriate</em> amount of jitter in both x and y to make sure that the datapoints are visible (i.e., jitter so that we can see the datapoints that would otherwise be obscured by overplotting). But not so much jitter that it distorts our interpretation of the data!</p></li>
 <li><p>Add a dashed line where y = x (i.e., a line with an intercept of 0 and slope of 1).</p></li>
@@ -269,7 +269,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="part-5" class="level2">
 <h2 class="anchored" data-anchor-id="part-5">Part 5</h2>
 <p>For this question, we want to examine some summary stats by historical era.</p>
-<p>5a. Take the combined dataset that you created back in Part 1, and use mutate to add a new column to it, <strong>era</strong>, that gives the approximate historical era as follows:</p>
+<p>5a. Take the combined dataset that you created back in Part 1, and use mutate to add a new column to it, <code>era</code>, that gives the approximate historical era as follows:</p>
 <ul>
 <li>Bronze age is 3700 BC up to and including 1300 BC</li>
 <li>Iron age is 1299 BC up to and including 600 BC</li>
@@ -277,28 +277,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Middle ages is 501 AD up to and including 1500 AD</li>
 <li>Modern age is 1501 AD until now</li>
 </ul>
-<p>Note: you can use case_when() within mutate() to do this in an elegant way that is less complicated for the user to read, or use nested calls to ifelse() within mutate().</p>
-<p>5b. Now that you have created the era column, let’s get the overall average of log-tranformed city size for each year and era, using group_by() and summarize(). More specifically:</p>
+<p>Note: you can use <code>case_when()</code> within <code>mutate()</code> to do this in an elegant way that is less complicated for the user to read, OR use nested calls to <code>ifelse()</code> within <code>mutate()</code>.</p>
+<p>5b. Now that you have created the <code>era</code> column, let’s get the overall average of log-tranformed city size for each year and era, using <code>group_by()</code> and <code>summarize()</code>. More specifically:</p>
 <ol type="i">
-<li><p>use mutate to add a column with log-transformed city sizes,</p></li>
-<li><p>then group by year and era,</p></li>
+<li><p>use <code>mutate()</code> to add a column with log-transformed city sizes,</p></li>
+<li><p>then <code>group_by()</code> year and era,</p></li>
 <li><p>then take the mean of the log-transformed city sizes for each year-era,</p></li>
 <li><p>and assign this new dataset the name <strong>city_avg</strong>.</p></li>
 </ol>
 <p>5c. Now, plot a time series using <strong>city_avg</strong> that shows the global average log city size (y-axis) vs.&nbsp;year (x-axis) for Bronze - Middle ages (i.e., omit Modern from the graph).</p>
 <ol type="i">
 <li><p>Show the individual datapoints AND a thin black line connecting the points.</p></li>
-<li><p>Color the dataapoints by era and include a legend.</p></li>
+<li><p>Color the datapoints by era and include a legend.</p></li>
 <li><p>Be sure that the coloured points are layered on TOP of the thin black line (Hint: the order in which the ggplot + layers are built up will determine this).</p></li>
 <li><p>Clean up any features/labels of the plot so an audience can understand it.</p></li>
 <li><p>Which pre-modern eras showed the biggest jumps in average city size around the world?</p></li>
 </ol>
-<p><strong>OPTIONAL:</strong> Add semi-transparent rectangles in the background of the plot, one rectangle spanning the year range for each era, with the rectangles colour-coded to match the color scheme of the datapoints. The idea is to make it easier for the viewer to see the era transitions. Make the rectangles span the entire vertical/y-range of the plot. Hint: oen way to do this is with geom_rect(). It’s helpful to first create a separate little dataframe with columns for era, start year, and end year. Then, add a geom_rect() layer that calls that dataframe.</p>
+<p><strong>OPTIONAL:</strong> Add semi-transparent rectangles in the background of the plot, one rectangle spanning the year range for each era, with the rectangles colour-coded to match the color scheme of the datapoints. The idea is to make it easier for the viewer to see the era transitions. Make the rectangles span the entire vertical/y-range of the plot. Hint: one way to do this is with <code>geom_rect()</code>. It’s helpful to first create a separate little dataframe with columns for <code>era</code>, <code>start_year</code>, and <code>end_year</code>. Then, add a <code>geom_rect()</code> layer that calls that dataframe.</p>
 </section>
 <section id="extra-optional-challenges" class="level2">
 <h2 class="anchored" data-anchor-id="extra-optional-challenges">Extra optional challenges</h2>
 <p>This is for extra (excellent) practice, and is not graded.</p>
-<p>The gapminder dataset has info about the continent for different countries around the world:</p>
+<p>The <code>gapminder</code> dataset has info about the continent for different countries around the world:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>gapminder</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -318,9 +318,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 # ℹ 1,694 more rows</code></pre>
 </div>
 </div>
-<p>Let’s use the continent info from gapminder, merging it into our other data on cities/pop sizes/eras that we created above. Our goal here will be to determine and plot the number (count) of major ancient cities for each continent-era. This will let us see where in the world the major ancient cities were, through the ages.</p>
+<p>Let’s use the continent info from <code>gapminder</code>, merging it into our other data on cities/pop sizes/eras that we created above. Our goal here will be to determine and plot the number (count) of major ancient cities for each continent-era. This will let us see where in the world the major ancient cities were, through the ages.</p>
 <ol type="i">
-<li><p>First, we will set up a dataframe with just the unique country and continent names from gapminder, as follows:</p>
+<li><p>First, we will set up a dataframe with just the unique country and continent names from <code>gapminder</code>, as follows:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>(cc <span class="ot">&lt;-</span> <span class="fu">unique</span>(gapminder[, <span class="fu">c</span>(<span class="st">'country'</span>, <span class="st">'continent'</span>)]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -342,12 +342,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Next, do the following steps:</p></li>
 <li><p>Using the city dataset where you have added an <strong>era</strong> column, filter to just <strong>pre-modern</strong> eras.</p></li>
-<li><p>Merge the continent names from cc into your city dataset with left_join(), based on country names. Note: country names are provided both in the city dataset and cc, but they have different capitalization, so you will need to figure out how do the joining.</p></li>
-<li><p>Filter to remove any rows where continent is NA.</p></li>
-<li><p>Filter to include just one row per city-era that has the largest (max) population for that city and era. Hint: one way to do this is with group_by() and summarize().</p></li>
+<li><p>Merge the continent names from cc into your city dataset with <code>left_join()</code>, based on country names. Note: country names are provided both in the city dataset and cc, but they have different capitalization, so you will need to figure out how do the joining.</p></li>
+<li><p>Filter to remove any rows where continent is <code>NA</code>.</p></li>
+<li><p>Filter to include just one row per city-era that has the largest (max) population for that city and era. Hint: one way to do this is with <code>group_by()</code> and <code>summarize()</code>.</p></li>
 <li><p>Then, determine how many ancient cities there were in each continent-era (i.e., count them). Hint: the output here should be a tibble with 15 rows…</p></li>
-<li><p>Finally, use ggplot to make a grouped or stacked bar graph with geom_bar() showing these counts by continent and era. Put era on the x-axis. Reorder the x-axis era categories so that it’s chronological (Bronze, Iron, Classical, Middle). Use fill for continent.</p></li>
-<li><p>Experiment with position = ‘stack’, position = ‘dodge’, and position = ‘fill’ for this. Which of these methods do you think is best for this particular graph? What do you conclude from this graph?</p></li>
+<li><p>Finally, use ggplot to make a grouped or stacked bar graph with <code>geom_bar()</code> showing these counts by continent and era. Put era on the x-axis. Reorder the x-axis era categories so that it’s chronological (Bronze, Iron, Classical, Middle). Use fill for continent.</p></li>
+<li><p>Experiment with <code>position = 'stack'</code>, <code>position = 'dodge'</code>, and <code>position = 'fill'</code> for this. Which of these methods do you think is best for this particular graph? What do you conclude from this graph?</p></li>
 </ol>
 </section>
 
