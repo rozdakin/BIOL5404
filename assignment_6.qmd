@@ -51,11 +51,22 @@ This is an example exploratory analysis of billboard-charting songs from the yea
 
 #### Previous reports in this class
 
+Here are some excellent examples of reports by previous students who were willing to share, for your benefit! They nicely show the diversity and depth of exploratory data analyses:
+
+-   [Arctic oceanography](http://roslyndakin.com/wp-content/uploads/BIOL_5404/Aislinn_Fox_EDAReport.html)
+-   [Soil microbiome](http://roslyndakin.com/wp-content/uploads/BIOL_5404/Ishraq_Final_BIOL5404.html)
+-   [Farmed crickets](http://roslyndakin.com/wp-content/uploads/BIOL_5404/Emile_vadboncoeur_EDA.html)
+-   [Paleozoic fishes](http://roslyndakin.com/wp-content/uploads/BIOL_5404/Warnock-Juteau_Trystan_BIOL5404_assignment6_markdown_01.html)
+-   [Cretaceous dinosaurs](http://roslyndakin.com/wp-content/uploads/BIOL_5404/BIOL-5404-EDA-Caelan-Libke.html)
+-   [Urban mammals](http://roslyndakin.com/wp-content/uploads/BIOL_5404/LilliGaston_Independent_Report.html)
+-   [Frog population trends](http://roslyndakin.com/wp-content/uploads/BIOL_5404/CDennison_Independent_Report.html)
+-   [Video game sales](http://roslyndakin.com/wp-content/uploads/BIOL_5404/WaleedDarwish_R_FinalProject.html)
+
+You can also take a look at the files that generated each project here (to do – add latest projects here):
+
 <https://drive.google.com/drive/folders/1wzDkJAqyJUivATaQjAUnWieyxtrq5OkN?usp=sharing#>
 
-The link above takes you to a folder with previous **markdown** reports that students were willing to share, for your benefit! They nicely show the diversity and depth of exploratory data analyses. To get a quick look at a project, you could download JUST its html file. Note: you must download (previewing the htmls from within Google Drive doesn't let you view the final formatting).
-
-For A6, you will not yet be creating a "pretty" markdown version yet. The goal for A6 is to draft your EDA as a regular-old R script, applying tools and concepts that we've been working on all term.
+NOTE: for A6, you will not yet be creating a "pretty" markdown version yet. The goal for A6 is to draft your EDA as a regular-old R script, applying tools and concepts that we've been working on all term.
 
 For A6, you should submit the following files on Brightspace:
 
