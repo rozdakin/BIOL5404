@@ -9,14 +9,18 @@ toc-location: left
 link-external-newwindow: true
 ---
 
+NOTE this is the (old) course outline for winter 2024
+
+\[\*\*\* it will be updated later for winter 2025 \*\*\*\]
+
 **Course Description:** This course introduces the practical skills needed to answer biological research questions with large and complex datasets in a reproducible manner. There is a growing demand for data analyses that are openly available, well annotated, and reusable by others. In this course, we will cover how to tidy, transform, visualize, model, and communicate datasets in R, with a focus on large and complex data. The course is aimed at graduate students with some prior experience with statistics at the undergraduate or graduate level, but no prior experience with R is required.
 
-+---------------------------------+-------------------+
-| Professor: Dr. Roz Dakin        | Office: CTTC 4440 |
-+---------------------------------+-------------------+
-| Wednesdays, 11:35 AM – 1:30 PM\ | Southam Hall 415  |
-| In person, synchronous course   |                   |
-+---------------------------------+-------------------+
++--------------------------------+-------------------+
+| Professor: Dr. Roz Dakin       | Office: CTTC 4440 |
++--------------------------------+-------------------+
+| TBD\                           | TBD               |
+| In person, synchronous course  |                   |
++--------------------------------+-------------------+
 
 ### Goals for this Course
 
