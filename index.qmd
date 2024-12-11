@@ -9,27 +9,23 @@ toc-location: left
 link-external-newwindow: true
 ---
 
-NOTE this is the (old) course outline for winter 2024
-
-\[\*\*\* it will be updated later for winter 2025 \*\*\*\]
-
 **Course Description:** This course introduces the practical skills needed to answer biological research questions with large and complex datasets in a reproducible manner. There is a growing demand for data analyses that are openly available, well annotated, and reusable by others. In this course, we will cover how to tidy, transform, visualize, model, and communicate datasets in R, with a focus on large and complex data. The course is aimed at graduate students with some prior experience with statistics at the undergraduate or graduate level, but no prior experience with R is required.
 
-+--------------------------------+-------------------+
-| Professor: Dr. Roz Dakin       | Office: CTTC 4440 |
-+--------------------------------+-------------------+
-| TBD\                           | TBD               |
-| In person, synchronous course  |                   |
-+--------------------------------+-------------------+
++-------------------------------+-------------------+
+| Professor: Dr. Roz Dakin      | Office: CTTC 4440 |
++-------------------------------+-------------------+
+| Fridays, 11:35 - 14:25\       | Southam Hall 303  |
+| In person, synchronous course |                   |
++-------------------------------+-------------------+
 
 ### Goals for this Course
 
-1)  Develop proficiency in the R programming language.
-2)  Practice using R to explore, wrangle, graph, and model realistic (complex) research datasets.
-3)  Gain experience troubleshooting (analyzing & solving errors in R code).
-4)  Apply (learn to use) a new data technique and/or package in R.
-5)  Create an independent data analysis following principles of reproducible research.
-6)  Use R markdown to communicate your work.
+1)  Develop proficiency in the R programming language
+2)  Practice using R to explore, wrangle, graph, and model realistic (complex) research datasets
+3)  Gain experience troubleshooting (analyzing & solving errors in R code)
+4)  Apply (learn to use) a new data technique and/or package in R
+5)  Create an independent data analysis following principles of reproducible research
+6)  Use R markdown to communicate your work
 
 ------------------------------------------------------------------------
 
@@ -46,17 +42,17 @@ We may also use [Advanced R 2e](https://adv-r.hadley.nz/) by Hadley Wickham
 
 ### Assignments {#assignments}
 
--   [Assignment 1 due January 21, 2024](assignment_1.html)
+-   [Assignment 1 due January 19, 2025](assignment_1.html)
 
--   [Assignment 2 due February 4, 2024](assignment_2.html)
+-   [Assignment 2 due February 2, 2025](assignment_2.html)
 
--   [Assignment 3 due February 18, 2024](assignment_3.html)
+-   [Assignment 3 due February 16, 2025](assignment_3.html)
 
--   [Assignment 4 due March 3, 2024](assignment_4.html)
+-   [Assignment 4 due March 2, 2025](assignment_4.html)
 
--   [Assignment 5 due March 17, 2024](assignment_5.html)
+-   [Assignment 5 due March 16, 2025](assignment_5.html)
 
--   [Assignment 6 due March 31, 2024](assignment_6.html)
+-   [Assignment 6 due March 30, 2025](assignment_6.html)
 
 ------------------------------------------------------------------------
 
@@ -67,11 +63,11 @@ We may also use [Advanced R 2e](https://adv-r.hadley.nz/) by Hadley Wickham
 +====================+==========+================================================================================================+
 | Quizzes            | 10%      | Short MC quizzes on Brightspace each week                                                      |
 +--------------------+----------+------------------------------------------------------------------------------------------------+
-| Assignments        | 50%      | 6 total, only your best 5 will count                                                           |
+| Assignments        | 40%      | 6 total, only your best 5 will count                                                           |
 +--------------------+----------+------------------------------------------------------------------------------------------------+
-| Peer evaluation    | 5%       | You will grade your peers and provide feedback on their code, throughout the term              |
+| Peer evaluation    | 5%       | On each assignment, you will grade your peers and provide feedback on their code               |
 +--------------------+----------+------------------------------------------------------------------------------------------------+
-| Independent report | 35%      | Communicate the results of your own data wrangling and exploratory analysis, done individually |
+| Independent report | 45%      | Communicate the results of your own data wrangling and exploratory analysis, done individually |
 +--------------------+----------+------------------------------------------------------------------------------------------------+
 
 ### Weekly Schedule
@@ -110,17 +106,17 @@ We may also use [Advanced R 2e](https://adv-r.hadley.nz/) by Hadley Wickham
 | 8           | Feb 28           | Visualization, part 2       | -   Irizarry Sections 9-10              |
 |             |                  |                             | -   [**Assignment #4**]{.smallcaps}     |
 +-------------+------------------+-----------------------------+-----------------------------------------+
-| 9           | Mar 6            | Exploratory data analysis   | -   r4ds Section 10                     |
+| 9           | Mar 7            | Exploratory data analysis   | -   r4ds Section 10                     |
 +-------------+------------------+-----------------------------+-----------------------------------------+
-| 10          | Mar 13           | \*\* no formal meeting \*\* | -   [**Assignment #5**]{.smallcaps}     |
+| 10          | Mar 14           | \*\* No formal meeting \*\* | -   [**Assignment #5**]{.smallcaps}     |
 +-------------+------------------+-----------------------------+-----------------------------------------+
-| 11          | Mar 20           | Strings and dates           | -   Irizarry Section 13                 |
+| 11          | Mar 21           | Strings and dates           | -   Irizarry Section 13                 |
 |             |                  |                             | -   Irizarry 17.1-17.3, 17.5-17.6, 17.9 |
 +-------------+------------------+-----------------------------+-----------------------------------------+
-| 12          | Mar 27           | markdown and git            | -   r4ds Section 28                     |
+| 12          | Mar 28           | markdown and git            | -   r4ds Section 28                     |
 |             |                  |                             | -   [**Assignment #6**]{.smallcaps}     |
 +-------------+------------------+-----------------------------+-----------------------------------------+
-|             | **Apr 14**       | **Independent report due**  |                                         |
+|             | **Apr 13**       | **Independent report due**  |                                         |
 +-------------+------------------+-----------------------------+-----------------------------------------+
 
 ### Late Policy
@@ -133,30 +129,22 @@ Work that is not submitted by the deadline will receive a grade of 0, unless you
 
 As a class, we will comply with [Carleton’s guidelines on academic integrity](https://carleton.ca/registrar/academic-integrity/).
 
-It’s OK (and encouraged) to work with other students on weekly assignments. I strongly encourage you to **help each other out** when troubleshooting in R. When working together, you should strive to contribute so that working together is mutually beneficial.
+It’s OK (and encouraged) to work with other students on weekly assignments and quizzes in this course. I strongly encourage you to **help each other out** when troubleshooting in R. When working together, you should strive to contribute so that working together is mutually beneficial.
 
-The exploratory data analysis and independent report must represent your own original investigation of the data (though you can obtain the data anywhere you wish – there is no requirement that you generated the data).
+The exploratory data analysis and independent report [must]{.underline} represent **your own original investigation of the data** (though you can obtain the data anywhere you wish – there is no requirement that you generated the data).
 
-As part of this course, you will be expected to evaluate and provide feedback on work by your peers. Please respect each other. I expect you to contribute by providing your peers with thoughtful feedback, and to be fair and honest in your peer evaluations.
+As part of this course, you will also be expected to evaluate and provide feedback on work by your peers. Please respect each other. I expect you to contribute by **providing your peers with** **thoughtful feedback**, and to be fair and honest in your peer evaluations.
+
+------------------------------------------------------------------------
+
+### Statement on ChatGPT/Generative AI usage
+
+I encourage you to use AI tools to help with troubleshooting in R.
+
+As our understanding of the uses of AI and its relationship to student work and academic integrity continue to evolve, students are required to discuss their use of AI in any circumstance not described here with the course instructor to ensure it supports the learning goals for the course.
 
 ------------------------------------------------------------------------
 
 ### Accommodations
 
 Please review the course schedule and contact me with any requests for academic accommodation during the first two weeks of class, or as soon as possible after the need is known to exist.
-
-#### Students with Disabilities
-
-The [Paul Menton Centre for Students with Disabilities (PMC)](https://carleton.ca/pmc/) provides academic accommodations and support services to students with Learning Disabilities (LD), mental health disabilities, Attention Deficit Hyperactivity Disorder (ADHD), Autism Spectrum Disorders (ASD), chronic medical conditions, and impairments in mobility, hearing, and vision.
-
-Students with disabilities who require academic accommodations must register with the Paul Menton Centre for Students with Disabilities (PMC).
-
-Contact the PMC to begin the intake process for PMC accommodations: [pmc\@carleton.ca](mailto:pmc@carleton.ca)
-
-#### Religious Obligations
-
-Please write to me with any requests for academic accommodation during the first few weeks of class, or as soon as possible after the need for accommodation is known to exist. Accommodation will be worked out on an individual basis.
-
-#### Pregnancy
-
-Please write to me with any requests for academic accommodation during the first few weeks of class, or as soon as possible after the need for accommodation is known to exist. For more details about the accommodation policy, visit the [Equity and Inclusive Communities (EIC) website](http://www.carleton.ca/equity/).
