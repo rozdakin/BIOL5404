@@ -149,7 +149,7 @@ Download **data_by_continent_country.zip** from Brightspace and uncompress/unzip
 -   Give the output of your call to list.files() a name (e.g., **myvector**), so that it creates a vector of paths to all the different csv files in data_by_continent_country.
 -   How many csv files are there in total?
 
-3b. Next, iterate over the vector you created above, reading in **each of the csv files**, and then storing the data from each of these files in the i^th^ element of a list that you create for this purpose.
+3b. Next, you are going to iterate over the vector you created above, reading in **each of the csv files**, and then storing the data from each of these files in the i^th^ element of a list that you create for this purpose.
 
 Start by using the line below to create an empty list with the desired length:
 
@@ -160,11 +160,11 @@ Start by using the line below to create an empty list with the desired length:
 mylist <- vector("list", length = length(myvector))
 ```
 
-3c. Now write a for loop to read in each csv file and put into **mylist**. You can use read.csv() from base R or read_csv() in tidyverse.
+Now, write a for loop to read in each csv file and put into **mylist**. You can use read.csv() from base R or read_csv() in tidyverse.
 
 Inspect the first element of your list. Try looking at a few more, did it work?
 
-3d. A problem with what we have so far is that the csv files did not actually contain values for country and continent names. We need to incorporate that info so that the data will be useful & tidy!
+3c. A problem with what we have so far is that the csv files did not actually contain values for country and continent names. We need to incorporate that info so that the data will be useful & tidy!
 
 Revise and repeat your loop above so that after reading in each csv file, your loop will also ADD a column with the correct **continent name for that country**, and ADD a column for the correct **country name for that country**. As above, store it in the i^th^ element of the list. Inspect it to make sure it worked.
 

@@ -240,14 +240,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Give the output of your call to list.files() a name (e.g., <strong>myvector</strong>), so that it creates a vector of paths to all the different csv files in data_by_continent_country.</li>
 <li>How many csv files are there in total?</li>
 </ul>
-<p>3b. Next, iterate over the vector you created above, reading in <strong>each of the csv files</strong>, and then storing the data from each of these files in the i<sup>th</sup> element of a list that you create for this purpose.</p>
+<p>3b. Next, you are going to iterate over the vector you created above, reading in <strong>each of the csv files</strong>, and then storing the data from each of these files in the i<sup>th</sup> element of a list that you create for this purpose.</p>
 <p>Start by using the line below to create an empty list with the desired length:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>mylist <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="st">"list"</span>, <span class="at">length =</span> <span class="fu">length</span>(myvector))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>3c. Now write a for loop to read in each csv file and put into <strong>mylist</strong>. You can use read.csv() from base R or read_csv() in tidyverse.</p>
+<p>Now, write a for loop to read in each csv file and put into <strong>mylist</strong>. You can use read.csv() from base R or read_csv() in tidyverse.</p>
 <p>Inspect the first element of your list. Try looking at a few more, did it work?</p>
-<p>3d. A problem with what we have so far is that the csv files did not actually contain values for country and continent names. We need to incorporate that info so that the data will be useful &amp; tidy!</p>
+<p>3c. A problem with what we have so far is that the csv files did not actually contain values for country and continent names. We need to incorporate that info so that the data will be useful &amp; tidy!</p>
 <p>Revise and repeat your loop above so that after reading in each csv file, your loop will also ADD a column with the correct <strong>continent name for that country</strong>, and ADD a column for the correct <strong>country name for that country</strong>. As above, store it in the i<sup>th</sup> element of the list. Inspect it to make sure it worked.</p>
 <p>Hint: you can use strsplit() from base R, or str_split() from tidyverse, to break up the elements of your paths based on a separator/pattern, and extract the continent and country info from the output of one of these string splitting functions.</p>
 <p>Aside: when you have a list of data.frames like this, and all of the data.frames in the list have the exact same column names and types, you can use the rbindlist() function from the data.table package to bind them together into a single data.frame. It’s very useful!</p>
