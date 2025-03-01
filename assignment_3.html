@@ -231,7 +231,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="part-3">Part 3</h2>
 <p>In this section, we’ll work with the data provided in <strong>data_by_continent_country.zip</strong> on Brightspace. This zip archive contains a set of folders and files that have demographic data from countries around the world. Each data file includes info on a country’s population, average life expectancy, and GDP per capita across 5-year intervals from 1952 to 2007.</p>
 <p><em>Aside: these data come from the gapminder package… they are readily available as a single object if you install the package. I’ve intentionally distributed them across folders here to give us a chance to practice reading in data &amp; iterating a process like this when we have many files to read in nested directories.</em></p>
-<p>Download <strong>data_by_continent_country.zip</strong> from Brightspace and uncompress/unzip it. The data are stored across folders, organized by continent, then country. Take a look at the folder structure using the explorer/finder on your computer. You should be able to see that there is a folder for each continent, with subfolders for each country, each of which has a csv file with data for a given country. Make sure the unzipped folder <strong>data_by_continent_country</strong> is in your working directory.</p>
+<p>Download <strong>data_by_continent_country.zip</strong> from Brightspace and uncompress/unzip it. The data are stored across folders, organized by continent, then country. Take a look at the folder structure using the explorer/finder on your computer. You should be able to see that there is a folder for each continent, with subfolders for each country, each of which has a csv file with data for a given country.</p>
+<p><strong>Follow this organization:</strong> PUT the unzipped folder <strong>data_by_continent_country</strong> in a dedicated directory for A3 (i.e., an A3 folder) that contains only:</p>
+<ul>
+<li><p>your .R script for A3</p></li>
+<li><p>the folder <strong>data_by_continent_country</strong> (and all its contents)</p></li>
+</ul>
+<p>Make sure you match your workflow to this organization above, and when you grade your peer, grade them with this setup as well.</p>
 <p>3a. First, determine how many csv files there are in total.</p>
 <ul>
 <li>You can use list.files() to do this, by getting the paths to all of the .csv files in data_by_continent_country.</li>

@@ -139,7 +139,15 @@ In this section, we'll work with the data provided in **data_by_continent_countr
 
 *Aside: these data come from the gapminder package... they are readily available as a single object if you install the package. I've intentionally distributed them across folders here to give us a chance to practice reading in data & iterating a process like this when we have many files to read in nested directories.*
 
-Download **data_by_continent_country.zip** from Brightspace and uncompress/unzip it. The data are stored across folders, organized by continent, then country. Take a look at the folder structure using the explorer/finder on your computer. You should be able to see that there is a folder for each continent, with subfolders for each country, each of which has a csv file with data for a given country. Make sure the unzipped folder **data_by_continent_country** is in your working directory.
+Download **data_by_continent_country.zip** from Brightspace and uncompress/unzip it. The data are stored across folders, organized by continent, then country. Take a look at the folder structure using the explorer/finder on your computer. You should be able to see that there is a folder for each continent, with subfolders for each country, each of which has a csv file with data for a given country.
+
+**Follow this organization:** PUT the unzipped folder **data_by_continent_country** in a dedicated directory for A3 (i.e., an A3 folder) that contains only:
+
+-   your .R script for A3
+
+-   the folder **data_by_continent_country** (and all its contents)
+
+Make sure you match your workflow to this organization above, and when you grade your peer, grade them with this setup as well.
 
 3a. First, determine how many csv files there are in total.
 
