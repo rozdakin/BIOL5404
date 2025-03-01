@@ -147,7 +147,7 @@ Download **data_by_continent_country.zip** from Brightspace and uncompress/unzip
 
 -   the folder **data_by_continent_country** (and all its contents)
 
-Make sure you match your workflow to this organization above, and when you grade your peer, grade them with this setup as well.
+Make sure you match your workflow to this organization above, and when you grade your peer, grade them with this setup as well, with the A3 folder as your working directory.
 
 3a. First, determine how many csv files there are in total.
 
