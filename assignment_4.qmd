@@ -195,7 +195,7 @@ ix. Add a solid red line showing the linear model (lm) of the relationship betwe
 
 For this question, we want to examine some summary stats by historical era.
 
-5a. Take the combined dataset that you created back in Part 1, and use mutate to add a new column to it, `era`, that gives the approximate historical era as follows:
+5a. Take the combined dataset that you created in Part 3 above, and use mutate to add a new column to it, `era`, that gives the approximate historical era for the numerical `year` as follows:
 
 -   Bronze age is 3700 BC up to and including 1300 BC
 -   Iron age is 1299 BC up to and including 600 BC
