@@ -232,7 +232,9 @@ Now that we have clean data we are ready to really explore our question about bo
 
 -   Colour the datapoints by species
 
--   Add geom_smooth() with `method = 'lm'`
+-   Add geom_smooth() with `method = 'lm'` also coloured by species
+
+-   (Note that the geom_smooth() should show a separate fit lines for each species)
 
 -   Name this plot `species_scatter`
 
@@ -240,7 +242,7 @@ What do you observe?
 
 6b. Before we run the analysis, let's consider that there are other factors that can influence variation in a bird's body size. One important factor may be seasonality (individuals of a given bird species will be largest/heaviest in spring before breeding, and the smallest/lightest at the end of the breeding phase). A second factor that may be important is latitude (in broadly distributed species, individuals living at higher latitudes tend to be larger/heavier).
 
-Make a scatterplot for `massing` vs. each of these two variables (i.e., one plot with `massign` vs. `month`, and one plot with `massing` vs. `latitude`). Again, colour by species, and include geom_smooth() as above.
+Make a scatterplot for `massing` vs. each of these two variables (i.e., one plot with `massign` vs. `month`, and one plot with `massing` vs. `latitude`). Again, colour by species, and include geom_smooth(), with a different line for each species, as above.
 
 After examining these two additional plots, what do you conclude?
 
@@ -257,7 +259,7 @@ mod2 <- lm(massing ~ year, data = YOUR_DATA)
 summary(mod2)
 ```
 
-6d. As a contrast to the `species_scatter` visualization you created above, create a scatterplot of `massing` vs. `year` that does NOT colour/group by species (i.e., all datapoints same colour and has only one geom_smooth line). Name this plot `pooled_scatter`.
+6d. As a contrast to the `species_scatter` visualization you created above, create a scatterplot of `massing` vs. `year` that does NOT colour/group by species (i.e., all datapoints same colour and has only [one]{.underline} geom_smooth line). Name this plot `pooled_scatter`.
 
 6e. What are your conclusions from mod1 and mod2, respectively, about potential changes in bird body mass over the years? Why do the two models yield different conclusions? Hint: comparing the graphs species_scatter and smooth_scatter may help you explain this.
 

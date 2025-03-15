@@ -278,12 +278,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>6a. Let’s start by creating a scatterplot to visualize the relationship between <code>massing</code> (y-axis) and <code>year</code> (x-axis) for our filtered sample.</p>
 <ul>
 <li><p>Colour the datapoints by species</p></li>
-<li><p>Add geom_smooth() with <code>method = 'lm'</code></p></li>
+<li><p>Add geom_smooth() with <code>method = 'lm'</code> also coloured by species</p></li>
+<li><p>(Note that the geom_smooth() should show a separate fit lines for each species)</p></li>
 <li><p>Name this plot <code>species_scatter</code></p></li>
 </ul>
 <p>What do you observe?</p>
 <p>6b. Before we run the analysis, let’s consider that there are other factors that can influence variation in a bird’s body size. One important factor may be seasonality (individuals of a given bird species will be largest/heaviest in spring before breeding, and the smallest/lightest at the end of the breeding phase). A second factor that may be important is latitude (in broadly distributed species, individuals living at higher latitudes tend to be larger/heavier).</p>
-<p>Make a scatterplot for <code>massing</code> vs.&nbsp;each of these two variables (i.e., one plot with <code>massign</code> vs.&nbsp;<code>month</code>, and one plot with <code>massing</code> vs.&nbsp;<code>latitude</code>). Again, colour by species, and include geom_smooth() as above.</p>
+<p>Make a scatterplot for <code>massing</code> vs.&nbsp;each of these two variables (i.e., one plot with <code>massign</code> vs.&nbsp;<code>month</code>, and one plot with <code>massing</code> vs.&nbsp;<code>latitude</code>). Again, colour by species, and include geom_smooth(), with a different line for each species, as above.</p>
 <p>After examining these two additional plots, what do you conclude?</p>
 <p>6c. For this next step, you will need to have the <code>lme4</code> and <code>lmerTest</code> packages installed. Use the code below to fit two linear regression models to analyze the change in body mass vs.&nbsp;year. The first model, <code>mod1</code>, accounts for species differences via the random effect. The second model, <code>mod2</code>, is a simpler model that does NOT account for species diffs. <code>mod2</code> is not an appropriate model because it ignores an important source of non-independence and a major source of body mass variation. But, we will look at it here to prove a point:</p>
 <div class="cell">
@@ -293,7 +294,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(massing <span class="sc">~</span> year, <span class="at">data =</span> YOUR_DATA)</span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>6d. As a contrast to the <code>species_scatter</code> visualization you created above, create a scatterplot of <code>massing</code> vs.&nbsp;<code>year</code> that does NOT colour/group by species (i.e., all datapoints same colour and has only one geom_smooth line). Name this plot <code>pooled_scatter</code>.</p>
+<p>6d. As a contrast to the <code>species_scatter</code> visualization you created above, create a scatterplot of <code>massing</code> vs.&nbsp;<code>year</code> that does NOT colour/group by species (i.e., all datapoints same colour and has only <u>one</u> geom_smooth line). Name this plot <code>pooled_scatter</code>.</p>
 <p>6e. What are your conclusions from mod1 and mod2, respectively, about potential changes in bird body mass over the years? Why do the two models yield different conclusions? Hint: comparing the graphs species_scatter and smooth_scatter may help you explain this.</p>
 <p>6f. Would you say that the year effect is a <strong>large</strong> effect? In other words, is the estimated change in bird body mass over the years a big change, or is it a subtle one? (Look at species_scatter again.)</p>
 </section>
