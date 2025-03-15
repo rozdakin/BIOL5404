@@ -90,9 +90,11 @@ iii. `Longitude`,
 iv. the population sizes (i.e., values in columns 7:47), and
 v.  the year info (stored in those column names).
 
-Then, **investigate** (look at) the items on your list.
+2c. Now, **investigate** (look at) the items on your list above in 2b.
 
-2c. There are two errors in the `latitude` column of the **ANCIENT** dataset. Fix the two errors in `latitude` before proceeding to Part 3. You could either find the two errors and fix each one using indexing, as shown here:
+Note: I'm asking you to use your tidyverse skills to investigate each of your checks from 2b, and in each case, describe what you see. You don't have to fix anything for 2c. Just demonstrate a thorough investigation.
+
+2d. There are two errors in the `latitude` column of the **ANCIENT** dataset. Fix the two errors in `latitude` before proceeding to Part 3. You could either find the two errors and fix each one using indexing, as shown here:
 
 ```{r}
 #| label: example-fix
