@@ -147,7 +147,7 @@ Let's create a new column that designates each study as having used R or not:
 #| label: uses-R
 #| results: false
 
-data$useR <- grepl('R', data$analysisPgrm, ignore.case = F)
+data$useR <- grepl('R', data$analysisPgrm) # ignore.case = F by default
 
 table(data$useR) # summarizes how many studies did not, and did, use R
 ```
