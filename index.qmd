@@ -111,7 +111,7 @@ We may also use [Advanced R 2e](https://adv-r.hadley.nz/) by Hadley Wickham
 | 10          | Mar 14           | \*\* No formal meeting \*\* | -   [**Assignment #5**]{.smallcaps}     |
 +-------------+------------------+-----------------------------+-----------------------------------------+
 | 11          | Mar 21           | Strings and dates           | -   Irizarry Section 13                 |
-|             |                  |                             | -   Irizarry 17.1-17.3, 17.5-17.6, 17.9 |
+|             |                  |                             | -   Irizarry 16.1-16.3, 16.5-16.6, 16.9 |
 +-------------+------------------+-----------------------------+-----------------------------------------+
 | 12          | Mar 28           | markdown and git            | -   r4ds Section 28                     |
 |             |                  |                             | -   [**Assignment #6**]{.smallcaps}     |
