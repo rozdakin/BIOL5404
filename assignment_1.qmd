@@ -16,7 +16,7 @@ link-external-newwindow: true
 
 ## Instructions
 
--   CCreate a new .R script to complete this assignment in your local assignments folder for this course.
+-   Create a new .R script to complete this assignment in your local assignments folder for this course.
 -   You'll submit the .R script on Brightspace.
 -   ***Put your FIRST and LAST NAME in the [file name]{.underline} of the script.***
 -   Put your name at the top of the script as well.
