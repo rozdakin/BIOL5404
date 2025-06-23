@@ -51,10 +51,15 @@ This is an example exploratory analysis of billboard-charting songs from the yea
 
 #### Previous reports in this class
 
-Here are some excellent examples of reports by previous students who were willing to share, for your benefit! They nicely show the diversity and depth of exploratory data analyses:
+Here are some excellent examples of reports by previous students who were willing to share, for your benefit! They nicely show the diversity and key components of exploratory data analyses:
 
+-   [Pop gen simulation](https://roslyndakin.com/wp-content/uploads/BIOL_5404/BIOL5404_EDA_BiancaTassi.html)
+-   [Bat captures](https://roslyndakin.com/wp-content/uploads/BIOL_5404/Mika_BatCaptureEDA.html)
+-   [Effects of recreational boating](https://roslyndakin.com/wp-content/uploads/BIOL_5404/Robinson_Steven_EDA_BIOL5404.html)
+-   [Water chemistry in the Yukon](https://roslyndakin.com/wp-content/uploads/BIOL_5404/KRorabeck_EDA.html)
+-   [Wildlife roadkill](https://roslyndakin.com/wp-content/uploads/BIOL_5404/Effect_of_Pavement_on_the_Number_of_Wildlife_Roadkills.html)
 -   [Arctic oceanography](http://roslyndakin.com/wp-content/uploads/BIOL_5404/Aislinn_Fox_EDAReport.html)
--   [Soil microbiome](http://roslyndakin.com/wp-content/uploads/BIOL_5404/Ishraq_Final_BIOL5404.html)
+-   [Soil microbiomes](http://roslyndakin.com/wp-content/uploads/BIOL_5404/Ishraq_Final_BIOL5404.html)
 -   [Farmed crickets](http://roslyndakin.com/wp-content/uploads/BIOL_5404/Emile_vadboncoeur_EDA.html)
 -   [Paleozoic fishes](http://roslyndakin.com/wp-content/uploads/BIOL_5404/Warnock-Juteau_Trystan_BIOL5404_assignment6_markdown_01.html)
 -   [Cretaceous dinosaurs](http://roslyndakin.com/wp-content/uploads/BIOL_5404/BIOL-5404-EDA-Caelan-Libke.html)
@@ -62,7 +67,9 @@ Here are some excellent examples of reports by previous students who were willin
 -   [Frog population trends](http://roslyndakin.com/wp-content/uploads/BIOL_5404/CDennison_Independent_Report.html)
 -   [Video game sales](http://roslyndakin.com/wp-content/uploads/BIOL_5404/WaleedDarwish_R_FinalProject.html)
 
-You can also take a look at the files that generated each project here (to do – add latest projects here):
+Please note that some of the examples above go to greater lengths than necessary for this course (e.g., because the project is part of the student's primary or thesis research, students often do a lot more than what is needed to fulfill the requirements for this course).
+
+You can also take a look at the files that generated some previous student projects here:
 
 <https://drive.google.com/drive/folders/1wzDkJAqyJUivATaQjAUnWieyxtrq5OkN?usp=sharing#>
 
