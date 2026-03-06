@@ -57,16 +57,16 @@ Here are some excellent examples of reports by previous students who were willin
 -   [Arctic arthropods](project_examples/arctic_arthropods/2_lewis_caitlin_final_project.html){target="_blank"}
 -   [Bat captures](project_examples/bat_captures/Mika_BatCaptureEDA.html){target="_blank"}
 -   [Effects of recreational boating](project_examples/effects_of_recreational_boating/Robinson_Steven_EDA_BIOL5404.html){target="_blank"}
+-   [Cretaceous dinosaurs](project_examples/cretaceous_dinosaurs/BIOL-5404-EDA-Caelan-Libke.html){target="_blank"}
+-   [Farmed crickets](project_examples/farmed_crickets/Emile_vadboncoeur_EDA.html){target="_blank"}
+-   [Soil microbiomes](project_examples/soil_microbiome/Ishraq_Final_BIOL5404.html){target="_blank"}
+-   [Wildlife roadkill](project_examples/wildlife_roadkill/Effect_of_Pavement_on_the_Number_of_Wildlife_Roadkills.html){target="_blank"}
+-   [Frog population trends](project_examples/frog_population_trends/CDennison_Independent_Report.html){target="_blank"}
+-   [Video game sales](project_examples/video_game_sales/WaleedDarwish_R_FinalProject.html){target="_blank"}
 -   Water chemistry in the Yukon
--   Wildlife roadkill
 -   Arctic oceanography
--   Soil microbiomes
--   Farmed crickets
 -   Paleozoic fishes
--   Cretaceous dinosaurs
 -   Urban mammals
--   Frog population trends
--   Video game sales
 
 Please note that many of the examples above go to FAR FAR greater lengths than necessary for this course. This often happens when the project is part of the student's primary or thesis research. In those cases, students often do a lot more than needed to fulfill the requirements for A6 and their final report.
 
