@@ -1,0 +1,1342 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Bianca Tassi">
+<meta name="dcterms.date" content="2025-04-15">
+
+<title>Exploratory Data Analysis of Simulated Population Genetic Data</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="BIOL5404_EDA_BiancaTassi_files/libs/clipboard/clipboard.min.js"></script>
+<script src="BIOL5404_EDA_BiancaTassi_files/libs/quarto-html/quarto.js"></script>
+<script src="BIOL5404_EDA_BiancaTassi_files/libs/quarto-html/popper.min.js"></script>
+<script src="BIOL5404_EDA_BiancaTassi_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="BIOL5404_EDA_BiancaTassi_files/libs/quarto-html/anchor.min.js"></script>
+<link href="BIOL5404_EDA_BiancaTassi_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="BIOL5404_EDA_BiancaTassi_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="BIOL5404_EDA_BiancaTassi_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="BIOL5404_EDA_BiancaTassi_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="BIOL5404_EDA_BiancaTassi_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="BIOL5404_EDA_BiancaTassi_files/libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="BIOL5404_EDA_BiancaTassi_files/libs/pagedtable-1.1/js/pagedtable.js"></script>
+
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-full">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of Contents</h2>
+   
+  <ul>
+  <li><a href="#background" id="toc-background" class="nav-link active" data-scroll-target="#background">Background</a>
+  <ul class="collapse">
+  <li><a href="#what-is-population-genetics-and-why-is-it-important" id="toc-what-is-population-genetics-and-why-is-it-important" class="nav-link" data-scroll-target="#what-is-population-genetics-and-why-is-it-important">What is Population Genetics and Why is it Important?</a></li>
+  <li><a href="#data-simulation" id="toc-data-simulation" class="nav-link" data-scroll-target="#data-simulation">Data Simulation</a></li>
+  <li><a href="#research-goals" id="toc-research-goals" class="nav-link" data-scroll-target="#research-goals">Research Goals</a></li>
+  </ul></li>
+  <li><a href="#about-the-data" id="toc-about-the-data" class="nav-link" data-scroll-target="#about-the-data">About the Data</a></li>
+  <li><a href="#tidying-the-data" id="toc-tidying-the-data" class="nav-link" data-scroll-target="#tidying-the-data">Tidying the Data</a></li>
+  <li><a href="#visualizing-genetic-clusters" id="toc-visualizing-genetic-clusters" class="nav-link" data-scroll-target="#visualizing-genetic-clusters">Visualizing Genetic Clusters</a></li>
+  <li><a href="#measuring-genetic-diversity" id="toc-measuring-genetic-diversity" class="nav-link" data-scroll-target="#measuring-genetic-diversity">Measuring Genetic Diversity</a>
+  <ul class="collapse">
+  <li><a href="#genetic-differentiation" id="toc-genetic-differentiation" class="nav-link" data-scroll-target="#genetic-differentiation">Genetic Differentiation</a></li>
+  <li><a href="#observed-heterozygosity-per-locus" id="toc-observed-heterozygosity-per-locus" class="nav-link" data-scroll-target="#observed-heterozygosity-per-locus">Observed Heterozygosity per Locus</a></li>
+  <li><a href="#observed-vs.-expected-heterozygosity" id="toc-observed-vs.-expected-heterozygosity" class="nav-link" data-scroll-target="#observed-vs.-expected-heterozygosity">Observed vs.&nbsp;Expected Heterozygosity</a></li>
+  </ul></li>
+  <li><a href="#investigating-genotype-distributions" id="toc-investigating-genotype-distributions" class="nav-link" data-scroll-target="#investigating-genotype-distributions">Investigating Genotype Distributions</a></li>
+  <li><a href="#random-sampling-and-allele-frequencies" id="toc-random-sampling-and-allele-frequencies" class="nav-link" data-scroll-target="#random-sampling-and-allele-frequencies">Random Sampling and Allele Frequencies</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a>
+  <ul class="collapse">
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</div>
+<main class="content column-page-left" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Exploratory Data Analysis of Simulated Population Genetic Data</h1>
+</div>
+
+
+
+<div class="quarto-title-meta column-page-left">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Bianca Tassi </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">April 15, 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="background" class="level1">
+<h1>Background</h1>
+<section id="what-is-population-genetics-and-why-is-it-important" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-population-genetics-and-why-is-it-important">What is Population Genetics and Why is it Important?</h2>
+<p><img src="model-based.png" class="img-fluid" width="500"></p>
+<p><strong>Population genetics</strong> is the study of how genetic traits are passed on and change in populations over time. Specifically, it combines genetics, principles of evolutionary biology, mathematics, and statistics to examine how allele frequencies change due to forces like mutation, natural selection, genetic drift and gene flow. Population genetics is important because it helps us understand how evolution works at the genetic level – It looks at how genes change over time in <em>populations</em>, not just <em>individuals</em>, and works to explain the mechanisms behind those changes.</p>
+<p>Population genetic studies have applications in agriculture, conservation biology, pest management, as well as forensics. Understanding population genetics also helps in tracking the spread of disease genes and predicting genetic disorders in medical fields. A key contribution of the field of population genetics is in the analysis of population structure. <strong>Population structure analysis</strong> can help in predicting how species might respond to future environments and understand the consequences of anthropogenic environmental change, like climate change and habitat degradation.</p>
+<p>And so, given the importance of performing population structure analysis, methods to do so are consistently being developed and refined.</p>
+<p><span class="smallcaps"><strong>PopCluster</strong></span> is a recently developed computer program that clusters individuals based on their genotype data in order to estimate population structure. This new clustering software works much faster than previous population structure analysis tools and can efficiently process large genomic datasets with high accuracy!</p>
+</section>
+<section id="data-simulation" class="level2">
+<h2 class="anchored" data-anchor-id="data-simulation">Data Simulation</h2>
+<p><strong>The goal of my master’s project</strong> is to evaluate <span class="smallcaps">PopCluster</span>’s new population genetic clustering method using simulated data.</p>
+<p>The <span class="smallcaps">PopCluster</span> software comes with an integrated simulation module where we can simulate genotype data before using this data in subsequent population structure analysis (also done using this software).</p>
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="popcluster_icon.png" class="img-fluid figure-img" width="229"></p>
+<figcaption>The PopCluster program (Wang, 2022)</figcaption>
+</figure>
+</div>
+<p>In simulating data, we can control specific parameter values, such as the number of loci, the number of simulated populations, and the number of individuals per population.</p>
+<p><strong>Simulated genotype data</strong> is artificially generated genetic data that mimics real genotype data. Simulators use realistic population genetic models that reflect the biological processes and evolutionary events that shape real data. They are able to model mendelian inheritance, migration, and random mating to name a few. Simulators can also model sequencing/genotyping errors, and missing data which again works to imitate the messiness of real-world data collection. The <span class="smallcaps">PopCluster</span> simulation module can apparently do all this and more, but this is still a relatively new program and there is not a lot of information available on its use.</p>
+</section>
+<section id="research-goals" class="level2">
+<h2 class="anchored" data-anchor-id="research-goals">Research Goals</h2>
+<p><img src="goal.png" class="img-fluid" width="414"></p>
+<p><strong>For my exploratory data analysis in R</strong>, I want to test the quality of the data that is generated through this simulation module in <span class="smallcaps">PopCluster</span> to make sure that it does mimic/model real biological genotype data. This is an important step for me to do before I actually use this module to generate the simulated data I will use in my master’s project!</p>
+<p>To evaluate the quality of the simulated data, I will:</p>
+<ol type="1">
+<li><p>Verify the population structure of the data by performing a Principal Component Analysis (PCA) and a Discriminant Analysis of Principal Components (DAPC) to visualize genetic clusters</p></li>
+<li><p>Estimate genetic differentiation and genetic diversity measurements for our simulated data</p></li>
+<li><p>Investigate differences in genotype distributions at the locus and population level</p></li>
+<li><p>Create For-Loops in R to randomly sample from the data under different sampling schemes and view changes in allele frequencies among the sampled individuals</p></li>
+</ol>
+</section>
+</section>
+<section id="about-the-data" class="level1">
+<h1>About the Data</h1>
+<p>This dataset includes single nucleotide polymorphism (SNP) genotype information for 3 simulated populations. Each simulated population <em>should</em> consist of 20 diploid individuals genotyped at 25 biallelic SNP loci. Each row of this dataset should be a unique individual with corresponding genotype data (2 alleles per locus for 25 different loci). Each individual (and their IndividualID) belongs to one population (Population 1, 2, or 3 as denoted by the PopID). The loci are found in the columns, where for example, L1_A1 and L1_A2 are both the same locus (L1), and the first allele at the locus is denoted as A1, and the second allele at that locus is A2. The alleles at each loci take integer values 1 or 2, where individuals with both alleles 1 and 2 at a locus are heterozygotes, and individuals with genotypes 11 or 22 are considered homozygotes.</p>
+<p>Let’s load the necessary packages for our analysis and read in our simulated dataset.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rmarkdown)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(adegenet)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(hierfstat)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>popdata <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"EDA_popdata_BiancaTassi.csv"</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(popdata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>spc_tbl_ [61 × 52] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+ $ IndividualID: chr [1:61] "P1_1" "P1_2" "P1_3" "P1_4" ...
+ $ PopID       : num [1:61] 1 1 1 1 1 1 1 1 1 1 ...
+ $ L1_A1       : num [1:61] 1 1 1 1 1 1 1 1 1 1 ...
+ $ L1_A2       : num [1:61] 1 1 1 1 1 1 1 1 1 1 ...
+ $ L2_A1       : num [1:61] 1 1 1 1 1 1 2 1 1 1 ...
+ $ L2_A2       : num [1:61] 2 2 1 1 1 2 2 2 1 2 ...
+ $ L3_A1       : num [1:61] 1 1 1 1 1 1 1 1 1 1 ...
+ $ L3_A2       : num [1:61] 1 1 1 1 1 2 1 2 1 2 ...
+ $ L4_A1       : num [1:61] 2 2 2 2 2 2 2 2 2 2 ...
+ $ L4_A2       : num [1:61] 2 2 2 2 2 2 2 2 2 2 ...
+ $ L5_A1       : num [1:61] 2 2 2 2 1 2 1 2 1 2 ...
+ $ L5_A2       : num [1:61] 2 2 2 2 2 2 2 2 2 2 ...
+ $ L6_A1       : num [1:61] 2 2 2 2 2 2 2 2 2 2 ...
+ $ L6_A2       : num [1:61] 2 2 2 2 2 2 2 2 2 2 ...
+ $ L7_A1       : num [1:61] 1 1 1 2 1 1 2 2 1 1 ...
+ $ L7_A2       : num [1:61] 1 1 2 2 1 1 2 2 2 1 ...
+ $ L8_A1       : num [1:61] 2 2 2 2 1 2 2 2 2 2 ...
+ $ L8_A2       : num [1:61] 2 2 2 2 2 2 2 2 2 2 ...
+ $ L9_A1       : num [1:61] 1 1 1 1 1 1 1 1 1 1 ...
+ $ L9_A2       : num [1:61] 1 1 1 1 1 1 1 1 1 1 ...
+ $ L10_A1      : num [1:61] 1 1 1 1 1 1 1 1 1 1 ...
+ $ L10_A2      : num [1:61] 1 1 1 2 1 1 1 1 1 1 ...
+ $ L11_A1      : num [1:61] 1 1 1 1 1 2 1 1 1 2 ...
+ $ L11_A2      : num [1:61] 1 2 2 2 1 2 2 2 2 2 ...
+ $ L12_A1      : num [1:61] 2 2 2 2 2 2 2 2 2 2 ...
+ $ L12_A2      : num [1:61] 2 2 2 2 2 2 2 2 2 2 ...
+ $ L13_A1      : num [1:61] 1 1 1 1 1 1 1 1 1 1 ...
+ $ L13_A2      : num [1:61] 1 1 1 1 1 1 1 2 1 2 ...
+ $ L14_A1      : num [1:61] 2 1 2 2 2 2 2 1 2 2 ...
+ $ L14_A2      : num [1:61] 2 1 2 2 2 2 2 2 2 2 ...
+ $ L15_A1      : num [1:61] 1 1 1 1 1 1 1 1 1 1 ...
+ $ L15_A2      : num [1:61] 1 1 1 1 1 1 1 1 1 1 ...
+ $ L16_A1      : num [1:61] 1 1 1 1 1 1 1 1 2 1 ...
+ $ L16_A2      : num [1:61] 2 1 2 2 2 2 1 2 2 1 ...
+ $ L17_A1      : num [1:61] 1 1 1 1 1 1 1 1 1 1 ...
+ $ L17_A2      : num [1:61] 1 1 1 1 1 1 1 1 1 1 ...
+ $ L18_A1      : num [1:61] 1 1 1 1 1 1 1 1 2 2 ...
+ $ L18_A2      : num [1:61] 2 2 2 1 2 2 2 1 2 2 ...
+ $ L19_A1      : num [1:61] 2 2 2 2 2 2 2 2 2 2 ...
+ $ L19_A2      : num [1:61] 2 2 2 2 2 2 2 2 2 2 ...
+ $ L20_A1      : num [1:61] 2 2 2 2 1 2 1 2 2 1 ...
+ $ L20_A2      : num [1:61] 2 2 2 2 2 2 2 2 2 2 ...
+ $ L21_A1      : num [1:61] 1 1 1 1 1 1 1 1 1 1 ...
+ $ L21_A2      : num [1:61] 1 1 1 1 2 1 2 1 1 1 ...
+ $ L22_A1      : num [1:61] 1 1 1 NA NA NA NA NA NA NA ...
+ $ L22_A2      : num [1:61] 1 NA 2 1 NA 1 1 1 1 NA ...
+ $ L23_A1      : num [1:61] 2 2 2 2 2 2 2 2 2 2 ...
+ $ L23_A2      : num [1:61] 2 2 2 2 2 2 2 2 2 2 ...
+ $ L24_A1      : num [1:61] 2 2 2 2 2 2 2 2 2 2 ...
+ $ L24_A2      : num [1:61] 2 2 2 2 2 2 2 2 2 2 ...
+ $ L25_A1      : num [1:61] 1 1 1 1 1 1 1 1 1 1 ...
+ $ L25_A2      : num [1:61] 2 2 1 2 1 1 1 2 1 2 ...
+ - attr(*, "spec")=
+  .. cols(
+  ..   IndividualID = col_character(),
+  ..   PopID = col_double(),
+  ..   L1_A1 = col_double(),
+  ..   L1_A2 = col_double(),
+  ..   L2_A1 = col_double(),
+  ..   L2_A2 = col_double(),
+  ..   L3_A1 = col_double(),
+  ..   L3_A2 = col_double(),
+  ..   L4_A1 = col_double(),
+  ..   L4_A2 = col_double(),
+  ..   L5_A1 = col_double(),
+  ..   L5_A2 = col_double(),
+  ..   L6_A1 = col_double(),
+  ..   L6_A2 = col_double(),
+  ..   L7_A1 = col_double(),
+  ..   L7_A2 = col_double(),
+  ..   L8_A1 = col_double(),
+  ..   L8_A2 = col_double(),
+  ..   L9_A1 = col_double(),
+  ..   L9_A2 = col_double(),
+  ..   L10_A1 = col_double(),
+  ..   L10_A2 = col_double(),
+  ..   L11_A1 = col_double(),
+  ..   L11_A2 = col_double(),
+  ..   L12_A1 = col_double(),
+  ..   L12_A2 = col_double(),
+  ..   L13_A1 = col_double(),
+  ..   L13_A2 = col_double(),
+  ..   L14_A1 = col_double(),
+  ..   L14_A2 = col_double(),
+  ..   L15_A1 = col_double(),
+  ..   L15_A2 = col_double(),
+  ..   L16_A1 = col_double(),
+  ..   L16_A2 = col_double(),
+  ..   L17_A1 = col_double(),
+  ..   L17_A2 = col_double(),
+  ..   L18_A1 = col_double(),
+  ..   L18_A2 = col_double(),
+  ..   L19_A1 = col_double(),
+  ..   L19_A2 = col_double(),
+  ..   L20_A1 = col_double(),
+  ..   L20_A2 = col_double(),
+  ..   L21_A1 = col_double(),
+  ..   L21_A2 = col_double(),
+  ..   L22_A1 = col_double(),
+  ..   L22_A2 = col_double(),
+  ..   L23_A1 = col_double(),
+  ..   L23_A2 = col_double(),
+  ..   L24_A1 = col_double(),
+  ..   L24_A2 = col_double(),
+  ..   L25_A1 = col_double(),
+  ..   L25_A2 = col_double()
+  .. )
+ - attr(*, "problems")=&lt;externalptr&gt; </code></pre>
+</div>
+</div>
+<p>Looking at the structure of this starting dataset, we see that there are 61 entries/rows for individuals and 52 columns (50 loci columns and the additional IndivudalID and PopID columns).</p>
+</section>
+<section id="tidying-the-data" class="level1">
+<h1>Tidying the Data</h1>
+<p>The first data hygiene step we will carry out using our imported population genetic data is to check if there are any <strong>missing values</strong> (NAs).</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colSums</span>(<span class="fu">is.na</span>(popdata)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>IndividualID        PopID        L1_A1        L1_A2        L2_A1        L2_A2 
+           0            0            0            0            0            0 
+       L3_A1        L3_A2        L4_A1        L4_A2        L5_A1        L5_A2 
+           0            0            0            0            0            0 
+       L6_A1        L6_A2        L7_A1        L7_A2        L8_A1        L8_A2 
+           0            0            0            0            0            0 
+       L9_A1        L9_A2       L10_A1       L10_A2       L11_A1       L11_A2 
+           0            0            0            0            0            0 
+      L12_A1       L12_A2       L13_A1       L13_A2       L14_A1       L14_A2 
+           0            0            0            0            0            0 
+      L15_A1       L15_A2       L16_A1       L16_A2       L17_A1       L17_A2 
+           0            0            0            0            0            0 
+      L18_A1       L18_A2       L19_A1       L19_A2       L20_A1       L20_A2 
+           0            0            0            0            0            0 
+      L21_A1       L21_A2       L22_A1       L22_A2       L23_A1       L23_A2 
+           0            0           34           24            0            0 
+      L24_A1       L24_A2       L25_A1       L25_A2 
+           0            0            0            0 </code></pre>
+</div>
+</div>
+<p>We find that Locus 22 at both alleles (L22_A1 and L22_A2) has a lot of missing data for many of the genotyped individuals in our dataset. For our downstream analysis of the data and calculation of descriptive statistics we do not want to include loci with missing data, and so this locus will be removed.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>popdata_removeNA <span class="ot">&lt;-</span> popdata <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>L22_A1, <span class="sc">-</span>L22_A2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>The genotype information for 24 loci now remains per individual.</p>
+<p>Next, we will check for any <strong>impossible values</strong> in our dataset.</p>
+<p>We know that we simulated three populations, so the only values we expect to find in the PopID column are integer values 1, 2, or 3. We want to find any rows where this condition is violated.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>invalid_popID <span class="ot">&lt;-</span> popdata_removeNA <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span>PopID <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>))</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>invalid_popID</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>There are no invalid values found in the PopID column.</p>
+<p>We also know that our alleles only take values 1 or 2, so we want to find any individuals with invalid values for alleles at the genotyped loci and remove them.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>invalid_loci <span class="ot">&lt;-</span> popdata_removeNA <span class="sc">%&gt;%</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(IndividualID, <span class="fu">starts_with</span>(<span class="st">"L"</span>)) <span class="sc">%&gt;%</span>  <span class="co">#Keep IndividualID for reference, select only locus columns</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">if_any</span>(<span class="fu">starts_with</span>(<span class="st">"L"</span>), <span class="sc">~</span> <span class="sc">!</span>. <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>)))  <span class="co">#Check if values are not 1 or 2</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">as_tibble</span>(invalid_loci))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 49
+  IndividualID L1_A1 L1_A2 L2_A1 L2_A2 L3_A1 L3_A2 L4_A1 L4_A2 L5_A1 L5_A2 L6_A1
+  &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 P1_12            1     1     1     2     1     2     0     2     2     2     2
+2 P3_19            1     1     3     4     1     1     2     2     3     2     2
+# ℹ 37 more variables: L6_A2 &lt;dbl&gt;, L7_A1 &lt;dbl&gt;, L7_A2 &lt;dbl&gt;, L8_A1 &lt;dbl&gt;,
+#   L8_A2 &lt;dbl&gt;, L9_A1 &lt;dbl&gt;, L9_A2 &lt;dbl&gt;, L10_A1 &lt;dbl&gt;, L10_A2 &lt;dbl&gt;,
+#   L11_A1 &lt;dbl&gt;, L11_A2 &lt;dbl&gt;, L12_A1 &lt;dbl&gt;, L12_A2 &lt;dbl&gt;, L13_A1 &lt;dbl&gt;,
+#   L13_A2 &lt;dbl&gt;, L14_A1 &lt;dbl&gt;, L14_A2 &lt;dbl&gt;, L15_A1 &lt;dbl&gt;, L15_A2 &lt;dbl&gt;,
+#   L16_A1 &lt;dbl&gt;, L16_A2 &lt;dbl&gt;, L17_A1 &lt;dbl&gt;, L17_A2 &lt;dbl&gt;, L18_A1 &lt;dbl&gt;,
+#   L18_A2 &lt;dbl&gt;, L19_A1 &lt;dbl&gt;, L19_A2 &lt;dbl&gt;, L20_A1 &lt;dbl&gt;, L20_A2 &lt;dbl&gt;,
+#   L21_A1 &lt;dbl&gt;, L21_A2 &lt;dbl&gt;, L23_A1 &lt;dbl&gt;, L23_A2 &lt;dbl&gt;, L24_A1 &lt;dbl&gt;, …</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>popdata_valid <span class="ot">&lt;-</span> popdata_removeNA <span class="sc">%&gt;%</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">if_all</span>(<span class="fu">starts_with</span>(<span class="st">"L"</span>), <span class="sc">~</span> . <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>)))  <span class="co">#Keep only valid values</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Two rows corresponding to individuals P1_12 and P3_19, contained impossible allele values and were removed from the dataset.</p>
+<p>Lastly, we want to check for any <strong>duplicate entries</strong> in our data and then remove them. For our analysis, it is important that the individuals and their IndividualID names in our dataset are unique.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>popdata_duplicate <span class="ot">&lt;-</span> popdata_valid <span class="sc">%&gt;%</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(IndividualID) <span class="sc">%&gt;%</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">n</span>() <span class="sc">&gt;</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(popdata_duplicate)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 50
+  IndividualID PopID L1_A1 L1_A2 L2_A1 L2_A2 L3_A1 L3_A2 L4_A1 L4_A2 L5_A1 L5_A2
+  &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 P3_20            3     1     1     1     1     1     1     2     2     1     2
+2 P3_20            3     1     1     1     1     1     1     2     2     1     2
+# ℹ 38 more variables: L6_A1 &lt;dbl&gt;, L6_A2 &lt;dbl&gt;, L7_A1 &lt;dbl&gt;, L7_A2 &lt;dbl&gt;,
+#   L8_A1 &lt;dbl&gt;, L8_A2 &lt;dbl&gt;, L9_A1 &lt;dbl&gt;, L9_A2 &lt;dbl&gt;, L10_A1 &lt;dbl&gt;,
+#   L10_A2 &lt;dbl&gt;, L11_A1 &lt;dbl&gt;, L11_A2 &lt;dbl&gt;, L12_A1 &lt;dbl&gt;, L12_A2 &lt;dbl&gt;,
+#   L13_A1 &lt;dbl&gt;, L13_A2 &lt;dbl&gt;, L14_A1 &lt;dbl&gt;, L14_A2 &lt;dbl&gt;, L15_A1 &lt;dbl&gt;,
+#   L15_A2 &lt;dbl&gt;, L16_A1 &lt;dbl&gt;, L16_A2 &lt;dbl&gt;, L17_A1 &lt;dbl&gt;, L17_A2 &lt;dbl&gt;,
+#   L18_A1 &lt;dbl&gt;, L18_A2 &lt;dbl&gt;, L19_A1 &lt;dbl&gt;, L19_A2 &lt;dbl&gt;, L20_A1 &lt;dbl&gt;,
+#   L20_A2 &lt;dbl&gt;, L21_A1 &lt;dbl&gt;, L21_A2 &lt;dbl&gt;, L23_A1 &lt;dbl&gt;, L23_A2 &lt;dbl&gt;, …</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Remove duplicates (keeping the first occurrence)</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>popdata_clean <span class="ot">&lt;-</span> popdata_valid <span class="sc">%&gt;%</span> <span class="fu">distinct</span>(IndividualID, <span class="at">.keep_all =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Individual P3_20 had two identical entries, so its duplicate information was removed from the dataset.</p>
+<p><em>Our data is now clean!</em></p>
+</section>
+<section id="visualizing-genetic-clusters" class="level1">
+<h1>Visualizing Genetic Clusters</h1>
+<p>Now that we have clean data to work with, we will use the <span class="smallcaps">adegenet</span> package in R to visualize genetic clusters from the SNP data and verify that we have successfully simulated three genetic populations. In order to use this package, we must first perform a data transformation step and convert the genotype data into a <em>genind</em> object.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Convert to matrix format</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>geno_matrix <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(popdata_clean)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Convert to genind object</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>genind_obj <span class="ot">&lt;-</span> <span class="fu">df2genind</span>(geno_matrix, <span class="at">ploidy =</span> <span class="dv">2</span>, <span class="at">pop =</span> <span class="fu">as.factor</span>(popdata_clean<span class="sc">$</span>PopID), <span class="at">sep =</span> <span class="st">"_"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can now perform a <strong>Principal Component Analysis (PCA)</strong> to assess population structure. PCAs can help us to visualize genetic variation between populations and show us how individuals in the data cluster based on genotype <em>similarities.</em></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>pca_result <span class="ot">&lt;-</span> <span class="fu">dudi.pca</span>(<span class="fu">tab</span>(genind_obj), <span class="at">center =</span> <span class="cn">TRUE</span>, <span class="at">scale =</span> <span class="cn">FALSE</span>, <span class="at">scannf =</span> <span class="cn">FALSE</span>, <span class="at">nf =</span> <span class="dv">2</span>) <span class="co">#nf = 2, keeps the first two principal components</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Extract PCA scores</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>pca_scores <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(pca_result<span class="sc">$</span>li) <span class="sc">%&gt;%</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">PopID =</span> popdata_clean<span class="sc">$</span>PopID)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(pca_scores, <span class="fu">aes</span>(<span class="at">x =</span> Axis1, <span class="at">y =</span> Axis2, <span class="at">color =</span> <span class="fu">as.factor</span>(PopID))) <span class="sc">+</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Principal Component Analysis of SNP Data"</span>, <span class="at">x =</span> <span class="st">"PC1"</span>, <span class="at">y =</span> <span class="st">"PC2"</span>, <span class="at">color =</span> <span class="st">"Population"</span>) <span class="sc">+</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"1"</span> <span class="ot">=</span> <span class="st">"blue"</span>, <span class="st">"2"</span> <span class="ot">=</span> <span class="st">"purple3"</span>, <span class="st">"3"</span> <span class="ot">=</span> <span class="st">"magenta1"</span>)) <span class="sc">+</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">13</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">13</span>),</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>),</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.border =</span> <span class="fu">element_rect</span>(<span class="at">size =</span> <span class="dv">1</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="cn">NA</span>),</span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">aspect.ratio =</span> <span class="dv">1</span></span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="BIOL5404_EDA_BiancaTassi_files/figure-html/PCA-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This PCA shows three separate genetic clusters or “populations” based on the genotypic data. Our simulated populations are shown to be genetically distinct and non-overlapping.</p>
+<p>Using this transformed data, we can also perform a <strong>Discriminant Analysis of Principal Components (DAPC).</strong> A DAPC is also great for identifying genetic clusters but unlike a PCA, it clusters individuals based on genotype <em>differences</em> (maximizes differences between groups while reducing within-group variation).</p>
+<p>DAPC uses the results of our previous PCA where two principal components were identified and retained. The number of discriminant functions retained is based on the number of populations in the dataset minus 1. Since our dataset has three populations (PopID = 1, 2, or 3), the maximum number of discriminant functions (DA axes) that can be retained is two.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Run DAPC with the optimal number of PCs = 2</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>dapc_result <span class="ot">&lt;-</span> <span class="fu">dapc</span>(genind_obj, <span class="at">n.pca =</span> <span class="dv">2</span>, <span class="at">n.da =</span> <span class="fu">length</span>(<span class="fu">unique</span>(popdata_clean<span class="sc">$</span>PopID))<span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="fu">scatter</span>(dapc_result,<span class="at">col =</span> <span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"purple3"</span>, <span class="st">"magenta1"</span>), <span class="at">posi.da =</span> <span class="st">"bottomleft"</span>, <span class="at">scree.pca =</span> <span class="cn">TRUE</span>, <span class="at">posi.pca =</span> <span class="st">"topleft"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="BIOL5404_EDA_BiancaTassi_files/figure-html/DAPC-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This DAPC shows even better separation of our three populations than the PCA.</p>
+<p>What we see in both the PCA and DAPC plots is what we expect from our simulated data – the <span class="smallcaps">PopCluster</span> simulation module has generated three genetically distinct populations. This is therefore a successful quality analysis step of our simulated data!</p>
+</section>
+<section id="measuring-genetic-diversity" class="level1">
+<h1>Measuring Genetic Diversity</h1>
+<p>To calculate measurements of genetic diversity and perform other downstream population genetic analyses we need to further transform our data.</p>
+<p>Specifically, we need to merge the columns that represent the same loci together. For example, we want to merge the columns for the first locus, L1_A1 and L1_A2, together to be one column called L1, and have all the genotype data also be merged together. So, if L1_A1 for one individual has a value of 1 and L1_A2 has a value of 1, they will be merged together as 11 (a homozygote).</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>popdata_tidy <span class="ot">&lt;-</span> popdata_clean <span class="sc">%&gt;%</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">starts_with</span>(<span class="st">"L"</span>) <span class="sc">&amp;</span> <span class="fu">ends_with</span>(<span class="st">"A1"</span>), </span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">.names =</span> <span class="st">"{.col}_merged"</span>, </span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">.fns =</span> <span class="sc">~</span> <span class="fu">paste0</span>(., <span class="fu">get</span>(<span class="fu">str_replace</span>(<span class="fu">cur_column</span>(), <span class="st">"A1"</span>, <span class="st">"A2"</span>))))) <span class="sc">%&gt;%</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(IndividualID, PopID, <span class="fu">ends_with</span>(<span class="st">"_merged"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename_with</span>(<span class="sc">~</span> <span class="fu">str_replace</span>(., <span class="st">"_A1_merged"</span>, <span class="st">""</span>), <span class="fu">ends_with</span>(<span class="st">"_merged"</span>))</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(popdata_tidy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 26
+  IndividualID PopID L1    L2    L3    L4    L5    L6    L7    L8    L9    L10  
+  &lt;chr&gt;        &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;
+1 P1_1             1 11    12    11    22    22    22    11    22    11    11   
+2 P1_2             1 11    12    11    22    22    22    11    22    11    11   
+3 P1_3             1 11    11    11    22    22    22    12    22    11    11   
+4 P1_4             1 11    11    11    22    22    22    22    22    11    12   
+5 P1_5             1 11    11    11    22    12    22    11    12    11    11   
+6 P1_6             1 11    12    12    22    22    22    11    22    11    11   
+# ℹ 14 more variables: L11 &lt;chr&gt;, L12 &lt;chr&gt;, L13 &lt;chr&gt;, L14 &lt;chr&gt;, L15 &lt;chr&gt;,
+#   L16 &lt;chr&gt;, L17 &lt;chr&gt;, L18 &lt;chr&gt;, L19 &lt;chr&gt;, L20 &lt;chr&gt;, L21 &lt;chr&gt;,
+#   L23 &lt;chr&gt;, L24 &lt;chr&gt;, L25 &lt;chr&gt;</code></pre>
+</div>
+</div>
+<p>We now have a further tidied dataset in a merged format with each locus represented as a single column with genotypes “11” and “22” being homozygotes, and individuals with the genoytype “12” at a locus being heterozygote. This tidy data set still has 58 individuals genotyped at 24 loci (but these loci now exist as singular columns).</p>
+<section id="genetic-differentiation" class="level3">
+<h3 class="anchored" data-anchor-id="genetic-differentiation">Genetic Differentiation</h3>
+<p>Using this merged data set we can calculate the level of genetic differentiation between the three populations. This measurement is denoted by F<sub>ST</sub> (fixation index) and is calculated using the <span class="smallcaps">hierfstat</span> package in R.</p>
+<p>We again must convert our tidy data into a new <em>genind</em> object to utilize the functions in this package.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>genind_obj2 <span class="ot">&lt;-</span> <span class="fu">df2genind</span>(popdata_tidy[,<span class="dv">3</span><span class="sc">:</span><span class="dv">26</span>],</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">pop =</span> popdata_tidy<span class="sc">$</span>PopID,</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">ploidy =</span> <span class="dv">2</span>,</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">sep =</span> <span class="st">""</span>)  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>We can then use a function in this package which calculates the overall F<sub>ST</sub> and F<sub>IS</sub> (the inbreeding coefficient) values using a method called <em>Weir and Cockerham’s estimate</em>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wc</span>(genind_obj2) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$FST
+[1] 0.2056415
+
+$FIS
+[1] 0.0004075013</code></pre>
+</div>
+</div>
+<p>This gives us an overall F<sub>ST</sub> value of around 0.2, and a very low value for F<sub>IS</sub> (close to zero). This tells us that there is a high level of genetic differentiation across the three populations. Our simulated populations are highly genetically differentiatedfrom each other and there is little to no inbreeding occurring. Therefore, our simulated data accurately mimics possible real life population genetic data where populations are genetically distinct, and individuals are randomly mating within the populations.</p>
+<p>The high level of genetic differentiation calculated between our simulated populations is also further proof that we have highly structured data as seen in our previous PCA and DAPC plots!</p>
+</section>
+<section id="observed-heterozygosity-per-locus" class="level3">
+<h3 class="anchored" data-anchor-id="observed-heterozygosity-per-locus">Observed Heterozygosity per Locus</h3>
+<p>Heterozygosity refers to the presence of different alleles at a specific locus within an individual. If an individual has two different alleles at a locus, they are heterozygous at that locus.</p>
+<p>We can use the summary() function to calculate various population genetic descriptive statistics including the observed and expected heterozygosity values for each locus in our dataset.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>diversity <span class="ot">&lt;-</span> <span class="fu">summary</span>(genind_obj2) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>In population genetic studies it is often important to check observed heterozygosity values in a dataset to understand if populations are experiencing loss of genetic diversity.</p>
+<p>Specifically, low heterozygosity at a locus can indicate a loss of genetic diversity and could be associated with inbreeding, population bottlenecks, genetic drift, natural selection, or other evolutionary processes. A population with overall low heterozygosity may have less genetic variation to adapt to changing environmental conditions.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>locus_numbers <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>, <span class="dv">22</span>)  <span class="co">#Generates 1-25, excluding 22 (no data point for the 22nd loci as this locus was removed from analysis due to missing data)</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>popdata_diversity <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Locus =</span> locus_numbers, <span class="at">Hobs =</span> diversity<span class="sc">$</span>Hobs)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Observed heterozygosity across all loci</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(popdata_diversity, <span class="fu">aes</span>(<span class="at">x =</span> Locus, <span class="at">y =</span> Hobs)) <span class="sc">+</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="st">"white"</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">stroke =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Observed Heterozygosity per Locus"</span>,</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Loci Number"</span>,</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Observed Heterozygosity"</span>) <span class="sc">+</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">25</span>, <span class="at">by =</span> <span class="dv">2</span>), <span class="at">labels =</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">25</span>, <span class="at">by =</span> <span class="dv">2</span>)) <span class="sc">+</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">13</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">13</span>),</span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text=</span><span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>),</span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.border =</span> <span class="fu">element_rect</span>(<span class="at">size =</span> <span class="dv">1</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="cn">NA</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="BIOL5404_EDA_BiancaTassi_files/figure-html/Hobs%20vs%20loci-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This scatter plot above shows observed heterozygosity per locus, which tells us how much genetic diversity exists at each simulated SNP locus based on the proportion of heterozygotes.</p>
+<p>In the absence of evolutionary forces, a plot of observed heterozygosity per locus should be relatively uniform. However, in real populations on the landscape, there are always evolutionary forces at work! So, a more scattered distribution (like what we see in our plot) is more representative of real data and suggests genetic differentiation among populations (which we know is true based on our above estimate of F<sub>ST</sub>).</p>
+<p>This plot shows a wide range of diversity across loci with observed heterozygosity ranging from 0 to ~0.5. Loci with high heterozygosity, like L5, L16, and L20, indicate a higher degree of genetic diversity. Loci with low heterozygosity, like L1, L4, and L19 (these loci have no heterozygosity), are far less genetically diverse.</p>
+<p>Therefore, our simulated genetic data shows variable levels of genetic diversity across loci, and this variation is representative of what we see in real biological population genetic data.</p>
+</section>
+<section id="observed-vs.-expected-heterozygosity" class="level3">
+<h3 class="anchored" data-anchor-id="observed-vs.-expected-heterozygosity">Observed vs.&nbsp;Expected Heterozygosity</h3>
+<p>As discussed, observed heterozygosity represents the proportion of heterozygotes that are actually observed in the population for each locus. On the other hand, expected heterozygosity represents the proportion of heterozygotes that we would expect under Hardy-Weinberg Equilibrium (HWE). <strong>Hardy-Weinberg equilibrium</strong> is a principle stating that allele and genotype frequencies in a population remain constant from generation to generation in the absence of evolutionary influences like selection, mutation, migration, or genetic drift.</p>
+<p>By comparing observed heterozygosity to what is expected, population geneticists can then identify deviations that might be caused by evolutionary forces or by the presence of population structure.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>popdata_function <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Hobs =</span> diversity<span class="sc">$</span>Hobs, <span class="at">Hexp =</span> diversity<span class="sc">$</span>Hexp)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Expected heterozygosity as a function of observed heterozygosity per Locus (trend line is what is expected at Hardy-Weinberg equilibrium)</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(popdata_function, <span class="fu">aes</span>(<span class="at">x =</span> Hobs, <span class="at">y =</span> Hexp)) <span class="sc">+</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">color =</span> <span class="st">"purple3"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="st">"white"</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">stroke =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Expected Heterozygosity vs. Observed Heterozygosity per Locus"</span>,</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Observed Heterozygosity (Hobs)"</span>,</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Expected Heterozygosity (Hexp)"</span>) <span class="sc">+</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">13</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">13</span>),</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text=</span><span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>),</span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.border =</span> <span class="fu">element_rect</span>(<span class="at">size =</span> <span class="dv">1</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="cn">NA</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="BIOL5404_EDA_BiancaTassi_files/figure-html/Hobs%20vs%20Hexp-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>A plot of observed versus expected heterozygosity should ideally show a straight line with a slope of 1. This would indicate that the observed heterozygosity is consistent with what is expected under HWE, and that there are no significant deviations from expected genotype frequencies.&nbsp;</p>
+<p>In our plot, we observe that the points roughly cluster around the positively corelated regression line, which indicates that our populations may be approximately in HWE.</p>
+<p>Points that deviate below the line (where Hobs &lt; Hexp), may be due to inbreeding, selection or <em>population structure</em>. Highly structured population may therefore have lower heterozygosity– We already know that our data is highly structured, so these deviations make sense. Points that deviate above the line (where Hobs &gt; Hexp), could suggest the presence of outbreeding, where individuals are more likely to be heterozygous than expected thereby increasing genetic diversity.</p>
+<p>Overall, the slight deviations that we observe in the data may indicate that evolutionary forces that disrupt Hardy-Weinberg equilibrium are acting on these populations, which is of course representative of real biological populations on the landscape!</p>
+</section>
+</section>
+<section id="investigating-genotype-distributions" class="level1">
+<h1>Investigating Genotype Distributions</h1>
+<p>We need to first convert our tidy data from wide to long format for visualization of genotype frequencies and proportions.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Convert data from wide to long format</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>popdata_long <span class="ot">&lt;-</span> popdata_tidy <span class="sc">%&gt;%</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"L"</span>), <span class="at">names_to =</span> <span class="st">"Locus"</span>, <span class="at">values_to =</span> <span class="st">"Genotype"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Extract numeric part of locus names to ensure proper sorting</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>popdata_long2 <span class="ot">&lt;-</span> popdata_long <span class="sc">%&gt;%</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Locus =</span> <span class="fu">factor</span>(Locus, <span class="at">levels =</span> <span class="fu">paste0</span>(<span class="st">"L"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>)))</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Count genotype frequencies per locus</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>heatmap <span class="ot">&lt;-</span> popdata_long2 <span class="sc">%&gt;%</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(Locus, Genotype)</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(heatmap, <span class="fu">aes</span>(<span class="at">x =</span> Genotype, <span class="at">y =</span> Locus, <span class="at">fill =</span> n)) <span class="sc">+</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>() <span class="sc">+</span></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">"aliceblue"</span>, <span class="at">high =</span> <span class="st">"blue4"</span>) <span class="sc">+</span></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Genotype Frequencies Across Loci"</span>, <span class="at">x =</span> <span class="st">"Genotype"</span>, <span class="at">y =</span> <span class="st">"Locus"</span>) <span class="sc">+</span></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">13</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">13</span>),</span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text=</span><span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>),</span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.border =</span> <span class="fu">element_rect</span>(<span class="at">size =</span> <span class="dv">1</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="cn">NA</span>),</span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">aspect.ratio=</span><span class="dv">1</span></span>
+<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="BIOL5404_EDA_BiancaTassi_files/figure-html/frequency%20heatmap-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The above heat map visually represents the frequencies of the different genotypes across all loci, with color intensity indicating the relative abundance of each genotype. This allows us to detect patterns of variation and identify loci with higher heterozygosity (12 dominance) or homozygosity (11 or 22 dominance).</p>
+<p>Some loci, like L1, L10, and L17, show high counts of the homozygote genotype 11, suggesting allele 1 is much more common at these loci. Other loci, like L4, L19, and L24, have high counts of genotype 22, suggesting allele 2 is dominant at these loci. Loci that have skewed genotype frequencies may suggest that they are under selection, or be linked to traits. L16 and L25 have a fair mix of all three genotypes. The genotype frequency variation seen across loci in our simulated data is representative of what we may observe in nature.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Count genotype occurrences per population</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>popdata_freq <span class="ot">&lt;-</span> popdata_long <span class="sc">%&gt;%</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(PopID, Genotype) <span class="sc">%&gt;%</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(PopID) <span class="sc">%&gt;%</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">freq =</span> n <span class="sc">/</span> <span class="fu">sum</span>(n))  <span class="co">#Convert to proportion</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(popdata_freq, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(PopID), <span class="at">y =</span> freq, <span class="at">fill =</span> Genotype)) <span class="sc">+</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>) <span class="sc">+</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Genotype Proportions by Population"</span>, <span class="at">x =</span> <span class="st">"Population"</span>, <span class="at">y =</span> <span class="st">"Proportion"</span>) <span class="sc">+</span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"11"</span> <span class="ot">=</span> <span class="st">"purple4"</span>, <span class="st">"12"</span> <span class="ot">=</span> <span class="st">"mediumpurple1"</span>, <span class="st">"22"</span> <span class="ot">=</span> <span class="st">"lightskyblue1"</span>)) <span class="sc">+</span></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">13</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">13</span>),</span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text=</span><span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>),</span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.border =</span> <span class="fu">element_rect</span>(<span class="at">size =</span> <span class="dv">1</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="cn">NA</span>),</span>
+<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">aspect.ratio=</span><span class="dv">1</span></span>
+<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="BIOL5404_EDA_BiancaTassi_files/figure-html/proportion%20by%20population-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This stacked bar plot above displays calculated genotype proportions at the population level. The proportion of each genotype (11, 12, or 22) is similar/ roughly equal across all three populations. There is a clear balance between the proportion of homozygotes and heterozygotes. Genotype 12 (heterozygous genotype) makes up around 25–35% in each population, while the homozygote genotypes 11 and 22 are also present and common in each population. This balance suggests no strong inbreeding is occurring within populations which is consistent with the inbreeding coefficient (F<sub>IS</sub>) we calculated previously. Since all three of the possible genotypes are present and the heterozygotes aren’t drastically low or high, this may also suggest that the populations are in HWE. These genotype distributions are largely what we would expect in real populations where there isn’t strong selection, inbreeding, or migration.</p>
+</section>
+<section id="random-sampling-and-allele-frequencies" class="level1">
+<h1>Random Sampling and Allele Frequencies</h1>
+<p>Population structure estimates using the <span class="smallcaps">PopCluster</span> program are shown to be highly accurate even when samples from source populations are small or highly unbalanced in size. To test this for ourselves, part of my master’s project will involve performing random sampling from my simulated data before population structure analysis in the software.</p>
+<p>I wanted to take the opportunity afforded to me through this EDA project to create the For-Loops in R to randomly sample from simulated data under four different sampling schemes.</p>
+<p><strong>The table below outlines the specific sample type and corresponding scheme for random sampling from our three simulated populations.</strong></p>
+<p><img src="Samplingschemes.png" class="img-fluid"></p>
+<p><strong>Small sampling</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>small_sample <span class="ot">&lt;-</span> <span class="fu">list</span>()  <span class="co">#Create an empty list to store sampled individuals</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Loop through each population (1, 2, 3)</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (pop <span class="cf">in</span> <span class="fu">unique</span>(popdata_tidy<span class="sc">$</span>PopID)) {</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">#Filter dataset for the current population and sample 2 individuals</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>  sampled <span class="ot">&lt;-</span> popdata_tidy <span class="sc">%&gt;%</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(PopID <span class="sc">==</span> pop) <span class="sc">%&gt;%</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sample_n</span>(<span class="dv">2</span>)  <span class="co">#Randomly select 2 individuals</span></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a><span class="co">#Store result in the list</span></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>  small_sample[[<span class="fu">as.character</span>(pop)]] <span class="ot">&lt;-</span> sampled</span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a><span class="co">#Combine all sampled individuals into a single tibble</span></span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>scheme_small <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(small_sample)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Equal sampling</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Same process as small sampling</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>equal_sample <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (pop <span class="cf">in</span> <span class="fu">unique</span>(popdata_tidy<span class="sc">$</span>PopID)) {</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  sampled2 <span class="ot">&lt;-</span> popdata_tidy <span class="sc">%&gt;%</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(PopID <span class="sc">==</span> pop) <span class="sc">%&gt;%</span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sample_n</span>(<span class="dv">10</span>) <span class="co">#Randomly select 10 individuals</span></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>  equal_sample[[<span class="fu">as.character</span>(pop)]] <span class="ot">&lt;-</span> sampled2</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>scheme_equal <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(equal_sample)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p><strong>Skewed sampling 1</strong></p>
+<p>We need an additional step to define specific sampling sizes for each population for our For-Loop code for the <em>skewed sampling schemes</em>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Define sampling sizes for each population</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>sampling_skew1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"1"</span> <span class="ot">=</span> <span class="dv">10</span>, <span class="st">"2"</span> <span class="ot">=</span> <span class="dv">10</span>, <span class="st">"3"</span> <span class="ot">=</span> <span class="dv">2</span>)</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>skew1_sample <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="co">#Loop through each population and sample the specified number of individuals</span></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (pop <span class="cf">in</span> <span class="fu">names</span>(sampling_skew1)) {</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>  sampled3 <span class="ot">&lt;-</span> popdata_tidy <span class="sc">%&gt;%</span></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(PopID <span class="sc">==</span> <span class="fu">as.numeric</span>(pop)) <span class="sc">%&gt;%</span></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sample_n</span>(sampling_skew1[pop])</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>  skew1_sample[[pop]] <span class="ot">&lt;-</span> sampled3</span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>scheme_skew1 <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(skew1_sample)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Skewed sampling 2</strong></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Same process as the skew 1 sampling loop</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>sampling_skew2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"1"</span> <span class="ot">=</span> <span class="dv">2</span>, <span class="st">"2"</span> <span class="ot">=</span> <span class="dv">2</span>, <span class="st">"3"</span> <span class="ot">=</span> <span class="dv">10</span>) <span class="co">#Different sampling sizes for skew 2 scheme</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>skew2_sample <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (pop <span class="cf">in</span> <span class="fu">names</span>(sampling_skew2)) {</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>  sampled4 <span class="ot">&lt;-</span> popdata_tidy <span class="sc">%&gt;%</span></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(PopID <span class="sc">==</span> <span class="fu">as.numeric</span>(pop)) <span class="sc">%&gt;%</span></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sample_n</span>(sampling_skew2[pop])</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>  skew2_sample[[pop]] <span class="ot">&lt;-</span> sampled4</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>scheme_skew2 <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(skew2_sample)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Now that we have done our random sampling from each of the simulated populations using For-Loops, we want to <strong>combine and then visualize the sampled individuals</strong> in a scrollable table format! It is also helpful for downstream data visualization for us to <strong>add a new column</strong> to this combined data to indicate the sampling type used to sample each individual.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Combine the sampled individuals and add scheme type column</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>scheme_small <span class="ot">&lt;-</span> scheme_small <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">SamplingScheme =</span> <span class="st">"small"</span>)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>scheme_equal <span class="ot">&lt;-</span> scheme_equal <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">SamplingScheme =</span> <span class="st">"equal"</span>)</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>scheme_skew1 <span class="ot">&lt;-</span> scheme_skew1 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">SamplingScheme =</span> <span class="st">"skew 1"</span>)</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>scheme_skew2 <span class="ot">&lt;-</span> scheme_skew2 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">SamplingScheme =</span> <span class="st">"skew 2"</span>)</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="co">#Combine the results of each of the random sampling loops</span></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>popdata_schemes <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(scheme_small, scheme_equal, scheme_skew1, scheme_skew2)</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a><span class="co">#Create scrollable table to see all the sampled individuals at each of the sampling schemes</span></span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a><span class="fu">paged_table</span>(popdata_schemes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["IndividualID"],"name":[1],"type":["chr"],"align":["left"]},{"label":["PopID"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["L1"],"name":[3],"type":["chr"],"align":["left"]},{"label":["L2"],"name":[4],"type":["chr"],"align":["left"]},{"label":["L3"],"name":[5],"type":["chr"],"align":["left"]},{"label":["L4"],"name":[6],"type":["chr"],"align":["left"]},{"label":["L5"],"name":[7],"type":["chr"],"align":["left"]},{"label":["L6"],"name":[8],"type":["chr"],"align":["left"]},{"label":["L7"],"name":[9],"type":["chr"],"align":["left"]},{"label":["L8"],"name":[10],"type":["chr"],"align":["left"]},{"label":["L9"],"name":[11],"type":["chr"],"align":["left"]},{"label":["L10"],"name":[12],"type":["chr"],"align":["left"]},{"label":["L11"],"name":[13],"type":["chr"],"align":["left"]},{"label":["L12"],"name":[14],"type":["chr"],"align":["left"]},{"label":["L13"],"name":[15],"type":["chr"],"align":["left"]},{"label":["L14"],"name":[16],"type":["chr"],"align":["left"]},{"label":["L15"],"name":[17],"type":["chr"],"align":["left"]},{"label":["L16"],"name":[18],"type":["chr"],"align":["left"]},{"label":["L17"],"name":[19],"type":["chr"],"align":["left"]},{"label":["L18"],"name":[20],"type":["chr"],"align":["left"]},{"label":["L19"],"name":[21],"type":["chr"],"align":["left"]},{"label":["L20"],"name":[22],"type":["chr"],"align":["left"]},{"label":["L21"],"name":[23],"type":["chr"],"align":["left"]},{"label":["L23"],"name":[24],"type":["chr"],"align":["left"]},{"label":["L24"],"name":[25],"type":["chr"],"align":["left"]},{"label":["L25"],"name":[26],"type":["chr"],"align":["left"]},{"label":["SamplingScheme"],"name":[27],"type":["chr"],"align":["left"]}],"data":[{"1":"P1_17","2":"1","3":"11","4":"12","5":"11","6":"22","7":"22","8":"22","9":"11","10":"22","11":"11","12":"11","13":"22","14":"22","15":"11","16":"22","17":"11","18":"12","19":"11","20":"12","21":"22","22":"12","23":"11","24":"22","25":"22","26":"22","27":"small"},{"1":"P1_1","2":"1","3":"11","4":"12","5":"11","6":"22","7":"22","8":"22","9":"11","10":"22","11":"11","12":"11","13":"11","14":"22","15":"11","16":"22","17":"11","18":"12","19":"11","20":"12","21":"22","22":"22","23":"11","24":"22","25":"22","26":"12","27":"small"},{"1":"P2_20","2":"2","3":"11","4":"12","5":"11","6":"22","7":"12","8":"22","9":"22","10":"11","11":"11","12":"11","13":"22","14":"22","15":"11","16":"12","17":"11","18":"12","19":"11","20":"22","21":"22","22":"22","23":"22","24":"22","25":"22","26":"22","27":"small"},{"1":"P2_16","2":"2","3":"11","4":"12","5":"11","6":"22","7":"22","8":"22","9":"12","10":"22","11":"11","12":"11","13":"22","14":"22","15":"11","16":"12","17":"11","18":"12","19":"11","20":"22","21":"22","22":"12","23":"11","24":"22","25":"22","26":"22","27":"small"},{"1":"P3_1","2":"3","3":"11","4":"11","5":"11","6":"22","7":"11","8":"22","9":"22","10":"12","11":"12","12":"11","13":"22","14":"22","15":"12","16":"12","17":"22","18":"11","19":"11","20":"11","21":"22","22":"12","23":"11","24":"12","25":"22","26":"12","27":"small"},{"1":"P3_18","2":"3","3":"11","4":"11","5":"11","6":"22","7":"12","8":"12","9":"12","10":"22","11":"22","12":"11","13":"22","14":"22","15":"11","16":"22","17":"11","18":"11","19":"11","20":"11","21":"22","22":"22","23":"11","24":"11","25":"22","26":"12","27":"small"},{"1":"P1_8","2":"1","3":"11","4":"12","5":"12","6":"22","7":"22","8":"22","9":"22","10":"22","11":"11","12":"11","13":"12","14":"22","15":"12","16":"12","17":"11","18":"12","19":"11","20":"11","21":"22","22":"22","23":"11","24":"22","25":"22","26":"12","27":"equal"},{"1":"P1_11","2":"1","3":"11","4":"11","5":"11","6":"22","7":"22","8":"22","9":"22","10":"22","11":"12","12":"11","13":"12","14":"22","15":"11","16":"12","17":"11","18":"12","19":"11","20":"11","21":"22","22":"12","23":"12","24":"22","25":"22","26":"11","27":"equal"},{"1":"P1_17","2":"1","3":"11","4":"12","5":"11","6":"22","7":"22","8":"22","9":"11","10":"22","11":"11","12":"11","13":"22","14":"22","15":"11","16":"22","17":"11","18":"12","19":"11","20":"12","21":"22","22":"12","23":"11","24":"22","25":"22","26":"22","27":"equal"},{"1":"P1_18","2":"1","3":"11","4":"12","5":"11","6":"22","7":"12","8":"22","9":"12","10":"22","11":"12","12":"11","13":"22","14":"22","15":"11","16":"22","17":"11","18":"12","19":"11","20":"11","21":"22","22":"22","23":"11","24":"22","25":"22","26":"11","27":"equal"},{"1":"P1_10","2":"1","3":"11","4":"12","5":"12","6":"22","7":"22","8":"22","9":"11","10":"22","11":"11","12":"11","13":"22","14":"22","15":"12","16":"22","17":"11","18":"11","19":"11","20":"22","21":"22","22":"12","23":"11","24":"22","25":"22","26":"12","27":"equal"},{"1":"P1_14","2":"1","3":"11","4":"11","5":"11","6":"22","7":"12","8":"22","9":"12","10":"22","11":"11","12":"11","13":"22","14":"22","15":"11","16":"12","17":"11","18":"11","19":"12","20":"22","21":"22","22":"11","23":"11","24":"22","25":"22","26":"12","27":"equal"},{"1":"P1_5","2":"1","3":"11","4":"11","5":"11","6":"22","7":"12","8":"22","9":"11","10":"12","11":"11","12":"11","13":"11","14":"22","15":"11","16":"22","17":"11","18":"12","19":"11","20":"12","21":"22","22":"12","23":"12","24":"22","25":"22","26":"11","27":"equal"},{"1":"P1_1","2":"1","3":"11","4":"12","5":"11","6":"22","7":"22","8":"22","9":"11","10":"22","11":"11","12":"11","13":"11","14":"22","15":"11","16":"22","17":"11","18":"12","19":"11","20":"12","21":"22","22":"22","23":"11","24":"22","25":"22","26":"12","27":"equal"},{"1":"P1_13","2":"1","3":"11","4":"12","5":"11","6":"22","7":"22","8":"22","9":"12","10":"22","11":"11","12":"11","13":"22","14":"22","15":"11","16":"22","17":"11","18":"22","19":"11","20":"11","21":"22","22":"22","23":"11","24":"22","25":"22","26":"12","27":"equal"},{"1":"P1_6","2":"1","3":"11","4":"12","5":"12","6":"22","7":"22","8":"22","9":"11","10":"22","11":"11","12":"11","13":"22","14":"22","15":"11","16":"22","17":"11","18":"12","19":"11","20":"12","21":"22","22":"22","23":"11","24":"22","25":"22","26":"11","27":"equal"},{"1":"P2_18","2":"2","3":"11","4":"11","5":"11","6":"22","7":"22","8":"22","9":"22","10":"22","11":"11","12":"11","13":"22","14":"22","15":"11","16":"22","17":"11","18":"22","19":"11","20":"22","21":"22","22":"22","23":"22","24":"12","25":"22","26":"22","27":"equal"},{"1":"P2_14","2":"2","3":"11","4":"11","5":"11","6":"22","7":"22","8":"22","9":"12","10":"12","11":"11","12":"11","13":"12","14":"22","15":"11","16":"12","17":"11","18":"12","19":"11","20":"12","21":"22","22":"22","23":"12","24":"12","25":"22","26":"22","27":"equal"},{"1":"P2_19","2":"2","3":"11","4":"12","5":"11","6":"22","7":"22","8":"22","9":"12","10":"12","11":"11","12":"11","13":"12","14":"22","15":"11","16":"12","17":"11","18":"11","19":"11","20":"22","21":"22","22":"22","23":"11","24":"22","25":"22","26":"22","27":"equal"},{"1":"P2_11","2":"2","3":"11","4":"11","5":"11","6":"22","7":"12","8":"12","9":"22","10":"12","11":"11","12":"12","13":"22","14":"22","15":"11","16":"22","17":"11","18":"12","19":"11","20":"22","21":"22","22":"12","23":"11","24":"22","25":"22","26":"22","27":"equal"},{"1":"P2_10","2":"2","3":"11","4":"11","5":"11","6":"22","7":"22","8":"12","9":"22","10":"22","11":"11","12":"11","13":"22","14":"22","15":"11","16":"11","17":"11","18":"11","19":"11","20":"12","21":"22","22":"22","23":"22","24":"22","25":"22","26":"22","27":"equal"},{"1":"P2_9","2":"2","3":"11","4":"11","5":"11","6":"22","7":"12","8":"12","9":"22","10":"12","11":"11","12":"12","13":"22","14":"22","15":"11","16":"22","17":"11","18":"22","19":"11","20":"22","21":"22","22":"22","23":"11","24":"22","25":"22","26":"22","27":"equal"},{"1":"P2_4","2":"2","3":"11","4":"12","5":"11","6":"22","7":"22","8":"12","9":"11","10":"12","11":"11","12":"11","13":"12","14":"22","15":"11","16":"12","17":"11","18":"22","19":"11","20":"22","21":"22","22":"12","23":"12","24":"22","25":"22","26":"22","27":"equal"},{"1":"P2_16","2":"2","3":"11","4":"12","5":"11","6":"22","7":"22","8":"22","9":"12","10":"22","11":"11","12":"11","13":"22","14":"22","15":"11","16":"12","17":"11","18":"12","19":"11","20":"22","21":"22","22":"12","23":"11","24":"22","25":"22","26":"22","27":"equal"},{"1":"P2_8","2":"2","3":"11","4":"11","5":"11","6":"22","7":"12","8":"22","9":"11","10":"11","11":"11","12":"11","13":"12","14":"22","15":"11","16":"12","17":"11","18":"22","19":"11","20":"12","21":"22","22":"22","23":"11","24":"22","25":"22","26":"22","27":"equal"},{"1":"P2_2","2":"2","3":"11","4":"11","5":"12","6":"22","7":"12","8":"22","9":"12","10":"22","11":"11","12":"12","13":"12","14":"22","15":"11","16":"12","17":"11","18":"22","19":"11","20":"22","21":"22","22":"22","23":"11","24":"12","25":"22","26":"12","27":"equal"},{"1":"P3_9","2":"3","3":"11","4":"11","5":"11","6":"22","7":"11","8":"12","9":"22","10":"22","11":"12","12":"11","13":"22","14":"12","15":"22","16":"22","17":"11","18":"12","19":"11","20":"12","21":"22","22":"12","23":"11","24":"12","25":"22","26":"22","27":"equal"},{"1":"P3_13","2":"3","3":"11","4":"11","5":"11","6":"22","7":"12","8":"12","9":"12","10":"12","11":"11","12":"11","13":"12","14":"11","15":"12","16":"12","17":"12","18":"11","19":"11","20":"11","21":"22","22":"12","23":"11","24":"12","25":"12","26":"22","27":"equal"},{"1":"P3_16","2":"3","3":"11","4":"11","5":"11","6":"22","7":"11","8":"12","9":"12","10":"22","11":"12","12":"11","13":"12","14":"22","15":"11","16":"22","17":"22","18":"11","19":"11","20":"11","21":"22","22":"12","23":"11","24":"11","25":"22","26":"22","27":"equal"},{"1":"P3_1","2":"3","3":"11","4":"11","5":"11","6":"22","7":"11","8":"22","9":"22","10":"12","11":"12","12":"11","13":"22","14":"22","15":"12","16":"12","17":"22","18":"11","19":"11","20":"11","21":"22","22":"12","23":"11","24":"12","25":"22","26":"12","27":"equal"},{"1":"P3_4","2":"3","3":"11","4":"11","5":"11","6":"22","7":"11","8":"22","9":"12","10":"12","11":"11","12":"12","13":"22","14":"12","15":"11","16":"11","17":"11","18":"12","19":"11","20":"11","21":"22","22":"12","23":"12","24":"22","25":"22","26":"12","27":"equal"},{"1":"P3_17","2":"3","3":"11","4":"11","5":"11","6":"22","7":"12","8":"22","9":"12","10":"22","11":"12","12":"11","13":"22","14":"12","15":"11","16":"22","17":"11","18":"11","19":"11","20":"11","21":"22","22":"12","23":"11","24":"12","25":"12","26":"12","27":"equal"},{"1":"P3_6","2":"3","3":"11","4":"22","5":"12","6":"22","7":"11","8":"22","9":"22","10":"12","11":"12","12":"11","13":"12","14":"12","15":"11","16":"22","17":"22","18":"11","19":"12","20":"11","21":"22","22":"12","23":"11","24":"11","25":"22","26":"22","27":"equal"},{"1":"P3_7","2":"3","3":"11","4":"11","5":"11","6":"22","7":"12","8":"22","9":"22","10":"22","11":"11","12":"11","13":"22","14":"22","15":"11","16":"12","17":"22","18":"12","19":"11","20":"11","21":"22","22":"12","23":"11","24":"12","25":"12","26":"12","27":"equal"},{"1":"P3_15","2":"3","3":"11","4":"11","5":"11","6":"22","7":"11","8":"12","9":"11","10":"22","11":"12","12":"11","13":"22","14":"22","15":"11","16":"22","17":"12","18":"22","19":"11","20":"11","21":"22","22":"12","23":"11","24":"12","25":"12","26":"12","27":"equal"},{"1":"P3_2","2":"3","3":"11","4":"11","5":"11","6":"22","7":"12","8":"22","9":"22","10":"22","11":"12","12":"11","13":"12","14":"12","15":"11","16":"12","17":"22","18":"11","19":"11","20":"11","21":"22","22":"12","23":"11","24":"12","25":"12","26":"22","27":"equal"},{"1":"P1_16","2":"1","3":"11","4":"11","5":"12","6":"22","7":"12","8":"22","9":"12","10":"22","11":"11","12":"11","13":"12","14":"22","15":"11","16":"12","17":"11","18":"22","19":"11","20":"11","21":"22","22":"12","23":"11","24":"22","25":"22","26":"22","27":"skew 1"},{"1":"P1_8","2":"1","3":"11","4":"12","5":"12","6":"22","7":"22","8":"22","9":"22","10":"22","11":"11","12":"11","13":"12","14":"22","15":"12","16":"12","17":"11","18":"12","19":"11","20":"11","21":"22","22":"22","23":"11","24":"22","25":"22","26":"12","27":"skew 1"},{"1":"P1_17","2":"1","3":"11","4":"12","5":"11","6":"22","7":"22","8":"22","9":"11","10":"22","11":"11","12":"11","13":"22","14":"22","15":"11","16":"22","17":"11","18":"12","19":"11","20":"12","21":"22","22":"12","23":"11","24":"22","25":"22","26":"22","27":"skew 1"},{"1":"P1_19","2":"1","3":"11","4":"22","5":"11","6":"22","7":"22","8":"22","9":"12","10":"22","11":"12","12":"11","13":"11","14":"22","15":"12","16":"22","17":"11","18":"12","19":"12","20":"11","21":"22","22":"22","23":"11","24":"22","25":"22","26":"12","27":"skew 1"},{"1":"P1_18","2":"1","3":"11","4":"12","5":"11","6":"22","7":"12","8":"22","9":"12","10":"22","11":"12","12":"11","13":"22","14":"22","15":"11","16":"22","17":"11","18":"12","19":"11","20":"11","21":"22","22":"22","23":"11","24":"22","25":"22","26":"11","27":"skew 1"},{"1":"P1_20","2":"1","3":"11","4":"11","5":"11","6":"22","7":"22","8":"22","9":"12","10":"22","11":"11","12":"11","13":"12","14":"22","15":"11","16":"22","17":"11","18":"12","19":"12","20":"11","21":"22","22":"12","23":"12","24":"22","25":"22","26":"11","27":"skew 1"},{"1":"P1_2","2":"1","3":"11","4":"12","5":"11","6":"22","7":"22","8":"22","9":"11","10":"22","11":"11","12":"11","13":"12","14":"22","15":"11","16":"11","17":"11","18":"11","19":"11","20":"12","21":"22","22":"22","23":"11","24":"22","25":"22","26":"12","27":"skew 1"},{"1":"P1_7","2":"1","3":"11","4":"22","5":"11","6":"22","7":"12","8":"22","9":"22","10":"22","11":"11","12":"11","13":"12","14":"22","15":"11","16":"22","17":"11","18":"11","19":"11","20":"12","21":"22","22":"12","23":"12","24":"22","25":"22","26":"11","27":"skew 1"},{"1":"P1_15","2":"1","3":"11","4":"12","5":"11","6":"22","7":"22","8":"22","9":"12","10":"22","11":"11","12":"11","13":"22","14":"12","15":"12","16":"22","17":"12","18":"12","19":"11","20":"11","21":"22","22":"12","23":"11","24":"22","25":"22","26":"11","27":"skew 1"},{"1":"P1_1","2":"1","3":"11","4":"12","5":"11","6":"22","7":"22","8":"22","9":"11","10":"22","11":"11","12":"11","13":"11","14":"22","15":"11","16":"22","17":"11","18":"12","19":"11","20":"12","21":"22","22":"22","23":"11","24":"22","25":"22","26":"12","27":"skew 1"},{"1":"P2_13","2":"2","3":"11","4":"11","5":"11","6":"22","7":"22","8":"12","9":"12","10":"12","11":"11","12":"12","13":"22","14":"22","15":"11","16":"11","17":"11","18":"12","19":"11","20":"22","21":"22","22":"22","23":"11","24":"22","25":"22","26":"22","27":"skew 1"},{"1":"P2_1","2":"2","3":"11","4":"12","5":"11","6":"22","7":"12","8":"22","9":"22","10":"12","11":"11","12":"11","13":"22","14":"22","15":"11","16":"11","17":"11","18":"11","19":"11","20":"12","21":"22","22":"12","23":"11","24":"22","25":"22","26":"11","27":"skew 1"},{"1":"P2_18","2":"2","3":"11","4":"11","5":"11","6":"22","7":"22","8":"22","9":"22","10":"22","11":"11","12":"11","13":"22","14":"22","15":"11","16":"22","17":"11","18":"22","19":"11","20":"22","21":"22","22":"22","23":"22","24":"12","25":"22","26":"22","27":"skew 1"},{"1":"P2_2","2":"2","3":"11","4":"11","5":"12","6":"22","7":"12","8":"22","9":"12","10":"22","11":"11","12":"12","13":"12","14":"22","15":"11","16":"12","17":"11","18":"22","19":"11","20":"22","21":"22","22":"22","23":"11","24":"12","25":"22","26":"12","27":"skew 1"},{"1":"P2_10","2":"2","3":"11","4":"11","5":"11","6":"22","7":"22","8":"12","9":"22","10":"22","11":"11","12":"11","13":"22","14":"22","15":"11","16":"11","17":"11","18":"11","19":"11","20":"12","21":"22","22":"22","23":"22","24":"22","25":"22","26":"22","27":"skew 1"},{"1":"P2_20","2":"2","3":"11","4":"12","5":"11","6":"22","7":"12","8":"22","9":"22","10":"11","11":"11","12":"11","13":"22","14":"22","15":"11","16":"12","17":"11","18":"12","19":"11","20":"22","21":"22","22":"22","23":"22","24":"22","25":"22","26":"22","27":"skew 1"},{"1":"P2_9","2":"2","3":"11","4":"11","5":"11","6":"22","7":"12","8":"12","9":"22","10":"12","11":"11","12":"12","13":"22","14":"22","15":"11","16":"22","17":"11","18":"22","19":"11","20":"22","21":"22","22":"22","23":"11","24":"22","25":"22","26":"22","27":"skew 1"},{"1":"P2_7","2":"2","3":"11","4":"12","5":"11","6":"22","7":"12","8":"12","9":"12","10":"22","11":"11","12":"11","13":"22","14":"22","15":"11","16":"12","17":"11","18":"12","19":"11","20":"12","21":"22","22":"22","23":"12","24":"22","25":"22","26":"22","27":"skew 1"},{"1":"P2_16","2":"2","3":"11","4":"12","5":"11","6":"22","7":"22","8":"22","9":"12","10":"22","11":"11","12":"11","13":"22","14":"22","15":"11","16":"12","17":"11","18":"12","19":"11","20":"22","21":"22","22":"12","23":"11","24":"22","25":"22","26":"22","27":"skew 1"},{"1":"P2_12","2":"2","3":"11","4":"11","5":"11","6":"22","7":"12","8":"22","9":"22","10":"22","11":"11","12":"11","13":"22","14":"12","15":"11","16":"11","17":"11","18":"12","19":"11","20":"22","21":"22","22":"22","23":"12","24":"12","25":"22","26":"22","27":"skew 1"},{"1":"P3_11","2":"3","3":"11","4":"11","5":"11","6":"22","7":"22","8":"22","9":"22","10":"12","11":"12","12":"11","13":"22","14":"12","15":"22","16":"11","17":"22","18":"12","19":"11","20":"11","21":"22","22":"12","23":"11","24":"22","25":"22","26":"22","27":"skew 1"},{"1":"P3_4","2":"3","3":"11","4":"11","5":"11","6":"22","7":"11","8":"22","9":"12","10":"12","11":"11","12":"12","13":"22","14":"12","15":"11","16":"11","17":"11","18":"12","19":"11","20":"11","21":"22","22":"12","23":"12","24":"22","25":"22","26":"12","27":"skew 1"},{"1":"P1_9","2":"1","3":"11","4":"11","5":"11","6":"22","7":"12","8":"22","9":"12","10":"22","11":"11","12":"11","13":"12","14":"22","15":"11","16":"22","17":"11","18":"22","19":"11","20":"22","21":"22","22":"22","23":"11","24":"22","25":"22","26":"11","27":"skew 2"},{"1":"P1_3","2":"1","3":"11","4":"11","5":"11","6":"22","7":"22","8":"22","9":"12","10":"22","11":"11","12":"11","13":"12","14":"22","15":"11","16":"22","17":"11","18":"12","19":"11","20":"12","21":"22","22":"22","23":"11","24":"22","25":"22","26":"11","27":"skew 2"},{"1":"P2_17","2":"2","3":"11","4":"11","5":"11","6":"22","7":"12","8":"22","9":"22","10":"22","11":"11","12":"11","13":"12","14":"22","15":"11","16":"22","17":"11","18":"22","19":"11","20":"22","21":"22","22":"22","23":"11","24":"12","25":"22","26":"12","27":"skew 2"},{"1":"P2_11","2":"2","3":"11","4":"11","5":"11","6":"22","7":"12","8":"12","9":"22","10":"12","11":"11","12":"12","13":"22","14":"22","15":"11","16":"22","17":"11","18":"12","19":"11","20":"22","21":"22","22":"12","23":"11","24":"22","25":"22","26":"22","27":"skew 2"},{"1":"P3_6","2":"3","3":"11","4":"22","5":"12","6":"22","7":"11","8":"22","9":"22","10":"12","11":"12","12":"11","13":"12","14":"12","15":"11","16":"22","17":"22","18":"11","19":"12","20":"11","21":"22","22":"12","23":"11","24":"11","25":"22","26":"22","27":"skew 2"},{"1":"P3_8","2":"3","3":"11","4":"11","5":"12","6":"22","7":"12","8":"22","9":"12","10":"22","11":"22","12":"11","13":"22","14":"12","15":"11","16":"22","17":"12","18":"11","19":"11","20":"11","21":"22","22":"11","23":"11","24":"11","25":"22","26":"22","27":"skew 2"},{"1":"P3_12","2":"3","3":"11","4":"12","5":"11","6":"22","7":"12","8":"12","9":"11","10":"22","11":"12","12":"11","13":"22","14":"22","15":"11","16":"22","17":"11","18":"12","19":"11","20":"11","21":"22","22":"12","23":"11","24":"11","25":"12","26":"11","27":"skew 2"},{"1":"P3_2","2":"3","3":"11","4":"11","5":"11","6":"22","7":"12","8":"22","9":"22","10":"22","11":"12","12":"11","13":"12","14":"12","15":"11","16":"12","17":"22","18":"11","19":"11","20":"11","21":"22","22":"12","23":"11","24":"12","25":"12","26":"22","27":"skew 2"},{"1":"P3_20","2":"3","3":"11","4":"11","5":"11","6":"22","7":"12","8":"12","9":"22","10":"22","11":"22","12":"11","13":"22","14":"22","15":"11","16":"22","17":"12","18":"12","19":"12","20":"11","21":"22","22":"22","23":"11","24":"12","25":"22","26":"22","27":"skew 2"},{"1":"P3_11","2":"3","3":"11","4":"11","5":"11","6":"22","7":"22","8":"22","9":"22","10":"12","11":"12","12":"11","13":"22","14":"12","15":"22","16":"11","17":"22","18":"12","19":"11","20":"11","21":"22","22":"12","23":"11","24":"22","25":"22","26":"22","27":"skew 2"},{"1":"P3_3","2":"3","3":"11","4":"11","5":"11","6":"22","7":"11","8":"22","9":"22","10":"22","11":"12","12":"11","13":"22","14":"12","15":"11","16":"11","17":"12","18":"11","19":"11","20":"11","21":"22","22":"12","23":"11","24":"12","25":"22","26":"12","27":"skew 2"},{"1":"P3_9","2":"3","3":"11","4":"11","5":"11","6":"22","7":"11","8":"12","9":"22","10":"22","11":"12","12":"11","13":"22","14":"12","15":"22","16":"22","17":"11","18":"12","19":"11","20":"12","21":"22","22":"12","23":"11","24":"12","25":"22","26":"22","27":"skew 2"},{"1":"P3_4","2":"3","3":"11","4":"11","5":"11","6":"22","7":"11","8":"22","9":"12","10":"12","11":"11","12":"12","13":"22","14":"12","15":"11","16":"11","17":"11","18":"12","19":"11","20":"11","21":"22","22":"12","23":"12","24":"22","25":"22","26":"12","27":"skew 2"},{"1":"P3_7","2":"3","3":"11","4":"11","5":"11","6":"22","7":"12","8":"22","9":"22","10":"22","11":"11","12":"11","13":"22","14":"22","15":"11","16":"12","17":"22","18":"12","19":"11","20":"11","21":"22","22":"12","23":"11","24":"12","25":"12","26":"12","27":"skew 2"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<p>Using this combined dataset of sampled individuals and their corresponding genotype information shown in the above table, we can <strong>visualize allele frequency differences</strong> based on the sampling scheme used to randomly sample the individuals.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Convert data from wide to long format</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>allele_data <span class="ot">&lt;-</span> popdata_schemes <span class="sc">%&gt;%</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"L"</span>), <span class="at">names_to =</span> <span class="st">"Locus"</span>, <span class="at">values_to =</span> <span class="st">"Genotype"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Allele1 =</span> <span class="fu">substr</span>(Genotype, <span class="dv">1</span>, <span class="dv">1</span>),</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">Allele2 =</span> <span class="fu">substr</span>(Genotype, <span class="dv">2</span>, <span class="dv">2</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(<span class="st">"Allele1"</span>, <span class="st">"Allele2"</span>), <span class="at">names_to =</span> <span class="st">"AlleleType"</span>, <span class="at">values_to =</span> <span class="st">"Allele"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(SamplingScheme, Locus, Allele) <span class="sc">%&gt;%</span></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Frequency =</span> <span class="fu">n</span>(), <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a><span class="co">#Normalize frequencies within each sampling scheme</span></span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>allele_freq <span class="ot">&lt;-</span> allele_data <span class="sc">%&gt;%</span></span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(SamplingScheme, Locus) <span class="sc">%&gt;%</span></span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">RelativeFreq =</span> Frequency <span class="sc">/</span> <span class="fu">sum</span>(Frequency))</span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>allele_colors <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"1"</span> <span class="ot">=</span> <span class="st">"darkturquoise"</span>,  <span class="co">#Define allele colors</span></span>
+<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"2"</span> <span class="ot">=</span> <span class="st">"purple"</span>)</span>
+<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(allele_freq, <span class="fu">aes</span>(<span class="at">x =</span> SamplingScheme, <span class="at">y =</span> RelativeFreq, <span class="at">fill =</span> Allele)) <span class="sc">+</span><span class="fu">stat_boxplot</span>(<span class="at">geom =</span><span class="st">'errorbar'</span>) <span class="sc">+</span></span>
+<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> allele_colors) <span class="sc">+</span></span>
+<span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb32-22"><a href="#cb32-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribution of Allele Frequencies Across Sampling Schemes"</span>,</span>
+<span id="cb32-23"><a href="#cb32-23" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Sampling Scheme"</span>, <span class="at">y =</span> <span class="st">"Allele Frequency"</span>) <span class="sc">+</span></span>
+<span id="cb32-24"><a href="#cb32-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">13</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb32-25"><a href="#cb32-25" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">13</span>),</span>
+<span id="cb32-26"><a href="#cb32-26" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb32-27"><a href="#cb32-27" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb32-28"><a href="#cb32-28" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text=</span><span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>),</span>
+<span id="cb32-29"><a href="#cb32-29" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb32-30"><a href="#cb32-30" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.border =</span> <span class="fu">element_rect</span>(<span class="at">size =</span> <span class="dv">1</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="cn">NA</span>),</span>
+<span id="cb32-31"><a href="#cb32-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>)</span>
+<span id="cb32-32"><a href="#cb32-32" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="BIOL5404_EDA_BiancaTassi_files/figure-html/boxplot-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This box plot shows how allele frequencies for the two possible alleles (1 and 2) vary across the different sampling schemes. It helps us understand how different ways of sampling a population affect the distribution of allele frequencies.</p>
+<p>The <strong>equal</strong> sampling scheme gives the most stable and symmetrical results, and reflects random, unbiased sampling which is ideal for population genetics studies. Alleles 1 and 2 are seen to have roughly symmetrical distributions with median allele frequencies near 0.5.</p>
+<p><strong>Skew 1</strong> and <strong>skew 2</strong> still show a fairly broad range of allele frequencies, but the distributions start to shift away from the median slightly, demonstrating some imbalance due to the skew in sampling. This reflects what happens when you oversample certain subpopulations or habitats in real data.</p>
+<p>The <strong>small</strong> sampling shows the widest spread and most variability for allele frequency distribution among the sampling schemes, particularly for allele 2. This exemplifies how small sample sizes (sometimes caused by genetic drift in real population data) increase variance and reduce precision in estimating allele frequencies.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>allele_plot <span class="ot">&lt;-</span> allele_data <span class="sc">%&gt;%</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(SamplingScheme, Locus) <span class="sc">%&gt;%</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Proportion =</span> Frequency <span class="sc">/</span> <span class="fu">sum</span>(Frequency))</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>allele_plot<span class="sc">$</span>Locus <span class="ot">&lt;-</span> <span class="fu">factor</span>(allele_plot<span class="sc">$</span>Locus, <span class="at">levels =</span> <span class="fu">paste0</span>(<span class="st">"L"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>))</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(allele_plot, <span class="fu">aes</span>(<span class="at">x =</span> Locus, <span class="at">y =</span> Proportion, <span class="at">fill =</span> Allele)) <span class="sc">+</span></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>SamplingScheme, <span class="at">scales =</span> <span class="st">"free_y"</span>) <span class="sc">+</span></span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> allele_colors) <span class="sc">+</span></span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Allele Frequencies Across Loci within Sampling Schemes"</span>,</span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Locus"</span>, <span class="at">y =</span> <span class="st">"Allele Frequency"</span>) <span class="sc">+</span></span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">13</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">13</span>),</span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text=</span><span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>),</span>
+<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.border =</span> <span class="fu">element_rect</span>(<span class="at">size =</span> <span class="dv">1</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="cn">NA</span>),</span>
+<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="BIOL5404_EDA_BiancaTassi_files/figure-html/barplots-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This bar plot breaks down allele frequencies <em>at individual loci</em> across the four different sampling schemes. It’s essentially a zoomed-in look at what was summarized in the above box plot – but now we can see exactly which loci are affected.</p>
+<p>In both visualizations we can see that <strong>sampling scheme strongly affects allele frequency estimates</strong> for our simulated data. Since population structure analysis uses these calculated allele frequencies, this would severely affect any downstream results!</p>
+<p>Our simulated data also does a good job at modeling the sampling bias that we tend to observe in real data.</p>
+</section>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
+<p>Overall, we were able to address all of the research goals for this exploratory data analysis. The quality of the data that is generated through this simulation module in <span class="smallcaps">PopCluster</span> <strong>does</strong> mimic real-life genotype data and produces biologically meaningful estimates.</p>
+<p>I feel confident in using the simulation module in <span class="smallcaps">PopCluster</span> to generate the data to be analyzed in my master’s thesis. I now also have the For-Loop code created through this project to sample from my populations once they are simulated!</p>
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="Simulatedata.png" class="img-fluid figure-img" width="700"></p>
+<figcaption>PopCluster is a great tool for the simulation of SNP data and population structure analysis</figcaption>
+</figure>
+</div>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<p>Goudet, J. (2005),&nbsp;<span class="smallcaps">hierfstat</span>, a package for&nbsp;r&nbsp;to compute and test hierarchical&nbsp;F-statistics. <em>Molecular Ecology Notes</em>, 5: 184-186.</p>
+<p>Jombart, T (2008). <span class="smallcaps">adegenet</span>: a R package for the multivariate analysis of genetic markers.&nbsp;<em>Bioinformatics</em>,&nbsp;24, 1403-1405.</p>
+<p>Manel, S. (2019a). Calculating Genetic Differentiation and Clustering Methods from SNP Data. <em>Population Genetics in R</em>, <a href="https://popgen.nescent.org/DifferentiationSNP.html" class="uri">https://popgen.nescent.org/DifferentiationSNP.html</a>.</p>
+<p>Manel, S. (2019b). Calculating Basic Population Genetic Statistics from SNP Data. <em>Population Genetics in R</em>, <a href="https://popgen.nescent.org/StartSNP.html" class="uri">https://popgen.nescent.org/StartSNP.html</a>.</p>
+<p>Miller, J, Cullingham, C, Peery, R. (2020). The influence of a priori grouping on inference of genetic clusters: simulation study and literature review of the DAPC method. <em>Heredity,</em> 125:269–280.</p>
+<p>Wang, J. (2022). Fast and accurate population admixture inference from genotype data from a few microsatellites to millions of SNPs. Heredity, 129(2), 79-92.</p>
+<p>Yi,&nbsp;X, and Latch,&nbsp;E.&nbsp;(2021).&nbsp;Nonrandom missing data can bias Principal Component Analysis inference of population genetic structure.&nbsp;<em>Molecular Ecology Resources</em>,&nbsp;22,&nbsp;602–611.</p>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
