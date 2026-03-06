@@ -54,9 +54,9 @@ This is an example exploratory analysis of billboard-charting songs from the yea
 Here are some excellent examples of reports by previous students who were willing to share, for your benefit! They nicely show the diversity and key components of exploratory data analyses:
 
 -   [Pop gen simulation](project_examples/pop_gen_simulation/BIOL5404_EDA_BiancaTassi.html){target="_blank"}
--   Arctic arthropods
--   Bat captures
--   Effects of recreational boating
+-   [Arctic arthropods](project_examples/arctic_arthropods/2_lewis_caitlin_final_project.html){target="_blank"}
+-   [Bat captures](project_examples/bat_captures/Mika_BatCaptureEDA.html){target="_blank"}
+-   [Effects of recreational boating](project_examples/effects_of_recreational_boating/Robinson_Steven_EDA_BIOL5404.html){target="_blank"}
 -   Water chemistry in the Yukon
 -   Wildlife roadkill
 -   Arctic oceanography
