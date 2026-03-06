@@ -53,20 +53,20 @@ This is an example exploratory analysis of billboard-charting songs from the yea
 
 Here are some excellent examples of reports by previous students who were willing to share, for your benefit! They nicely show the diversity and key components of exploratory data analyses:
 
--   [Pop gen simulation](https://roslyndakin.com/wp-content/uploads/BIOL_5404/BIOL5404_EDA_BiancaTassi.html)
--   [Arctic arthropods](https://roslyndakin.com/wp-content/uploads/BIOL_5404/2_lewis_caitlin_final_project.html#arthropods-at-east-bay-mainland-nunavut-canada)
--   [Bat captures](https://roslyndakin.com/wp-content/uploads/BIOL_5404/Mika_BatCaptureEDA.html)
--   [Effects of recreational boating](https://roslyndakin.com/wp-content/uploads/BIOL_5404/Robinson_Steven_EDA_BIOL5404.html)
--   [Water chemistry in the Yukon](https://roslyndakin.com/wp-content/uploads/BIOL_5404/KRorabeck_EDA.html)
--   [Wildlife roadkill](https://roslyndakin.com/wp-content/uploads/BIOL_5404/Effect_of_Pavement_on_the_Number_of_Wildlife_Roadkills.html)
--   [Arctic oceanography](http://roslyndakin.com/wp-content/uploads/BIOL_5404/Aislinn_Fox_EDAReport.html)
--   [Soil microbiomes](http://roslyndakin.com/wp-content/uploads/BIOL_5404/Ishraq_Final_BIOL5404.html)
--   [Farmed crickets](http://roslyndakin.com/wp-content/uploads/BIOL_5404/Emile_vadboncoeur_EDA.html)
--   [Paleozoic fishes](http://roslyndakin.com/wp-content/uploads/BIOL_5404/Warnock-Juteau_Trystan_BIOL5404_assignment6_markdown_01.html)
--   [Cretaceous dinosaurs](http://roslyndakin.com/wp-content/uploads/BIOL_5404/BIOL-5404-EDA-Caelan-Libke.html)
--   [Urban mammals](http://roslyndakin.com/wp-content/uploads/BIOL_5404/LilliGaston_Independent_Report.html)
--   [Frog population trends](http://roslyndakin.com/wp-content/uploads/BIOL_5404/CDennison_Independent_Report.html)
--   [Video game sales](http://roslyndakin.com/wp-content/uploads/BIOL_5404/WaleedDarwish_R_FinalProject.html)
+-   Pop gen simulation
+-   Arctic arthropods
+-   Bat captures
+-   Effects of recreational boating
+-   Water chemistry in the Yukon
+-   Wildlife roadkill
+-   Arctic oceanography
+-   Soil microbiomes
+-   Farmed crickets
+-   Paleozoic fishes
+-   Cretaceous dinosaurs
+-   Urban mammals
+-   Frog population trends
+-   Video game sales
 
 Please note that many of the examples above go to FAR FAR greater lengths than necessary for this course. This often happens when the project is part of the student's primary or thesis research. In those cases, students often do a lot more than needed to fulfill the requirements for A6 and their final report.
 
