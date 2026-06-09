@@ -9,7 +9,7 @@ toc-location: left
 link-external-newwindow: true
 ---
 
-\*\* Details TBD for 2027, info below is not updated \*\*
+[**\*\* This site is not yet updated for 2027 \*\***]{style="color: red; background-color: white;"}
 
 **Course Description:** This course introduces the practical skills needed to answer biological research questions with large and complex datasets in a reproducible manner. There is a growing demand for data analyses that are openly available, well annotated, and reusable by others. In this course, we will cover how to tidy, transform, visualize, model, and communicate datasets in R, with a focus on large and complex data. The course is aimed at graduate students with some prior experience with statistics at the undergraduate or graduate level, but no prior experience with R is required.
 
@@ -60,66 +60,61 @@ We may also use [Advanced R 2e](https://adv-r.hadley.nz/) by Hadley Wickham
 
 ### Evaluation
 
-+--------------------+----------+------------------------------------------------------------------------------------------------+
-| Item               | Weight   | Details                                                                                        |
-+====================+==========+================================================================================================+
-| Quizzes            | 10%      | Short MC quizzes on Brightspace each week                                                      |
-+--------------------+----------+------------------------------------------------------------------------------------------------+
-| Assignments        | 40%      | 6 total, only your best 5 will count                                                           |
-+--------------------+----------+------------------------------------------------------------------------------------------------+
-| Peer evaluation    | 5%       | On each assignment, you will grade your peers and provide feedback on their code               |
-+--------------------+----------+------------------------------------------------------------------------------------------------+
-| Independent report | 45%      | Communicate the results of your own data wrangling and exploratory analysis, done individually |
-+--------------------+----------+------------------------------------------------------------------------------------------------+
+| Item | Weight | Details |
+|----|----|----|
+| Quizzes | 10% | Short MC quizzes on Brightspace each week |
+| Assignments | 40% | 6 total, only your best 5 will count |
+| Peer evaluation | 5% | On each assignment, you will grade your peers and provide feedback on their code |
+| Independent report | 45% | Communicate the results of your own data wrangling and exploratory analysis, done individually |
 
 ### Weekly Schedule
 
-+-------------+------------------+-----------------------------+-----------------------------------------+
-| Week        | Date             | Topics                      | Activities                              |
-+=============+==================+=============================+=========================================+
-| 1           | Jan 10           | Intro, philosopy, tidy data | -   Install R and R Studio              |
-|             |                  |                             | -   Read Roche et al.                   |
-|             |                  |                             | -   Read Alston & Rick                  |
-|             |                  |                             | -   Irizarry Section 1                  |
-|             |                  |                             | -   r4ds Introduction                   |
-+-------------+------------------+-----------------------------+-----------------------------------------+
-| 2           | Jan 17           | R basics                    | -   Irizarry Section 2                  |
-|             |                  |                             | -   r4ds Section 2                      |
-|             |                  |                             | -   [**Assignment #1**]{.smallcaps}     |
-+-------------+------------------+-----------------------------+-----------------------------------------+
-| 3           | Jan 24           | Programming basics          | -   Read Noble 2009                     |
-|             |                  |                             | -   Irizarry Sections 3 & 6             |
-|             |                  |                             | -   r4ds Section 6                      |
-|             |                  |                             | -   Extra: r4ds Section 27              |
-+-------------+------------------+-----------------------------+-----------------------------------------+
-| 4           | Jan 31           | tidyverse & data            | -   Irizarry Section 4                  |
-|             |                  |                             | -   [**Assignment #2**]{.smallcaps}     |
-+-------------+------------------+-----------------------------+-----------------------------------------+
-| 5           | Feb 7            | tidyverse & data            | -   Irizarry Sections 11-12             |
-|             |                  |                             | -   Read Broman & Woo                   |
-+-------------+------------------+-----------------------------+-----------------------------------------+
-| 6           | Feb 14           | Visualization, part 1       | -   Irizarry Sections 7-8               |
-|             |                  |                             | -   [**Assignment #3**]{.smallcaps}     |
-+-------------+------------------+-----------------------------+-----------------------------------------+
-|             | **WINTER BREAK** |                             | -   Read Kelleher & Wagener             |
-|             |                  |                             | -   Read Dekker & Silva                 |
-|             |                  |                             | -   Work on book sections to come...    |
-+-------------+------------------+-----------------------------+-----------------------------------------+
-| 8           | Feb 28           | Visualization, part 2       | -   Irizarry Sections 9-10              |
-|             |                  |                             | -   [**Assignment #4**]{.smallcaps}     |
-+-------------+------------------+-----------------------------+-----------------------------------------+
-| 9           | Mar 7            | Exploratory data analysis   | -   r4ds Section 10                     |
-+-------------+------------------+-----------------------------+-----------------------------------------+
-| 10          | Mar 14           | \*\* No formal meeting \*\* | -   [**Assignment #5**]{.smallcaps}     |
-+-------------+------------------+-----------------------------+-----------------------------------------+
-| 11          | Mar 21           | Strings and dates           | -   Irizarry Section 13                 |
-|             |                  |                             | -   Irizarry 16.1-16.3, 16.5-16.6, 16.9 |
-+-------------+------------------+-----------------------------+-----------------------------------------+
-| 12          | Mar 28           | markdown and git            | -   r4ds Section 28                     |
-|             |                  |                             | -   [**Assignment #6**]{.smallcaps}     |
-+-------------+------------------+-----------------------------+-----------------------------------------+
-|             | **Apr 13**       | **Independent report due**  |                                         |
-+-------------+------------------+-----------------------------+-----------------------------------------+
++------+------------------+-----------------------------+-----------------------------------------+
+| Week | Date             | Topics                      | Activities                              |
++======+==================+=============================+=========================================+
+| 1    | Jan 10           | Intro, philosopy, tidy data | -   Install R and R Studio              |
+|      |                  |                             | -   Read Roche et al.                   |
+|      |                  |                             | -   Read Alston & Rick                  |
+|      |                  |                             | -   Irizarry Section 1                  |
+|      |                  |                             | -   r4ds Introduction                   |
++------+------------------+-----------------------------+-----------------------------------------+
+| 2    | Jan 17           | R basics                    | -   Irizarry Section 2                  |
+|      |                  |                             | -   r4ds Section 2                      |
+|      |                  |                             | -   [**Assignment #1**]{.smallcaps}     |
++------+------------------+-----------------------------+-----------------------------------------+
+| 3    | Jan 24           | Programming basics          | -   Read Noble 2009                     |
+|      |                  |                             | -   Irizarry Sections 3 & 6             |
+|      |                  |                             | -   r4ds Section 6                      |
+|      |                  |                             | -   Extra: r4ds Section 27              |
++------+------------------+-----------------------------+-----------------------------------------+
+| 4    | Jan 31           | tidyverse & data            | -   Irizarry Section 4                  |
+|      |                  |                             | -   [**Assignment #2**]{.smallcaps}     |
++------+------------------+-----------------------------+-----------------------------------------+
+| 5    | Feb 7            | tidyverse & data            | -   Irizarry Sections 11-12             |
+|      |                  |                             | -   Read Broman & Woo                   |
++------+------------------+-----------------------------+-----------------------------------------+
+| 6    | Feb 14           | Visualization, part 1       | -   Irizarry Sections 7-8               |
+|      |                  |                             | -   [**Assignment #3**]{.smallcaps}     |
++------+------------------+-----------------------------+-----------------------------------------+
+|      | **WINTER BREAK** |                             | -   Read Kelleher & Wagener             |
+|      |                  |                             | -   Read Dekker & Silva                 |
+|      |                  |                             | -   Work on book sections to come...    |
++------+------------------+-----------------------------+-----------------------------------------+
+| 8    | Feb 28           | Visualization, part 2       | -   Irizarry Sections 9-10              |
+|      |                  |                             | -   [**Assignment #4**]{.smallcaps}     |
++------+------------------+-----------------------------+-----------------------------------------+
+| 9    | Mar 7            | Exploratory data analysis   | -   r4ds Section 10                     |
++------+------------------+-----------------------------+-----------------------------------------+
+| 10   | Mar 14           | \*\* No formal meeting \*\* | -   [**Assignment #5**]{.smallcaps}     |
++------+------------------+-----------------------------+-----------------------------------------+
+| 11   | Mar 21           | Strings and dates           | -   Irizarry Section 13                 |
+|      |                  |                             | -   Irizarry 16.1-16.3, 16.5-16.6, 16.9 |
++------+------------------+-----------------------------+-----------------------------------------+
+| 12   | Mar 28           | markdown and git            | -   r4ds Section 28                     |
+|      |                  |                             | -   [**Assignment #6**]{.smallcaps}     |
++------+------------------+-----------------------------+-----------------------------------------+
+|      | **Apr 13**       | **Independent report due**  |                                         |
++------+------------------+-----------------------------+-----------------------------------------+
 
 ### Late Policy
 
